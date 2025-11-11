@@ -1,8 +1,39 @@
-[gd_scene load_steps=2 format=3 uid="uid://bn3p2gijv0tv2"]
+[gd_scene load_steps=5 format=3 uid="uid://bn3p2gijv0tv2"]
+
+[ext_resource type="Script" uid="uid://cqeyq2oh5u3v6" path="res://Player/player.gd" id="1_l8h54"]
+[ext_resource type="Texture2D" uid="uid://uje85nqwv0pc" path="res://Sprites/player temp.png" id="2_4ntmi"]
+
+[sub_resource type="Curve" id="Curve_4ntmi"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.45, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.516854), -1.34831, 0.0, 0, 0]
+point_count = 3
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hvfyp"]
+radius = 6.0
+height = 22.0
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
+collision_layer = 4
+collision_mask = 3
+script = ExtResource("1_l8h54")
+acceleration = 1.0
+deceleration = 0.148
+jump_deceleration = 0.538
+dash_speed = 1200
+dash_max_dist = 800
+dash_curve = SubResource("Curve_4ntmi")
+speed = 1750.0
+jump_velocity = 320.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 1)
 shape = SubResource("CapsuleShape2D_hvfyp")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("2_4ntmi")
+
+[node name="coyoteTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+process_callback = 0
+wait_time = 0.075
+one_shot = true

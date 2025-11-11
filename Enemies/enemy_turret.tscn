@@ -1,0 +1,78 @@
+[gd_scene load_steps=11 format=3 uid="uid://cqmy8hqhbyy88"]
+
+[ext_resource type="Script" uid="uid://bxxru047s08qh" path="res://Enemies/enemy_turret.gd" id="1_2qo54"]
+[ext_resource type="Texture2D" uid="uid://uo332bhb3h1j" path="res://Sprites/Enemies/turret-sheet.png" id="2_2qo54"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2qo54"]
+size = Vector2(16, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_44y42"]
+atlas = ExtResource("2_2qo54")
+region = Rect2(40, 0, 20, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ceo0l"]
+atlas = ExtResource("2_2qo54")
+region = Rect2(60, 0, 20, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0bf42"]
+atlas = ExtResource("2_2qo54")
+region = Rect2(80, 0, 20, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ibygo"]
+atlas = ExtResource("2_2qo54")
+region = Rect2(20, 0, 20, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xovxr"]
+atlas = ExtResource("2_2qo54")
+region = Rect2(0, 0, 20, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8irrn"]
+atlas = ExtResource("2_2qo54")
+region = Rect2(20, 0, 20, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xn741"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_44y42")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ceo0l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0bf42")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ibygo")
+}],
+"loop": false,
+"name": &"fire",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xovxr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8irrn")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[node name="Enemy" type="CharacterBody2D"]
+collision_layer = 8
+collision_mask = 3
+script = ExtResource("1_2qo54")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2, -1)
+shape = SubResource("RectangleShape2D_2qo54")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_xn741")
+animation = &"fire"
+autoplay = "idle"
+frame = 3
+frame_progress = 1.0
