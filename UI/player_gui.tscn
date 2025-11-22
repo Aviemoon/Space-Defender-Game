@@ -12,6 +12,35 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_g87e5")
 
+[node name="MainUI" type="Control" parent="."]
+process_mode = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="hpLabel" type="Label" parent="MainUI"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -52.0
+offset_bottom = 49.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 32
+text = "Health
+0 / 0"
+horizontal_alignment = 1
+
+[node name="timerLabel" type="Label" parent="MainUI"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 32
+text = "time"
+
 [node name="PauseUI" type="Control" parent="."]
 visible = false
 layout_mode = 1
@@ -30,10 +59,119 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.12549)
 
-[node name="Button" type="Button" parent="PauseUI"]
-layout_mode = 0
-offset_right = 144.0
-offset_bottom = 47.0
+[node name="MenuUi" type="Control" parent="PauseUI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseUI/MenuUi"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -120.0
+offset_top = -85.5
+offset_right = 120.0
+offset_bottom = 85.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Unpause" type="Button" parent="PauseUI/MenuUi/VBoxContainer"]
+layout_mode = 2
+text = "Unpause"
+
+[node name="Options" type="Button" parent="PauseUI/MenuUi/VBoxContainer"]
+layout_mode = 2
+text = "Options"
+
+[node name="Restart" type="Button" parent="PauseUI/MenuUi/VBoxContainer"]
+layout_mode = 2
 text = "Restart"
 
-[connection signal="pressed" from="PauseUI/Button" to="." method="_on_button_pressed"]
+[node name="QuitMenu" type="Button" parent="PauseUI/MenuUi/VBoxContainer"]
+layout_mode = 2
+text = "Quit to menu"
+
+[node name="QuitDesktop" type="Button" parent="PauseUI/MenuUi/VBoxContainer"]
+layout_mode = 2
+text = "Quit to desktop"
+
+[node name="OptionsMenu" type="Control" parent="PauseUI"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TabContainer" type="TabContainer" parent="PauseUI/OptionsMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 256.0
+offset_top = 45.0
+offset_right = -256.0
+offset_bottom = -45.0
+grow_horizontal = 2
+grow_vertical = 2
+current_tab = 2
+
+[node name="Gameplay" type="VBoxContainer" parent="PauseUI/OptionsMenu/TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="Button" type="Button" parent="PauseUI/OptionsMenu/TabContainer/Gameplay"]
+layout_mode = 2
+text = "awa"
+
+[node name="Audio" type="VBoxContainer" parent="PauseUI/OptionsMenu/TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="Button" type="Button" parent="PauseUI/OptionsMenu/TabContainer/Audio"]
+layout_mode = 2
+text = "awa"
+
+[node name="Graphics" type="VBoxContainer" parent="PauseUI/OptionsMenu/TabContainer"]
+layout_mode = 2
+metadata/_tab_index = 2
+
+[node name="Label" type="Label" parent="PauseUI/OptionsMenu/TabContainer/Graphics"]
+layout_mode = 2
+text = "Resolution"
+
+[node name="ViewportResolution" type="OptionButton" parent="PauseUI/OptionsMenu/TabContainer/Graphics"]
+layout_mode = 2
+selected = 2
+item_count = 3
+popup/item_0/text = "1920x1080"
+popup/item_0/id = 0
+popup/item_1/text = "1600x900"
+popup/item_1/id = 1
+popup/item_2/text = "1280x720"
+popup/item_2/id = 2
+
+[node name="OptionsBack" type="Button" parent="PauseUI/OptionsMenu"]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 25.0
+offset_right = 110.0
+offset_bottom = 75.0
+text = "Back"
+
+[connection signal="pressed" from="PauseUI/MenuUi/VBoxContainer/Unpause" to="." method="_on_unpause_pressed"]
+[connection signal="pressed" from="PauseUI/MenuUi/VBoxContainer/Options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="PauseUI/MenuUi/VBoxContainer/Restart" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="PauseUI/MenuUi/VBoxContainer/QuitMenu" to="." method="_on_quit_menu_pressed"]
+[connection signal="pressed" from="PauseUI/MenuUi/VBoxContainer/QuitDesktop" to="." method="_on_quit_desktop_pressed"]
+[connection signal="item_selected" from="PauseUI/OptionsMenu/TabContainer/Graphics/ViewportResolution" to="." method="_on_viewport_resolution_item_selected"]
+[connection signal="pressed" from="PauseUI/OptionsMenu/OptionsBack" to="." method="_on_options_back_pressed"]

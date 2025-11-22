@@ -1,36 +1,62 @@
-[gd_scene load_steps=5 format=3 uid="uid://bn3p2gijv0tv2"]
+[gd_scene load_steps=8 format=3 uid="uid://bn3p2gijv0tv2"]
 
 [ext_resource type="Script" uid="uid://cqeyq2oh5u3v6" path="res://Player/player.gd" id="1_l8h54"]
-[ext_resource type="Texture2D" uid="uid://uje85nqwv0pc" path="res://Sprites/player temp.png" id="2_4ntmi"]
+[ext_resource type="Texture2D" uid="uid://4rptcch4o5hb" path="res://Sprites/player temp.png" id="2_4ntmi"]
 
 [sub_resource type="Curve" id="Curve_4ntmi"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.45, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.516854), -1.34831, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hvfyp"]
-radius = 6.0
-height = 22.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4ntmi"]
+size = Vector2(14, 15)
 
-[node name="Player" type="CharacterBody2D" groups=["Player"]]
+[sub_resource type="AtlasTexture" id="AtlasTexture_4ntmi"]
+atlas = ExtResource("2_4ntmi")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_btcbx"]
+atlas = ExtResource("2_4ntmi")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gwnis"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4ntmi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_btcbx")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 1.4
+}]
+
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("player_sprite") groups=["Player"]]
 collision_layer = 4
 collision_mask = 3
 script = ExtResource("1_l8h54")
-acceleration = 1.0
-deceleration = 0.148
+player_sprite = NodePath("PlayerSprite")
+acceleration = 0.593
+deceleration = 0.321
 jump_deceleration = 0.538
 dash_speed = 1200
 dash_max_dist = 800
 dash_curve = SubResource("Curve_4ntmi")
+max_hp = 100
 speed = 1750.0
 jump_velocity = 320.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1, 1)
-shape = SubResource("CapsuleShape2D_hvfyp")
+[node name="WallCollision" type="CollisionShape2D" parent="."]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_4ntmi")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="PlayerSprite" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
-texture = ExtResource("2_4ntmi")
+sprite_frames = SubResource("SpriteFrames_gwnis")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.744461
 
 [node name="coyoteTimer" type="Timer" parent="."]
 unique_name_in_owner = true

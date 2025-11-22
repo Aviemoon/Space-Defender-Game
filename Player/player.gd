@@ -1,6 +1,7 @@
 extends Character
 class_name PlayerCharacter
 
+@export var player_sprite:AnimatedSprite2D
 
 @export_range(0,1 ) var acceleration = 0.1
 @export_range(0, 1) var deceleration = 0.1
@@ -51,6 +52,11 @@ func movement(delta):
 		velocity.x = move_toward(0, direction * speed, speed * acceleration)
 	else:
 		velocity.x = move_toward(velocity.x, 0, speed * deceleration)
+	
+	if get_global_mouse_position().x < position.x:
+		player_sprite.flip_h = true
+	else:
+		player_sprite.flip_h = false
 	
 func _physics_process(delta):
 	movement(delta)
