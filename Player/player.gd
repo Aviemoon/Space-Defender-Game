@@ -27,6 +27,12 @@ var is_wallsliding = false
 #var dash_timer = 0
 
 
+#func _ready():
+	#
+	#for i in skills:
+		
+		
+
 func jump(power = 1):
 	velocity.y = -jump_velocity * power
 
@@ -81,6 +87,11 @@ func _physics_process(delta):
 
 	move_and_slide()
 
-
-
-	
+func _unhandled_input(event):
+	if event.is_action_pressed("ability_1"):
+		if $skill1Timer.is_stopped():
+			var new_skill = skills[0]
+			var skill_inst = new_skill.instantiate()
+			add_child(skill_inst)
+			GlobalSignal.player_ability_1.emit()
+			$skill1Timer.start()

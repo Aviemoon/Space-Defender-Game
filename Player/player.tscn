@@ -1,7 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://bn3p2gijv0tv2"]
+[gd_scene load_steps=11 format=3 uid="uid://bn3p2gijv0tv2"]
 
 [ext_resource type="Script" uid="uid://cqeyq2oh5u3v6" path="res://Player/player.gd" id="1_l8h54"]
 [ext_resource type="Texture2D" uid="uid://4rptcch4o5hb" path="res://Sprites/player temp.png" id="2_4ntmi"]
+[ext_resource type="PackedScene" uid="uid://bmfx4t03bnc6f" path="res://Skills/sword_slash.tscn" id="2_gwnis"]
+[ext_resource type="PackedScene" uid="uid://m4j6i41arew2" path="res://Utility/Hurtbox.tscn" id="3_btcbx"]
 
 [sub_resource type="Curve" id="Curve_4ntmi"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.45, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.516854), -1.34831, 0.0, 0, 0]
@@ -32,6 +34,10 @@ animations = [{
 "speed": 1.4
 }]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gwnis"]
+radius = 3.0
+height = 12.0
+
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("player_sprite") groups=["Player"]]
 collision_layer = 4
 collision_mask = 3
@@ -43,6 +49,7 @@ jump_deceleration = 0.538
 dash_speed = 1200
 dash_max_dist = 800
 dash_curve = SubResource("Curve_4ntmi")
+skills = Array[PackedScene]([ExtResource("2_gwnis")])
 max_hp = 100
 speed = 1750.0
 jump_velocity = 320.0
@@ -50,6 +57,7 @@ jump_velocity = 320.0
 [node name="WallCollision" type="CollisionShape2D" parent="."]
 position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_4ntmi")
+debug_color = Color(0, 0.6, 0.701961, 0.109804)
 
 [node name="PlayerSprite" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
@@ -63,3 +71,15 @@ unique_name_in_owner = true
 process_callback = 0
 wait_time = 0.075
 one_shot = true
+
+[node name="Hurtbox" parent="." instance=ExtResource("3_btcbx")]
+friendly = true
+
+[node name="CollisionShape2D" parent="Hurtbox" index="0"]
+shape = SubResource("CapsuleShape2D_gwnis")
+
+[node name="skill1Timer" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
+
+[editable path="Hurtbox"]
