@@ -18,6 +18,8 @@ class_name PlayerCharacter
 @onready var coyoteTimer = %coyoteTimer
 var can_coyote = true
 var is_wallsliding = false
+
+var facing_right:bool = true
 #var last_dir
 #var just_wall_jumped:bool
 #
@@ -39,6 +41,8 @@ func jump(power = 1):
 func movement(delta):
 	var direction = Input.get_axis("left", "right")
 	
+	
+	
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 		if coyoteTimer.is_stopped() and can_coyote:
@@ -58,11 +62,14 @@ func movement(delta):
 		velocity.x = move_toward(0, direction * speed, speed * acceleration)
 	else:
 		velocity.x = move_toward(velocity.x, 0, speed * deceleration)
+
 	
 	if get_global_mouse_position().x < position.x:
 		player_sprite.flip_h = true
+		facing_right = false
 	else:
 		player_sprite.flip_h = false
+		facing_right = true
 	
 func _physics_process(delta):
 	movement(delta)
@@ -88,10 +95,17 @@ func _physics_process(delta):
 	move_and_slide()
 
 func _unhandled_input(event):
+	pass
+
+func _input(event):
 	if event.is_action_pressed("ability_1"):
 		if $skill1Timer.is_stopped():
 			var new_skill = skills[0]
 			var skill_inst = new_skill.instantiate()
-			add_child(skill_inst)
+			if not facing_right:
+				skill_inst.rotation = PI
+				if skill_inst.get("sprite"):
+					skill_inst.sprite.flip_v = true
+			$RotationPoint.add_child(skill_inst)
 			GlobalSignal.player_ability_1.emit()
 			$skill1Timer.start()

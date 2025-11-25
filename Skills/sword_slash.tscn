@@ -4,22 +4,23 @@
 [ext_resource type="Texture2D" uid="uid://bku630ywwg5ov" path="res://Sprites/Abilities/slash.png" id="2_a6dbj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_20rp4"]
-size = Vector2(52.25, 36)
+size = Vector2(53, 30)
 
-[node name="SwordSlash" type="Area2D" groups=["attack_friendly"]]
+[node name="SwordSlash" type="Area2D" node_paths=PackedStringArray("sprite") groups=["attack_friendly"]]
 collision_layer = 16
 collision_mask = 8
 script = ExtResource("1_fnk5e")
 base_damage = 5.0
+sprite = NodePath("Sprite2D")
 metadata/_custom_type_script = "uid://dne8bqt32xcqt"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(39, 0)
-scale = Vector2(0.19, 1)
+position = Vector2(32.5, 0)
+scale = Vector2(0.245, 0.733333)
 texture = ExtResource("2_a6dbj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["attack_friendly"]]
-position = Vector2(39.875, 0)
+position = Vector2(32.5, 0)
 shape = SubResource("RectangleShape2D_20rp4")
 disabled = true
 

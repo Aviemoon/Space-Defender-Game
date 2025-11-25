@@ -8,7 +8,6 @@ signal hurt(p_friendly, p_damage, p_angle, p_knockback)
 func _on_area_entered(area):
 
 	if (area.is_in_group('attack_friendly') or area.is_in_group('attack_unfriendly')) and area.get('damage'):
-		print('awa')
 		var angle = Vector2.ZERO
 		var knockback = 1
 		var damage = area.damage

@@ -49,7 +49,7 @@ jump_deceleration = 0.538
 dash_speed = 1200
 dash_max_dist = 800
 dash_curve = SubResource("Curve_4ntmi")
-skills = Array[PackedScene]([ExtResource("2_gwnis")])
+skills = Array[PackedScene]([ExtResource("2_gwnis"), null])
 max_hp = 100
 speed = 1750.0
 jump_velocity = 320.0
@@ -81,5 +81,7 @@ shape = SubResource("CapsuleShape2D_gwnis")
 [node name="skill1Timer" type="Timer" parent="."]
 wait_time = 0.3
 one_shot = true
+
+[node name="RotationPoint" type="Marker2D" parent="."]
 
 [editable path="Hurtbox"]

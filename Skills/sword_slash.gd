@@ -7,9 +7,12 @@ func _ready():
 
 func attack():
 	$Sprite2D.visible = true
-	await get_tree().create_timer(0.06).timeout
+
+	var tween = get_tree().create_tween()
+	tween.tween_property($Sprite2D, "modulate:a", 0, 0.1)
+	await tween.finished
+	tween.kill()
 	$CollisionShape2D.disabled = true
-	$Sprite2D.visible = false
 	queue_free()
 
 

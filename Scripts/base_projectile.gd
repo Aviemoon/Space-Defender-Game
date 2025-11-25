@@ -5,6 +5,7 @@ class_name BaseProjectile
 @export var base_speed:float = 0
 @export var base_health:int = 0
 @export var base_knockback:float = 0
+@export var sprite:Node2D
 
 var damage 
 var speed = base_speed
