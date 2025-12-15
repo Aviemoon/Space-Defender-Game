@@ -7,40 +7,40 @@ class_name PlayerCharacter
 @export_range(0, 1) var deceleration = 0.1
 @export_range(0, 1) var jump_deceleration = 0.1
 
-@export var dash_speed = 900
-@export var dash_max_dist = 300
-@export var dash_curve:Curve
+# --- DASHING ---
+
+@export var dash_mult:float = 3
+#@export var dash_curve:Curve
 @export var dash_cooldown = 1
+var dashing = false
+@export var dash_length = 0.3
+@onready var dash_timer = dash_length
+var can_dash:bool = true
 
 @export var wall_slide_multiplier = 0.7
 @export var wall_pushoff = 333
 
+# --- COYOTE TIMER ---
+
 @onready var coyoteTimer = %coyoteTimer
 var can_coyote = true
+
+var direction = Vector2.ZERO
+
 var is_wallsliding = false
 
 var facing_right:bool = true
 #var last_dir
 #var just_wall_jumped:bool
-#
-#var is_dashing = false
-#var dash_start_pos
-#var dash_direction = 0
-#var dash_timer = 0
-
-
-#func _ready():
-	#
-	#for i in skills:
-		
-		
 
 func jump(power = 1):
 	velocity.y = -jump_velocity * power
 
+func _ready():
+	%dashCooldown.wait_time = dash_cooldown
+
 func movement(delta):
-	var direction = Input.get_axis("left", "right")
-	
+	direction = Input.get_axis("left", "right")
 	
 	
 	if not is_on_floor():
@@ -48,6 +48,8 @@ func movement(delta):
 		if coyoteTimer.is_stopped() and can_coyote:
 			coyoteTimer.start()
 			can_coyote = false
+	elif not is_on_floor() and dashing:
+		velocity.y = 0
 	else:
 		can_coyote = true
 	
@@ -59,7 +61,16 @@ func movement(delta):
 		velocity.y *= jump_deceleration
 	
 	if direction:
-		velocity.x = move_toward(0, direction * speed, speed * acceleration)
+		if dashing:
+			velocity.x = move_toward(0, direction * speed, speed * acceleration * dash_mult)
+			dash_timer -= delta
+			if dash_timer < 0:
+				dash_timer = dash_length
+				dashing = false
+			print(dash_timer)
+		else:
+			
+			velocity.x = move_toward(0, direction * speed, speed * acceleration)
 	else:
 		velocity.x = move_toward(velocity.x, 0, speed * deceleration)
 
@@ -73,32 +84,13 @@ func movement(delta):
 	
 func _physics_process(delta):
 	movement(delta)
-	#if Input.is_action_just_pressed("dash") and direction and not is_dashing and dash_timer <= 0:
-		#is_dashing = true
-		#dash_start_pos = position.x
-		#dash_direction = direction
-		#dash_timer = dash_cooldown
-		#
-	#print(is_dashing)
-	#if is_dashing:
-		#var current_dist = abs(position.x - dash_start_pos)
-		#
-		#if current_dist >= dash_start_pos or is_on_wall():
-			#is_dashing = false
-		#else:
-			#velocity.x = dash_direction * dash_speed * dash_curve.sample(current_dist / dash_max_dist)
-			#velocity.y = 0
-	#
-	#if dash_timer > 0:
-		#dash_timer -= delta
 
-	move_and_slide()
-
-func _unhandled_input(event):
-	pass
-
-func _input(event):
-	if event.is_action_pressed("ability_1"):
+	if Input.is_action_just_pressed("dash") and can_dash:
+		dashing = true
+		can_dash = false
+		%dashCooldown.start()
+	
+	if Input.is_action_pressed("ability_1"):
 		if $skill1Timer.is_stopped():
 			var new_skill = skills[0]
 			var skill_inst = new_skill.instantiate()
@@ -109,3 +101,25 @@ func _input(event):
 			$RotationPoint.add_child(skill_inst)
 			GlobalSignal.player_ability_1.emit()
 			$skill1Timer.start()
+	move_and_slide()
+
+	
+func _unhandled_input(event):
+	pass
+
+#func _input(event):
+	#if event.is_action_pressed("ability_1"):
+		#if $skill1Timer.is_stopped():
+			#var new_skill = skills[0]
+			#var skill_inst = new_skill.instantiate()
+			#if not facing_right:
+				#skill_inst.rotation = PI
+				#if skill_inst.get("sprite"):
+					#skill_inst.sprite.flip_v = true
+			#$RotationPoint.add_child(skill_inst)
+			#GlobalSignal.player_ability_1.emit()
+			#$skill1Timer.start()
+
+
+func _on_dash_cooldown_timeout():
+	can_dash = true

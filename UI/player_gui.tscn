@@ -121,35 +121,110 @@ offset_right = -256.0
 offset_bottom = -45.0
 grow_horizontal = 2
 grow_vertical = 2
-current_tab = 2
+current_tab = 1
 
-[node name="Gameplay" type="VBoxContainer" parent="PauseUI/OptionsMenu/TabContainer"]
+[node name="Gameplay" type="Control" parent="PauseUI/OptionsMenu/TabContainer"]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 
-[node name="Button" type="Button" parent="PauseUI/OptionsMenu/TabContainer/Gameplay"]
+[node name="VboxGameplay" type="VBoxContainer" parent="PauseUI/OptionsMenu/TabContainer/Gameplay"]
+visible = false
+layout_mode = 2
+offset_right = 40.0
+offset_bottom = 31.0
+
+[node name="Button" type="Button" parent="PauseUI/OptionsMenu/TabContainer/Gameplay/VboxGameplay"]
 layout_mode = 2
 text = "awa"
 
-[node name="Audio" type="VBoxContainer" parent="PauseUI/OptionsMenu/TabContainer"]
-visible = false
+[node name="Audio" type="Control" parent="PauseUI/OptionsMenu/TabContainer"]
 layout_mode = 2
 metadata/_tab_index = 1
 
-[node name="Button" type="Button" parent="PauseUI/OptionsMenu/TabContainer/Audio"]
-layout_mode = 2
-text = "awa"
+[node name="VSeparator" type="VSeparator" parent="PauseUI/OptionsMenu/TabContainer/Audio"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -418.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
 
-[node name="Graphics" type="VBoxContainer" parent="PauseUI/OptionsMenu/TabContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="PauseUI/OptionsMenu/TabContainer/Audio"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -565.0
+offset_right = -267.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="AudioBtns" type="VBoxContainer" parent="PauseUI/OptionsMenu/TabContainer/Audio/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Mute" type="CheckBox" parent="PauseUI/OptionsMenu/TabContainer/Audio/MarginContainer/AudioBtns"]
+layout_mode = 2
+button_pressed = true
+
+[node name="MasterSlider" type="HSlider" parent="PauseUI/OptionsMenu/TabContainer/Audio/MarginContainer/AudioBtns"]
+layout_mode = 2
+value = 45.0
+
+[node name="MasterSlider2" type="HSlider" parent="PauseUI/OptionsMenu/TabContainer/Audio/MarginContainer/AudioBtns"]
+layout_mode = 2
+value = 45.0
+
+[node name="MasterSlider3" type="HSlider" parent="PauseUI/OptionsMenu/TabContainer/Audio/MarginContainer/AudioBtns"]
+layout_mode = 2
+value = 45.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseUI/OptionsMenu/TabContainer/Audio"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 195.0
+grow_vertical = 2
+
+[node name="lblMute" type="Label" parent="PauseUI/OptionsMenu/TabContainer/Audio/VBoxContainer"]
+layout_mode = 2
+text = "Mute all audio"
+
+[node name="lblMaster" type="Label" parent="PauseUI/OptionsMenu/TabContainer/Audio/VBoxContainer"]
+layout_mode = 2
+text = "Master volume"
+
+[node name="lblMusic" type="Label" parent="PauseUI/OptionsMenu/TabContainer/Audio/VBoxContainer"]
+layout_mode = 2
+text = "Music volume"
+
+[node name="lblSFX" type="Label" parent="PauseUI/OptionsMenu/TabContainer/Audio/VBoxContainer"]
+layout_mode = 2
+text = "SFX volume"
+
+[node name="Graphics" type="Control" parent="PauseUI/OptionsMenu/TabContainer"]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 2
 
-[node name="Label" type="Label" parent="PauseUI/OptionsMenu/TabContainer/Graphics"]
+[node name="VboxGraphics" type="VBoxContainer" parent="PauseUI/OptionsMenu/TabContainer/Graphics"]
+visible = false
+layout_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 31.0
+offset_right = 74.0
+offset_bottom = 49.0
+
+[node name="Label" type="Label" parent="PauseUI/OptionsMenu/TabContainer/Graphics/VboxGraphics"]
 layout_mode = 2
 text = "Resolution"
 
-[node name="ViewportResolution" type="OptionButton" parent="PauseUI/OptionsMenu/TabContainer/Graphics"]
+[node name="ViewportResolution" type="OptionButton" parent="PauseUI/OptionsMenu/TabContainer/Graphics/VboxGraphics"]
 layout_mode = 2
 selected = 2
 item_count = 3
@@ -173,5 +248,5 @@ text = "Back"
 [connection signal="pressed" from="PauseUI/MenuUi/VBoxContainer/Restart" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="PauseUI/MenuUi/VBoxContainer/QuitMenu" to="." method="_on_quit_menu_pressed"]
 [connection signal="pressed" from="PauseUI/MenuUi/VBoxContainer/QuitDesktop" to="." method="_on_quit_desktop_pressed"]
-[connection signal="item_selected" from="PauseUI/OptionsMenu/TabContainer/Graphics/ViewportResolution" to="." method="_on_viewport_resolution_item_selected"]
+[connection signal="item_selected" from="PauseUI/OptionsMenu/TabContainer/Graphics/VboxGraphics/ViewportResolution" to="." method="_on_viewport_resolution_item_selected"]
 [connection signal="pressed" from="PauseUI/OptionsMenu/OptionsBack" to="." method="_on_options_back_pressed"]

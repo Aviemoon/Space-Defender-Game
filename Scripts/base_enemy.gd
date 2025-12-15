@@ -9,6 +9,8 @@ var direction:Vector2
 var player
 @export var sprite:AnimatedSprite2D
 
+func _ready():
+	pass
 
 func _physics_process(delta):
 	player = get_tree().get_first_node_in_group("player")
@@ -33,6 +35,8 @@ func movement(delta):
 					
 	
 	direction_flip()
+
+
 
 func direction_flip():
 	#print(direction)

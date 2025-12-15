@@ -15,6 +15,7 @@ sprite = NodePath("Sprite2D")
 metadata/_custom_type_script = "uid://dne8bqt32xcqt"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 1
 position = Vector2(32.5, 0)
 scale = Vector2(0.245, 0.733333)
 texture = ExtResource("2_a6dbj")
