@@ -26,6 +26,7 @@ func transition_scene(new_scene:String, target_area:String, player_offset:Vector
 	await get_tree().process_frame
 	
 	get_tree().change_scene_to_file(new_scene)
+	#get_tree().change_scene_to_packed()
 	
 	await get_tree().scene_changed
 	

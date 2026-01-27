@@ -44,6 +44,7 @@ sources/2 = SubResource("TileSetScenesCollectionSource_rvmc5")
 [node name="World" type="Node2D"]
 
 [node name="Parallax2D" type="ParallaxBackground" parent="."]
+visible = false
 scroll_offset = Vector2(40, 21)
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="Parallax2D"]
