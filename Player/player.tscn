@@ -1,12 +1,18 @@
-[gd_scene load_steps=10 format=3 uid="uid://bn3p2gijv0tv2"]
+[gd_scene load_steps=11 format=3 uid="uid://bn3p2gijv0tv2"]
 
 [ext_resource type="Script" uid="uid://cqeyq2oh5u3v6" path="res://Player/player.gd" id="1_l8h54"]
 [ext_resource type="Texture2D" uid="uid://4rptcch4o5hb" path="res://Sprites/player temp.png" id="2_4ntmi"]
 [ext_resource type="PackedScene" uid="uid://bmfx4t03bnc6f" path="res://Skills/sword_slash.tscn" id="2_gwnis"]
 [ext_resource type="PackedScene" uid="uid://m4j6i41arew2" path="res://Utility/Hurtbox.tscn" id="3_btcbx"]
 
+[sub_resource type="Curve" id="Curve_gwnis"]
+_limits = [0.0, 25.0, 0.0, 350.0]
+_data = [Vector2(0, 0), 0.0, 0.07142857, 0, 1, Vector2(350, 25), 0.07142857, 0.0, 1, 0]
+point_count = 2
+metadata/_snap_count = 30
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4ntmi"]
-size = Vector2(14, 15)
+size = Vector2(10, 15)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4ntmi"]
 atlas = ExtResource("2_4ntmi")
@@ -44,6 +50,7 @@ deceleration = 0.3
 jump_deceleration = 0.5
 dash_mult = 2.3
 dash_length = 0.21
+fall_damage_curve = SubResource("Curve_gwnis")
 friendly = true
 skills = Array[PackedScene]([ExtResource("2_gwnis"), null])
 max_hp = 100

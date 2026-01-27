@@ -12,12 +12,13 @@ config_version=5
 
 config/name="tower game"
 run/main_scene="uid://cugfsoo4pjghg"
-config/features=PackedStringArray("4.4", "Forward Plus")
+config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
-GlobalSignal="*res://Utility/global_signal.gd"
+GlobalSignal="*res://_globals/global_signal.gd"
+SceneManager="*res://_globals/Scene_Manager/scene_manager.gd"
 
 [display]
 

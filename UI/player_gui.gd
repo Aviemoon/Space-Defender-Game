@@ -10,6 +10,7 @@ var is_in_options:bool = false
 
 
 func _process(delta):
+	
 	# -- pausing --
 	if Input.is_action_just_pressed("pause"):
 		if get_tree().paused and not is_in_options:
