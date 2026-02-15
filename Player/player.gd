@@ -37,6 +37,9 @@ var is_falling:bool = false
 #var last_dir
 #var just_wall_jumped:bool
 
+var is_attacking = false
+var attack_slow_cooldown = false
+
 func _ready():
 	if get_tree().get_first_node_in_group('Player') != self:
 		self.queue_free()
@@ -105,33 +108,69 @@ func movement(delta):
 	else:
 		player_sprite.flip_h = false
 		facing_right = true
+
+func attack_move_speed(power:float = 1.0, duration:float = 1.0):
+	attack_slow_cooldown = true
+	print('yay')
+	var old_speed = speed
+	speed /= power
+	await get_tree().create_timer(duration).timeout
+	speed = old_speed
+	attack_slow_cooldown = false
 	
+	
+	
+
 func _physics_process(delta):
 	movement(delta)
-
 	if Input.is_action_just_pressed("dash") and can_dash:
 		dashing = true
 		can_dash = false
 		%dashCooldown.start()
+	attacking()
+	move_and_slide()
+
+func attacking():
+	var used_skill:int
 	
 	if Input.is_action_pressed("ability_1"):
+		used_skill = 1
 		if $skill1Timer.is_stopped():
+			if not attack_slow_cooldown:
+				attack_move_speed(1.5, 0.5)
+			is_attacking = true
 			var new_skill = skills[0]
 			var skill_inst = new_skill.instantiate()
 			if not facing_right:
 				skill_inst.scale.x = -1
 			else:
 				skill_inst.scale.x = 1
-				#if skill_inst.get("sprite"):
-					#skill_inst.sprite.flip_v = true
+			
 			$RotationPoint.add_child(skill_inst)
 			GlobalSignal.player_ability_1.emit()
+			
 			$skill1Timer.start()
-	move_and_slide()
-
 	
-func _unhandled_input(event):
-	pass
+	if Input.is_action_pressed("ability_2"):
+		used_skill = 2
+		if $skill2Timer.is_stopped():
+			is_attacking = true
+			var new_skill = skills[1]
+			var skill_inst = new_skill.instantiate()
+			skill_inst.global_position = global_position
+			#if not facing_right:
+				#skill_inst.scale.x = -1
+			#else:
+				#skill_inst.scale.x = 1
+			
+			$RotationPoint.add_child(skill_inst)
+			GlobalSignal.player_ability_2.emit()
+			
+			$skill2Timer.start()
+	
+	
+#func _unhandled_input(event):
+	#pass
 
 #func _input(event):
 	#if event.is_action_pressed("ability_1"):
@@ -149,3 +188,8 @@ func _unhandled_input(event):
 
 func _on_dash_cooldown_timeout():
 	can_dash = true
+
+
+func _on_hurtbox_hurt(p_friendly: Variant, p_damage: Variant, p_angle: Variant, p_knockback: Variant) -> void:
+	hurt(p_friendly, p_damage, p_angle, p_knockback)
+	print(p_friendly, p_damage, p_angle, p_knockback)

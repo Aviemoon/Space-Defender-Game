@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://dv3163hyhfsmm"]
+
+[ext_resource type="Texture2D" uid="uid://dhmch313v5i6l" path="res://Sprites/tiles/tilesheet_spikes.png" id="1_x7ial"]
+[ext_resource type="Script" uid="uid://lgg3lbwga46f" path="res://Special_Tiles/spikes.gd" id="2_mx4u7"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mx4u7"]
+texture = ExtResource("1_x7ial")
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 0.5, 8, 0.5, 8, 8, -8, 8)
+
+[sub_resource type="TileSet" id="TileSet_ppwc7"]
+physics_layer_0/collision_layer = 33
+physics_layer_0/collision_mask = 33
+sources/0 = SubResource("TileSetAtlasSource_mx4u7")
+
+[node name="Spikes" type="TileMapLayer"]
+tile_set = SubResource("TileSet_ppwc7")
+script = ExtResource("2_mx4u7")

@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://bn3p2gijv0tv2"]
+[gd_scene load_steps=12 format=3 uid="uid://bn3p2gijv0tv2"]
 
 [ext_resource type="Script" uid="uid://cqeyq2oh5u3v6" path="res://Player/player.gd" id="1_l8h54"]
 [ext_resource type="Texture2D" uid="uid://4rptcch4o5hb" path="res://Sprites/player temp.png" id="2_4ntmi"]
 [ext_resource type="PackedScene" uid="uid://bmfx4t03bnc6f" path="res://Skills/sword_slash.tscn" id="2_gwnis"]
 [ext_resource type="PackedScene" uid="uid://m4j6i41arew2" path="res://Utility/Hurtbox.tscn" id="3_btcbx"]
+[ext_resource type="PackedScene" uid="uid://cq24cigt53s4x" path="res://Skills/laser_blast.tscn" id="3_k53q1"]
 
 [sub_resource type="Curve" id="Curve_gwnis"]
 _limits = [0.0, 25.0, 0.0, 350.0]
@@ -11,8 +12,8 @@ _data = [Vector2(0, 0), 0.0, 0.07142857, 0, 1, Vector2(350, 25), 0.07142857, 0.0
 point_count = 2
 metadata/_snap_count = 30
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_4ntmi"]
-size = Vector2(10, 15)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k53q1"]
+size = Vector2(6, 15)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4ntmi"]
 atlas = ExtResource("2_4ntmi")
@@ -37,8 +38,8 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gwnis"]
-radius = 3.0
-height = 12.0
+radius = 4.0
+height = 16.0
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("player_sprite") groups=["Player"]]
 collision_layer = 4
@@ -52,14 +53,14 @@ dash_mult = 2.3
 dash_length = 0.21
 fall_damage_curve = SubResource("Curve_gwnis")
 friendly = true
-skills = Array[PackedScene]([ExtResource("2_gwnis"), null])
+skills = Array[PackedScene]([ExtResource("2_gwnis"), ExtResource("3_k53q1")])
 max_hp = 100
 speed = 1750.0
 jump_velocity = 320.0
 
 [node name="WallCollision" type="CollisionShape2D" parent="."]
 position = Vector2(0, 0.5)
-shape = SubResource("RectangleShape2D_4ntmi")
+shape = SubResource("RectangleShape2D_k53q1")
 debug_color = Color(0, 0.6, 0.701961, 0.109804)
 
 [node name="PlayerSprite" type="AnimatedSprite2D" parent="."]
@@ -76,12 +77,22 @@ wait_time = 0.075
 one_shot = true
 
 [node name="Hurtbox" parent="." instance=ExtResource("3_btcbx")]
+collision_mask = 40
 friendly = true
+hurtbox_type = 1
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
+position = Vector2(0, 1)
 shape = SubResource("CapsuleShape2D_gwnis")
 
+[node name="disableTimer" parent="Hurtbox" index="1"]
+wait_time = 0.2
+
 [node name="skill1Timer" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
+
+[node name="skill2Timer" type="Timer" parent="."]
 wait_time = 0.3
 one_shot = true
 
@@ -91,6 +102,7 @@ one_shot = true
 unique_name_in_owner = true
 one_shot = true
 
+[connection signal="hurt" from="Hurtbox" to="." method="_on_hurtbox_hurt"]
 [connection signal="timeout" from="dashCooldown" to="." method="_on_dash_cooldown_timeout"]
 
 [editable path="Hurtbox"]
