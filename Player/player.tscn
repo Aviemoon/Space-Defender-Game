@@ -80,6 +80,7 @@ one_shot = true
 collision_mask = 40
 friendly = true
 hurtbox_type = 1
+hurt_area_cooldown = 0.4
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
 position = Vector2(0, 1)
@@ -102,6 +103,7 @@ one_shot = true
 unique_name_in_owner = true
 one_shot = true
 
+[connection signal="body_exited" from="Hurtbox" to="Hurtbox" method="_on_body_exited"]
 [connection signal="hurt" from="Hurtbox" to="." method="_on_hurtbox_hurt"]
 [connection signal="timeout" from="dashCooldown" to="." method="_on_dash_cooldown_timeout"]
 
