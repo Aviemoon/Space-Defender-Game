@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://bfqas0u1rssf"]
+
+[ext_resource type="Texture2D" uid="uid://daubtjl67j8op" path="res://Sprites/tiles/tilesheet_platforms.png" id="1_mbjlu"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7t1g2"]
+texture = ExtResource("1_mbjlu")
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 0, -8, 0)
+0:0/0/physics_layer_0/polygon_0/one_way = true
+1:0/0 = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 0, -8, 0)
+1:0/0/physics_layer_0/polygon_0/one_way = true
+2:0/0 = 0
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 0, -8, 0)
+2:0/0/physics_layer_0/polygon_0/one_way = true
+3:0/0 = 0
+3:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 0, -8, 0)
+3:0/0/physics_layer_0/polygon_0/one_way = true
+
+[sub_resource type="TileSet" id="TileSet_sy2xu"]
+physics_layer_0/collision_layer = 2
+physics_layer_0/collision_mask = 0
+sources/0 = SubResource("TileSetAtlasSource_7t1g2")
+
+[node name="Platforms" type="TileMapLayer"]
+tile_set = SubResource("TileSet_sy2xu")

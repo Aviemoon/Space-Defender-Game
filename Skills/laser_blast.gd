@@ -22,8 +22,8 @@ func _physics_process(delta: float) -> void:
 
 
 func _on_body_entered(body: Node2D) -> void:
-	
-	enemy_hit(1)
+	if not body.is_in_group('Player'):
+		enemy_hit(1)
 
 
 

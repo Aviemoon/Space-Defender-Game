@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://lt3g7fj7ogcc" path="res://Sprites/Abilities/laser.png" id="2_tbqin"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qocid"]
-size = Vector2(16, 4)
+size = Vector2(14, 2)
 
 [node name="LaserBlast" type="Area2D" node_paths=PackedStringArray("collision") groups=["attack_friendly"]]
 top_level = true
@@ -25,6 +25,7 @@ texture = ExtResource("2_tbqin")
 shape = SubResource("RectangleShape2D_qocid")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+rect = Rect2(-4, -1, 8, 2)
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="tree_entered" from="." to="." method="_on_tree_entered"]

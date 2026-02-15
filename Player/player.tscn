@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://bn3p2gijv0tv2"]
+[gd_scene load_steps=13 format=3 uid="uid://bn3p2gijv0tv2"]
 
 [ext_resource type="Script" uid="uid://cqeyq2oh5u3v6" path="res://Player/player.gd" id="1_l8h54"]
 [ext_resource type="Texture2D" uid="uid://4rptcch4o5hb" path="res://Sprites/player temp.png" id="2_4ntmi"]
 [ext_resource type="PackedScene" uid="uid://bmfx4t03bnc6f" path="res://Skills/sword_slash.tscn" id="2_gwnis"]
 [ext_resource type="PackedScene" uid="uid://m4j6i41arew2" path="res://Utility/Hurtbox.tscn" id="3_btcbx"]
 [ext_resource type="PackedScene" uid="uid://cq24cigt53s4x" path="res://Skills/laser_blast.tscn" id="3_k53q1"]
+[ext_resource type="Texture2D" uid="uid://cajavfyvvgq80" path="res://icon.svg" id="6_fhl08"]
 
 [sub_resource type="Curve" id="Curve_gwnis"]
 _limits = [0.0, 25.0, 0.0, 350.0]
@@ -98,6 +99,15 @@ wait_time = 0.3
 one_shot = true
 
 [node name="RotationPoint" type="Marker2D" parent="."]
+
+[node name="GunOffset" type="Marker2D" parent="."]
+position = Vector2(7, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="GunOffset"]
+scale = Vector2(0.109375, 0.09375)
+texture = ExtResource("6_fhl08")
+
+[node name="Marker2D" type="Marker2D" parent="."]
 
 [node name="dashCooldown" type="Timer" parent="."]
 unique_name_in_owner = true

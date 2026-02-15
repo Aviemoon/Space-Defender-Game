@@ -20,6 +20,9 @@ var can_dash:bool = true
 @export var wall_slide_multiplier = 0.7
 @export var wall_pushoff = 333
 
+@onready var gun_offset: Marker2D = $GunOffset
+
+
 # --- COYOTE TIMER ---
 
 @onready var coyoteTimer = %coyoteTimer
@@ -56,6 +59,10 @@ func jump(power = 1):
 #func _ready():
 	#%dashCooldown.wait_time = dash_cooldown
 
+func calculate_gun_offset_position():
+	
+	gun_offset.rotation += deg_to_rad(90)
+
 func movement(delta):
 	direction = Input.get_axis("left", "right")
 	
@@ -79,6 +86,12 @@ func movement(delta):
 			
 		is_falling = false
 		can_coyote = true
+	if Input.is_action_just_pressed('down') and is_on_floor():
+		set_collision_mask_value(2, false) #IDKKKKK
+		
+		print('awawa')
+	else:
+		set_collision_mask_value(2, true)
 	
 	if Input.is_action_just_pressed("jump") and (is_on_floor() or coyoteTimer.is_stopped() != true):
 		jump()
@@ -117,11 +130,10 @@ func attack_move_speed(power:float = 1.0, duration:float = 1.0):
 	await get_tree().create_timer(duration).timeout
 	speed = old_speed
 	attack_slow_cooldown = false
-	
-	
-	
+
 
 func _physics_process(delta):
+	
 	movement(delta)
 	if Input.is_action_just_pressed("dash") and can_dash:
 		dashing = true
@@ -162,8 +174,8 @@ func attacking():
 				#skill_inst.scale.x = -1
 			#else:
 				#skill_inst.scale.x = 1
-			
-			$RotationPoint.add_child(skill_inst)
+			calculate_gun_offset_position()
+			gun_offset.add_child(skill_inst)
 			GlobalSignal.player_ability_2.emit()
 			
 			$skill2Timer.start()

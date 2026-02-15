@@ -30,6 +30,7 @@ func go_to_rotation(delta) -> bool:
 
 func enemy_hit(charge = 1) -> void:
 	health -= charge
+	#print('awaa')
 	if health <= 0:
 		collision.call_deferred('set', 'disabled', true)
 		visible = false

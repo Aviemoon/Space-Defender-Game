@@ -1,9 +1,10 @@
-[gd_scene load_steps=13 format=4 uid="uid://cugfsoo4pjghg"]
+[gd_scene load_steps=14 format=4 uid="uid://cugfsoo4pjghg"]
 
 [ext_resource type="Texture2D" uid="uid://c1l0wkjc4hhd0" path="res://Sprites/tiles/tilesheet01.png" id="2_wllj5"]
 [ext_resource type="PackedScene" uid="uid://dv3163hyhfsmm" path="res://Special_Tiles/spikes.tscn" id="3_jn7ig"]
 [ext_resource type="PackedScene" uid="uid://cqmy8hqhbyy88" path="res://Enemies/enemy_turret.tscn" id="3_ri0gf"]
 [ext_resource type="PackedScene" uid="uid://bn3p2gijv0tv2" path="res://Player/player.tscn" id="4_0l6l6"]
+[ext_resource type="PackedScene" uid="uid://bfqas0u1rssf" path="res://Special_Tiles/platforms.tscn" id="4_wllj5"]
 [ext_resource type="PackedScene" uid="uid://co5rx2yv2vhod" path="res://UI/player_gui.tscn" id="5_mu24a"]
 [ext_resource type="PackedScene" uid="uid://cim01l6swnlwg" path="res://Utility/dungeon_generator.tscn" id="6_q45av"]
 [ext_resource type="PackedScene" uid="uid://tkm0lrwcgniv" path="res://Utility/Util_Tiles/level_transition.tscn" id="7_kuxh6"]
@@ -37,8 +38,6 @@ texture = ExtResource("2_wllj5")
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 1:0/0 = 0
-1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, -0.0220947, -8, 0)
-1:0/0/physics_layer_0/polygon_0/one_way = true
 2:0/0 = 0
 2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 2:1/0 = 0
@@ -94,7 +93,10 @@ tile_map_data = PackedByteArray("AAD5/wMAAAAAAAAAAAD4/wMAAAAAAAAAAAD6/wQAAAAAAAA
 tile_set = SubResource("TileSet_aqk2v")
 
 [node name="Spikes" parent="." instance=ExtResource("3_jn7ig")]
-tile_map_data = PackedByteArray("AAAEAAIAAAAAAAAAAAADAAIAAAAAAAAAAAACAAIAAAAAAAAAAAA=")
+tile_map_data = PackedByteArray("AAAEAAIAAAAAAAAAAAAWAAUAAAAAAAAAAAAXAAUAAAAAAAAAAAApAP//AAAAAAAAAAAkAPf/AAAAAAAAAAAlAPf/AAAAAAAAAAAmAPf/AAAAAAAAAAA=")
+
+[node name="Platforms" parent="." instance=ExtResource("4_wllj5")]
+tile_map_data = PackedByteArray("AAAMAAAAAAADAAAAAAAKAAAAAAABAAAAAAALAAAAAAACAAAAAAD+//3/AAACAAAAAAD9//3/AAACAAAAAAD8//3/AAACAAAAAAD7//3/AAACAAAAAAD6//3/AAACAAAAAAD5//3/AAABAAAAAAD///3/AAADAAAAAAD+//j/AAADAAAAAAD9//j/AAACAAAAAAD8//j/AAACAAAAAAD7//j/AAACAAAAAAD6//j/AAACAAAAAAD5//j/AAABAAAAAAAEAAAAAAAAAAAAAAARAAAAAAABAAAAAAASAAAAAAADAAAAAAAOAPv/AAAAAAAAAAAPAPv/AAAAAAAAAAAQAPv/AAAAAAAAAAALAPv/AAAAAAAAAAAKAPv/AAAAAAAAAAAIAP3/AAAAAAAAAAAJAP3/AAAAAAAAAAAzAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAAnAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAAqAPj/AAAAAAAAAAArAPj/AAAAAAAAAAAhAPj/AAADAAAAAAAgAPj/AAACAAAAAAAfAPj/AAACAAAAAAAeAPj/AAACAAAAAAAdAPj/AAACAAAAAAAcAPj/AAACAAAAAAAbAPj/AAACAAAAAAAaAPj/AAACAAAAAAAZAPj/AAACAAAAAAAYAPj/AAACAAAAAAAXAPj/AAACAAAAAAAWAPj/AAACAAAAAAAUAPj/AAACAAAAAAAVAPj/AAACAAAAAAATAPj/AAACAAAAAAASAPj/AAACAAAAAAARAPj/AAABAAAAAAATAPv/AAABAAAAAAAUAPv/AAACAAAAAAAVAPv/AAACAAAAAAAWAPv/AAADAAAAAAA=")
 
 [node name="Player" parent="." instance=ExtResource("4_0l6l6")]
 acceleration = 0.1
