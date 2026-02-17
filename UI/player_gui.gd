@@ -2,6 +2,9 @@ extends Control
 
 @onready var PauseUI = $PauseUI
 @onready var Player = get_tree().get_first_node_in_group("Player")
+@onready var hp_label: Label = $MainUI/hpLabel
+@onready var timer_label: Label = $MainUI/timerLabel
+@onready var gold_label: Label = $MainUI/goldLabel
 
 var seconds = 0
 var minutes = 0
@@ -29,11 +32,12 @@ func _process(delta):
 	if seconds > 60:
 		seconds -= 60
 		minutes += 1
-	$MainUI/timerLabel.text = "Timer: %d:%02d" % [minutes, seconds]
+	timer_label.text = "Timer: %d:%02d" % [minutes, seconds]
 	
 	# -- hp --
-	if Player:
-		$MainUI/hpLabel.text = "Health: %d / %d" % [Player.hp, Player.max_hp]
+	if Player is PlayerCharacter:
+		hp_label.text = "Health: %d / %d" % [Player.hp, Player.max_hp]
+		gold_label.text = "Gold: %d" % Player.gold
 
 
 func _on_button_pressed():

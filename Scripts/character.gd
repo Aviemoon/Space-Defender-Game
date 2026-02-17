@@ -15,6 +15,8 @@ class_name Character
 
 var hp_lbl = Label.new()
 
+
+
 func _ready():
 	hp_lbl.global_position = global_position
 	hp_lbl.position.y -= 10
@@ -22,22 +24,28 @@ func _ready():
 	hp_lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	add_child(hp_lbl)
 
-func create_dmg_num(num:int):
+func create_dmg_num(num:int, color_override:String = "#ffffff", text_override:String = ""):
 	#var ctrl = Control.new()
 	var lbl = Label.new()
 	#lbl.scale = Vector2.ZERO
+	if color_override:
+		lbl.add_theme_color_override('font_color', color_override)
+	
 	lbl.add_theme_color_override('font_shadow_color', Color.BLACK)
 	lbl.add_theme_constant_override('shadow_offset_x', 2)
 	lbl.add_theme_constant_override('shadow_offset_y', 2)
-	lbl.add_theme_font_size_override('font_size', 8)
-	lbl.text = str(num)
+	lbl.add_theme_font_size_override('font_size', 16)
+	if text_override:
+		lbl.text = str(text_override)
+	else:
+		lbl.text = str(num)
 	lbl.global_position = global_position
-	lbl.scale = scale 
+	lbl.scale = Vector2(.5, .5)
 	
 	
-	#get_parent().add_child(ctrl)
+
 	get_parent().add_child(lbl)
-	#GlobalVar.current_labels += 1
+
 	var tween = get_tree().create_tween()
 	tween.tween_property(lbl, 'global_position:y',  lbl.global_position.y - 25, 0.1)
 	tween.set_parallel()
@@ -60,6 +68,7 @@ func hurt(p_friendly, p_damage, p_angle, p_knockback):
 			create_dmg_num(total_dmg)
 			if hp <= 0:
 				die()
+	#return true
 
 
 

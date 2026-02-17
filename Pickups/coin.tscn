@@ -1,0 +1,83 @@
+[gd_scene load_steps=12 format=3 uid="uid://4xtak6pxqe70"]
+
+[ext_resource type="Texture2D" uid="uid://clu1l6yfl37a4" path="res://Sprites/Pickups/coin 2.png" id="1_oayp1"]
+[ext_resource type="Script" uid="uid://b771th0hhsm6c" path="res://Pickups/coin.gd" id="1_qgrjt"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_qgrjt"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_oayp1"]
+radius = 3.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qgrjt"]
+atlas = ExtResource("1_oayp1")
+region = Rect2(0, 0, 6, 6)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1pu3x"]
+atlas = ExtResource("1_oayp1")
+region = Rect2(6, 0, 6, 6)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iodw8"]
+atlas = ExtResource("1_oayp1")
+region = Rect2(12, 0, 6, 6)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5xwpt"]
+atlas = ExtResource("1_oayp1")
+region = Rect2(18, 0, 6, 6)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jgi1x"]
+atlas = ExtResource("1_oayp1")
+region = Rect2(24, 0, 6, 6)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s17ww"]
+atlas = ExtResource("1_oayp1")
+region = Rect2(30, 0, 6, 6)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5m3am"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qgrjt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1pu3x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iodw8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5xwpt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jgi1x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s17ww")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qgrjt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qgrjt")
+}],
+"loop": true,
+"name": &"new_animation",
+"speed": 5.0
+}]
+
+[node name="Coin" type="RigidBody2D" groups=["loot"]]
+collision_layer = 256
+collision_mask = 5
+physics_material_override = SubResource("PhysicsMaterial_qgrjt")
+gravity_scale = 0.75
+script = ExtResource("1_qgrjt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_oayp1")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_5m3am")
+animation = &"new_animation"
+autoplay = "new_animation"
+frame_progress = 0.021216838
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

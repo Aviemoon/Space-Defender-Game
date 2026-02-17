@@ -7,6 +7,8 @@ class_name PlayerCharacter
 @export_range(0, 1) var deceleration = 0.1
 @export_range(0, 1) var jump_deceleration = 0.1
 
+var gold: int = 0
+
 # --- DASHING ---
 
 @export var dash_mult:float = 3
@@ -132,6 +134,11 @@ func attack_move_speed(power:float = 1.0, duration:float = 1.0):
 	attack_slow_cooldown = false
 
 
+func create_dmg_num(num:int, color_override:String = "#ffffff", text_override:String = ""):
+	var col = "#cc1122"
+	var txt = '-%d' % num
+	super.create_dmg_num(num, col, txt)
+
 func _physics_process(delta):
 	
 	movement(delta)
@@ -205,3 +212,44 @@ func _on_dash_cooldown_timeout():
 func _on_hurtbox_hurt(p_friendly: Variant, p_damage: Variant, p_angle: Variant, p_knockback: Variant) -> void:
 	hurt(p_friendly, p_damage, p_angle, p_knockback)
 	print(p_friendly, p_damage, p_angle, p_knockback)
+
+
+
+
+
+
+
+#
+
+
+func _on_magnet_area_body_entered(body: Node2D) -> void:
+	if body is Pickup:
+		body.target = self
+
+
+
+
+func gold_pickup_num(num):
+	var lbl = Label.new()
+	#lbl.scale = Vector2.ZERO
+	lbl.add_theme_color_override('font_color', '#ffff00')
+	lbl.add_theme_color_override('font_shadow_color', Color.BLACK)
+	lbl.add_theme_constant_override('shadow_offset_x', 2)
+	lbl.add_theme_constant_override('shadow_offset_y', 2)
+	lbl.add_theme_font_size_override('font_size', 16)
+	lbl.text = str("+%dG" % num)
+	lbl.global_position = global_position
+	lbl.global_position.y -= 20
+	lbl.scale = Vector2(.5, .5)
+	
+	get_parent().add_child(lbl)
+	var tween = get_tree().create_tween()
+	tween.tween_property(lbl, 'modulate:a', 0, 1)
+	await tween.finished
+	tween.kill()
+	lbl.call_deferred('queue_free')
+
+func _on_pickup_area_body_entered(body: Node2D) -> void:
+	if body is Pickup:
+		gold += body.collect()
+		gold_pickup_num(body.collect())

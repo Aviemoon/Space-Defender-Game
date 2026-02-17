@@ -32,6 +32,7 @@ window/vsync/vsync_mode=2
 Player="player character group"
 attack_friendly="group for projectiles, hurt areas etc"
 attack_unfriendly="attack for enemies"
+loot="this is loot."
 
 [input]
 
@@ -98,6 +99,7 @@ ability_4={
 2d_physics/layer_4="Enemy"
 2d_physics/layer_5="attack"
 2d_physics/layer_6="Traps"
+2d_physics/layer_9="Pickups"
 
 [rendering]
 

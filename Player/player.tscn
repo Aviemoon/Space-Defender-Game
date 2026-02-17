@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bn3p2gijv0tv2"]
+[gd_scene load_steps=15 format=3 uid="uid://bn3p2gijv0tv2"]
 
 [ext_resource type="Script" uid="uid://cqeyq2oh5u3v6" path="res://Player/player.gd" id="1_l8h54"]
 [ext_resource type="Texture2D" uid="uid://4rptcch4o5hb" path="res://Sprites/player temp.png" id="2_4ntmi"]
@@ -41,6 +41,12 @@ animations = [{
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gwnis"]
 radius = 4.0
 height = 16.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fhl08"]
+radius = 3.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vtle1"]
+radius = 21.213203
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("player_sprite") groups=["Player"]]
 collision_layer = 4
@@ -104,6 +110,7 @@ one_shot = true
 position = Vector2(7, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="GunOffset"]
+visible = false
 scale = Vector2(0.109375, 0.09375)
 texture = ExtResource("6_fhl08")
 
@@ -113,8 +120,28 @@ texture = ExtResource("6_fhl08")
 unique_name_in_owner = true
 one_shot = true
 
+[node name="PickupArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 256
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickupArea"]
+position = Vector2(0, 1)
+shape = SubResource("CircleShape2D_fhl08")
+debug_color = Color(0.8, 0.23921569, 0.8509804, 0.039215688)
+
+[node name="MagnetArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 256
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MagnetArea"]
+position = Vector2(0, 2)
+shape = SubResource("CircleShape2D_vtle1")
+debug_color = Color(0.044736385, 0.61828125, 0.5677669, 0.09411765)
+
 [connection signal="body_exited" from="Hurtbox" to="Hurtbox" method="_on_body_exited"]
 [connection signal="hurt" from="Hurtbox" to="." method="_on_hurtbox_hurt"]
 [connection signal="timeout" from="dashCooldown" to="." method="_on_dash_cooldown_timeout"]
+[connection signal="body_entered" from="PickupArea" to="." method="_on_pickup_area_body_entered"]
+[connection signal="body_entered" from="MagnetArea" to="." method="_on_magnet_area_body_entered"]
 
 [editable path="Hurtbox"]

@@ -1,8 +1,8 @@
-extends Character
-class_name BaseEnemy
+class_name BaseEnemy extends Character 
 
 @export_enum("sentry", "wonder", "custom") var AI_type = "sentry"
 @export var can_fly:bool = false
+
 
 var direction:Vector2
 #@onready var player = get_tree().get_first_node_in_group("player")
@@ -18,6 +18,15 @@ func _physics_process(delta):
 	movement(delta)
 	move_and_slide()
 	
+func die():
+	for i in range(6):
+		var new_coin = Coin.new()
+		
+		new_coin.global_position = global_position
+		if new_coin: print('awa')
+		
+		get_parent().call_deferred('add_child', new_coin)
+	super.die()
 	
 
 func movement(delta):
