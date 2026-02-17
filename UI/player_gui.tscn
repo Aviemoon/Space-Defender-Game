@@ -256,6 +256,27 @@ offset_right = 110.0
 offset_bottom = 75.0
 text = "Back"
 
+[node name="Overlays" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HurtOverlay" type="ColorRect" parent="Overlays"]
+visible = false
+modulate = Color(1, 1, 1, 0.29411766)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 0, 0, 0.22745098)
+
+[connection signal="tree_entered" from="." to="." method="_on_tree_entered"]
+[connection signal="tree_exited" from="." to="." method="_on_tree_exited"]
 [connection signal="pressed" from="PauseUI/MenuUi/VBoxContainer/Unpause" to="." method="_on_unpause_pressed"]
 [connection signal="pressed" from="PauseUI/MenuUi/VBoxContainer/Options" to="." method="_on_options_pressed"]
 [connection signal="pressed" from="PauseUI/MenuUi/VBoxContainer/Restart" to="." method="_on_button_pressed"]

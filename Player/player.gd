@@ -49,6 +49,7 @@ func _ready():
 	if get_tree().get_first_node_in_group('Player') != self:
 		self.queue_free()
 	self.call_deferred('reparent', get_tree().root)
+	GlobalSignal.player_stat_change.emit()
 	#if GlobalRoomChange.activate:
 		#global_position = GlobalRoomChange.player_position
 		#if GlobalRoomChange.player_jump_on_enter:
@@ -211,23 +212,13 @@ func _on_dash_cooldown_timeout():
 
 func _on_hurtbox_hurt(p_friendly: Variant, p_damage: Variant, p_angle: Variant, p_knockback: Variant) -> void:
 	hurt(p_friendly, p_damage, p_angle, p_knockback)
+	GlobalSignal.player_hurt.emit()
+	GlobalSignal.player_stat_change.emit()
 	print(p_friendly, p_damage, p_angle, p_knockback)
-
-
-
-
-
-
-
-#
-
 
 func _on_magnet_area_body_entered(body: Node2D) -> void:
 	if body is Pickup:
 		body.target = self
-
-
-
 
 func gold_pickup_num(num):
 	var lbl = Label.new()
@@ -253,3 +244,4 @@ func _on_pickup_area_body_entered(body: Node2D) -> void:
 	if body is Pickup:
 		gold += body.collect()
 		gold_pickup_num(body.collect())
+		GlobalSignal.player_stat_change.emit()

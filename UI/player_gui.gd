@@ -5,11 +5,17 @@ extends Control
 @onready var hp_label: Label = $MainUI/hpLabel
 @onready var timer_label: Label = $MainUI/timerLabel
 @onready var gold_label: Label = $MainUI/goldLabel
+@onready var hurt_overlay: ColorRect = $Overlays/HurtOverlay
+
+#@export var hurt_overlay_curve: Curve
+
+const HURT_ALPHA = 75
 
 var seconds = 0
 var minutes = 0
 
 var is_in_options:bool = false
+
 
 
 func _process(delta):
@@ -33,12 +39,25 @@ func _process(delta):
 		seconds -= 60
 		minutes += 1
 	timer_label.text = "Timer: %d:%02d" % [minutes, seconds]
+
+func hurt_overlay_flash():
+	var tween = get_tree().create_tween()
+	if tween.is_running():
+		tween.stop()
+		tween.play()
+	hurt_overlay.modulate.a = 0.75
+	print(hurt_overlay.modulate.a)
+	hurt_overlay.visible = true
 	
-	# -- hp --
+	tween.tween_property(hurt_overlay, 'modulate:a', 0, 0.75)
+	await tween.finished
+	tween.kill()
+	hurt_overlay.visible = false
+
+func update_labels():
 	if Player is PlayerCharacter:
 		hp_label.text = "Health: %d / %d" % [Player.hp, Player.max_hp]
 		gold_label.text = "Gold: %d" % Player.gold
-
 
 func _on_button_pressed():
 	get_tree().paused = false
@@ -79,3 +98,11 @@ func _on_viewport_resolution_item_selected(index):
 			DisplayServer.window_set_size(Vector2i(1600, 900))
 		2:
 			DisplayServer.window_set_size(Vector2i(1280, 720))
+
+func _on_tree_entered() -> void:
+	GlobalSignal.player_hurt.connect(hurt_overlay_flash)
+	GlobalSignal.player_stat_change.connect(update_labels)
+
+func _on_tree_exited() -> void:
+	GlobalSignal.player_hurt.disconnect(hurt_overlay_flash)
+	GlobalSignal.player_stat_change.disconnect(update_labels)

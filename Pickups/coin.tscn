@@ -66,18 +66,19 @@ animations = [{
 
 [node name="Coin" type="RigidBody2D" groups=["loot"]]
 collision_layer = 256
-collision_mask = 5
+collision_mask = 7
 physics_material_override = SubResource("PhysicsMaterial_qgrjt")
-gravity_scale = 0.75
 script = ExtResource("1_qgrjt")
+speed_modifier = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_oayp1")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -4)
 sprite_frames = SubResource("SpriteFrames_5m3am")
 animation = &"new_animation"
 autoplay = "new_animation"
-frame_progress = 0.021216838
+frame_progress = 0.20539103
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

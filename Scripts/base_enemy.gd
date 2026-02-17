@@ -2,6 +2,8 @@ class_name BaseEnemy extends Character
 
 @export_enum("sentry", "wonder", "custom") var AI_type = "sentry"
 @export var can_fly:bool = false
+const GOLD = preload("res://Pickups/coin.tscn")
+
 
 
 var direction:Vector2
@@ -20,9 +22,9 @@ func _physics_process(delta):
 	
 func die():
 	for i in range(6):
-		var new_coin = Coin.new()
+		var new_coin = GOLD.instantiate()
 		
-		new_coin.global_position = global_position
+		new_coin.global_position = global_position + Vector2(randi_range(2, 5), randi_range(2, 5)) 
 		if new_coin: print('awa')
 		
 		get_parent().call_deferred('add_child', new_coin)
