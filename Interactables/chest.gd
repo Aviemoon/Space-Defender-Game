@@ -5,10 +5,24 @@ extends Interactable
 
 func interact():
 	for i in drops:
-		var position_offset = drop_spawn_point.global_position.x - (len(drops) * number_of_coins)
-		for j in range(number_of_coins):
+		#var position_offset = drop_spawn_point.global_position.x - (len(drops) * number_of_coins)
+		var position_offset = drop_spawn_point.global_position
+		for j in range(1, number_of_coins + 1):
 			var new_drop = i.instantiate()
-			new_drop.global_position = Vector2(position_offset + (j*3), drop_spawn_point.global_position.y)
+			new_drop.global_position = position_offset
+			if new_drop is Coin:
+				new_drop.gravity_scale = 0.25
+			
+			var velocity_modifier = (j) * 3
+			if j < number_of_coins / 2:
+				velocity_modifier *= -1
+			elif j > (number_of_coins / 2):
+				velocity_modifier /= 2
+			else:
+				velocity_modifier = 0
+			print(velocity_modifier)
+			
+			new_drop.linear_velocity = Vector2(velocity_modifier, -150)
 			get_parent().call_deferred('add_child', new_drop)
 	opened = true
 	$Sprite2D.modulate = Color(0.3, 0.3, 0.3)

@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://bt2e5rxx6m4uq"]
+[gd_scene load_steps=6 format=3 uid="uid://bt2e5rxx6m4uq"]
 
 [ext_resource type="Texture2D" uid="uid://dm2u1g8cds4or" path="res://Sprites/Interactable/chest_small.png" id="1_o08mj"]
 [ext_resource type="Script" uid="uid://m3xmp7fhmu3q" path="res://Interactables/chest.gd" id="1_odjdj"]
+[ext_resource type="PackedScene" uid="uid://4xtak6pxqe70" path="res://Pickups/coin.tscn" id="2_waagb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_enxnb"]
 size = Vector2(16, 14)
@@ -13,7 +14,9 @@ radius = 28.01785
 collision_layer = 512
 collision_mask = 3
 script = ExtResource("1_odjdj")
+number_of_coins = 14
 action_name = "'Press E to Interact'"
+drops = Array[PackedScene]([ExtResource("2_waagb")])
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 1)
@@ -32,7 +35,7 @@ shape = SubResource("CircleShape2D_odjdj")
 debug_color = Color(0.14509805, 0.627451, 0.42352942, 0.12156863)
 
 [node name="DropSpawnPoint" type="Marker2D" parent="."]
-position = Vector2(0, -12)
+position = Vector2(0, 1)
 
 [connection signal="body_entered" from="InteractArea" to="." method="_on_interact_area_body_entered"]
 [connection signal="body_exited" from="InteractArea" to="." method="_on_interact_area_body_exited"]

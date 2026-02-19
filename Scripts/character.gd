@@ -1,10 +1,13 @@
-extends CharacterBody2D
-class_name Character
+class_name Character extends CharacterBody2D
+
 
 @export var friendly = false
 @export var skills:Array[PackedScene]
+
+@export_group('Stats', '')
+
 @export var max_hp = 0
-@onready var hp = max_hp
+
 @export var damage = 0
 @export var defense = 0
 
@@ -12,14 +15,14 @@ class_name Character
 @export var jump_velocity = 312.0
 @export var fall_immunity:bool = false
 
-
+@onready var hp = max_hp
 var hp_lbl = Label.new()
 
 
 
 func _ready():
 	hp_lbl.global_position = global_position
-	hp_lbl.position.y -= 10
+	hp_lbl.position.y += 10
 	hp_lbl.add_theme_font_size_override('font_size', 8)
 	hp_lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	add_child(hp_lbl)

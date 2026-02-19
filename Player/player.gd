@@ -1,7 +1,8 @@
-extends Character
-class_name PlayerCharacter
+class_name PlayerCharacter extends Character
 
 @export var player_sprite:AnimatedSprite2D
+
+@export_group('Speed', '')
 
 @export_range(0,1 ) var acceleration = 0.1
 @export_range(0, 1) var deceleration = 0.1
@@ -11,19 +12,17 @@ var gold: int = 0
 
 # --- DASHING ---
 
-@export var dash_mult:float = 3
+#@export_category('Dashing')
+@export_group('Dashing', '')
+
 #@export var dash_curve:Curve
+@export var dash_mult:float = 3
 @export var dash_cooldown = 1
-var dashing = false
 @export var dash_length = 0.3
 @onready var dash_timer = dash_length
+
+var dashing = false
 var can_dash:bool = true
-
-@export var wall_slide_multiplier = 0.7
-@export var wall_pushoff = 333
-
-@onready var gun_offset: Marker2D = $GunOffset
-
 
 # --- COYOTE TIMER ---
 
@@ -38,7 +37,16 @@ var facing_right:bool = true
 
 var fall_height = 0
 var is_falling:bool = false
+
+@onready var gun_offset: Marker2D = $GunOffset
+
+@export_group('Miscellaneous', '')
+
 @export var fall_damage_curve:Curve
+@export var wall_slide_multiplier = 0.7
+@export var wall_pushoff = 333
+
+
 #var last_dir
 #var just_wall_jumped:bool
 
