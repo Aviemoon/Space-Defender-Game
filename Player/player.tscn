@@ -62,7 +62,7 @@ dash_length = 0.21
 fall_damage_curve = SubResource("Curve_gwnis")
 friendly = true
 skills = Array[PackedScene]([ExtResource("2_gwnis"), ExtResource("3_k53q1")])
-max_hp = 100
+damage = 6.0
 speed = 1750.0
 jump_velocity = 320.0
 
@@ -124,6 +124,7 @@ one_shot = true
 [node name="PickupArea" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 256
+monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PickupArea"]
 position = Vector2(0, 1)
@@ -133,7 +134,7 @@ debug_color = Color(0.8, 0.23921569, 0.8509804, 0.039215688)
 [node name="MagnetArea" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 256
-monitoring = false
+monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MagnetArea"]
 position = Vector2(0, 2)

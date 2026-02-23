@@ -70,7 +70,7 @@ collision_layer = 8
 collision_mask = 3
 script = ExtResource("1_2qo54")
 sprite = NodePath("AnimatedSprite2D")
-max_hp = 23
+max_hp = 23.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(2, -1)

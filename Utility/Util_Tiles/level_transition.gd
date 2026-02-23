@@ -51,7 +51,9 @@ func calculate_offset(p_player:Node2D) -> Vector2:
 	var offset:Vector2 = Vector2.ZERO
 	var player_position = p_player.global_position
 	if location == TRANSITION_SIDE.LEFT or location == TRANSITION_SIDE.RIGHT:
-		offset.y = player_position.y - global_position.y
+		#offset.y = player_position.y - global_position.y
+		offset.y = global_position.y
+		print("player pos: %d\nglobal pos: %d" % [player_position.y, global_position.y])
 		if location == TRANSITION_SIDE.LEFT:
 			offset.x = -8
 		else:

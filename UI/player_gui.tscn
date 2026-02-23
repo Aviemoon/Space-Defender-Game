@@ -117,6 +117,14 @@ grow_vertical = 2
 layout_mode = 2
 text = "Unpause"
 
+[node name="Save" type="Button" parent="PauseUI/MenuUi/VBoxContainer"]
+layout_mode = 2
+text = "Save Game"
+
+[node name="Load" type="Button" parent="PauseUI/MenuUi/VBoxContainer"]
+layout_mode = 2
+text = "Load Game"
+
 [node name="Options" type="Button" parent="PauseUI/MenuUi/VBoxContainer"]
 layout_mode = 2
 text = "Options"
@@ -278,6 +286,8 @@ text = "Back"
 [connection signal="tree_entered" from="." to="." method="_on_tree_entered"]
 [connection signal="tree_exited" from="." to="." method="_on_tree_exited"]
 [connection signal="pressed" from="PauseUI/MenuUi/VBoxContainer/Unpause" to="." method="_on_unpause_pressed"]
+[connection signal="pressed" from="PauseUI/MenuUi/VBoxContainer/Save" to="." method="_on_save_pressed"]
+[connection signal="pressed" from="PauseUI/MenuUi/VBoxContainer/Load" to="." method="_on_load_pressed"]
 [connection signal="pressed" from="PauseUI/MenuUi/VBoxContainer/Options" to="." method="_on_options_pressed"]
 [connection signal="pressed" from="PauseUI/MenuUi/VBoxContainer/Restart" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="PauseUI/MenuUi/VBoxContainer/QuitMenu" to="." method="_on_quit_menu_pressed"]

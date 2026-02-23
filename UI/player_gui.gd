@@ -41,6 +41,7 @@ func _process(delta):
 	timer_label.text = "Timer: %d:%02d" % [minutes, seconds]
 
 func hurt_overlay_flash():
+	print("YESSSSSSSSSSS")
 	var tween = get_tree().create_tween()
 	if tween.is_running():
 		tween.stop()
@@ -54,19 +55,22 @@ func hurt_overlay_flash():
 	tween.kill()
 	hurt_overlay.visible = false
 
+func pause_game():
+	get_tree().paused = false
+	PauseUI.visible = false
+
 func update_labels():
 	if Player is PlayerCharacter:
 		hp_label.text = "Health: %d / %d" % [Player.hp, Player.max_hp]
 		gold_label.text = "Gold: %d" % Player.gold
 
 func _on_button_pressed():
-	get_tree().paused = false
+	pause_game()
 	get_tree().reload_current_scene()
 
 
 func _on_unpause_pressed():
-	get_tree().paused = false
-	PauseUI.visible = false
+	pause_game()
 
 
 
@@ -106,3 +110,13 @@ func _on_tree_entered() -> void:
 func _on_tree_exited() -> void:
 	GlobalSignal.player_hurt.disconnect(hurt_overlay_flash)
 	GlobalSignal.player_stat_change.disconnect(update_labels)
+
+
+func _on_save_pressed() -> void:
+	SavingManager.save_game()
+	pause_game()
+
+
+func _on_load_pressed() -> void:
+	SavingManager.load_game()
+	pause_game()

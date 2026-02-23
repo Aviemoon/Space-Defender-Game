@@ -16,18 +16,18 @@ var gold: int = 0
 @export_group('Dashing', '')
 
 #@export var dash_curve:Curve
-@export var dash_mult:float = 3
-@export var dash_cooldown = 1
-@export var dash_length = 0.3
+@export var dash_mult : float = 3.0
+@export var dash_cooldown : float = 1.0
+@export var dash_length : float = 0.3
 @onready var dash_timer = dash_length
 
-var dashing = false
-var can_dash:bool = true
+var dashing : bool = false
+var can_dash : bool = true
 
 # --- COYOTE TIMER ---
 
 @onready var coyoteTimer = %coyoteTimer
-var can_coyote = true
+var can_coyote : bool = true
 
 var direction = Vector2.ZERO
 
@@ -58,6 +58,7 @@ func _ready():
 		self.queue_free()
 	self.call_deferred('reparent', get_tree().root)
 	GlobalSignal.player_stat_change.emit()
+	GlobalSignal.player_hurt.emit()
 	#if GlobalRoomChange.activate:
 		#global_position = GlobalRoomChange.player_position
 		#if GlobalRoomChange.player_jump_on_enter:
@@ -77,7 +78,6 @@ func calculate_gun_offset_position():
 func movement(delta):
 	direction = Input.get_axis("left", "right")
 	
-	
 	if not is_on_floor():
 		if velocity.y > 0 and !is_falling:
 			fall_height = global_position.y
@@ -93,7 +93,9 @@ func movement(delta):
 		if is_falling and fall_distance > 100:
 			var fall_damage = 100 * fall_damage_curve.sample(fall_distance / 100)
 			fall_height = 0
-			hp -= fall_damage
+			hurt(false, fall_damage, 0, 0)
+			GlobalSignal.player_stat_change.emit()
+			#hp -= fall_damage
 			
 		is_falling = false
 		can_coyote = true

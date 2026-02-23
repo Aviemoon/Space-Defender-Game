@@ -1,21 +1,22 @@
 class_name Character extends CharacterBody2D
 
 
-@export var friendly = false
-@export var skills:Array[PackedScene]
+@export var friendly : bool = false
+@export var skills : Array[PackedScene]
+@export var items : Array[PackedScene]
 
 @export_group('Stats', '')
 
-@export var max_hp = 0
+@export var max_hp : float = 100
 
-@export var damage = 0
+@export var damage : float = 1
 @export var defense = 0
 
-@export var speed = 233.0
+@export var speed : float = 233.0
 @export var jump_velocity = 312.0
 @export var fall_immunity:bool = false
 
-@onready var hp = max_hp
+@onready var hp : float = max_hp
 var hp_lbl = Label.new()
 
 
@@ -26,6 +27,7 @@ func _ready():
 	hp_lbl.add_theme_font_size_override('font_size', 8)
 	hp_lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	add_child(hp_lbl)
+	hp = max_hp
 
 func create_dmg_num(num:int, color_override:String = "#ffffff", text_override:String = ""):
 	#var ctrl = Control.new()
@@ -64,9 +66,9 @@ func hurt(p_friendly, p_damage, p_angle, p_knockback):
 	if p_friendly != friendly:
 		hp_lbl.text = str(hp)
 		#print('%s, %s, %s, %s' % [p_friendly, p_damage, p_angle, p_knockback])
-		var total_dmg = p_damage
+		var total_dmg = p_damage - defense/2
 		if total_dmg > 0:
-			hp -= total_dmg - defense/2
+			hp -= total_dmg 
 			print('hp is %s' % hp)
 			create_dmg_num(total_dmg)
 			if hp <= 0:

@@ -1,11 +1,13 @@
 extends CanvasLayer
 
 signal load_scene_started
-signal new_scene_ready(target_name:String, offset:String)
+signal new_scene_ready(target_name : String, offset : String)
 signal load_scene_finished
+signal scene_entered(uid : String)
 
 #@onready var fade: Control
-	
+
+var current_scene_uid : String = 'uid://cugfsoo4pjghg'
 
 func _ready() -> void:
 
@@ -26,7 +28,9 @@ func transition_scene(new_scene:String, target_area:String, player_offset:Vector
 	await get_tree().process_frame
 	
 	get_tree().change_scene_to_file(new_scene)
-	#get_tree().change_scene_to_packed()
+	current_scene_uid = ResourceUID.path_to_uid(new_scene)
+	print('new scene: ', current_scene_uid)
+	scene_entered.emit(current_scene_uid)
 	
 	await get_tree().scene_changed
 	
