@@ -58,7 +58,7 @@ func _ready():
 		self.queue_free()
 	self.call_deferred('reparent', get_tree().root)
 	GlobalSignal.player_stat_change.emit()
-	GlobalSignal.player_hurt.emit()
+	
 	#if GlobalRoomChange.activate:
 		#global_position = GlobalRoomChange.player_position
 		#if GlobalRoomChange.player_jump_on_enter:
@@ -95,6 +95,7 @@ func movement(delta):
 			fall_height = 0
 			hurt(false, fall_damage, 0, 0)
 			GlobalSignal.player_stat_change.emit()
+			GlobalSignal.player_hurt.emit()
 			#hp -= fall_damage
 			
 		is_falling = false
