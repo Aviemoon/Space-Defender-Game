@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://lt3g7fj7ogcc" path="res://Sprites/Abilities/laser.png" id="2_tbqin"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qocid"]
-size = Vector2(14, 2)
+size = Vector2(10, 2)
 
 [node name="LaserBlast" type="Area2D" node_paths=PackedStringArray("collision") groups=["attack_friendly"]]
 top_level = true
@@ -18,7 +18,7 @@ collision = NodePath("CollisionShape2D")
 metadata/_custom_type_script = "uid://dne8bqt32xcqt"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(3, 3)
+scale = Vector2(2.5, 2.5)
 texture = ExtResource("2_tbqin")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

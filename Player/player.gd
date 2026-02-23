@@ -90,8 +90,8 @@ func movement(delta):
 		velocity.y = 0
 	else:
 		var fall_distance = global_position.y - fall_height
-		if is_falling and fall_distance > 100:
-			var fall_damage = 100 * fall_damage_curve.sample(fall_distance / 100)
+		if is_falling and fall_distance > 200:
+			var fall_damage = 70 * fall_damage_curve.sample(fall_distance / 100)
 			fall_height = 0
 			hurt(false, fall_damage, 0, 0)
 			GlobalSignal.player_stat_change.emit()
