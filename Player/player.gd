@@ -50,8 +50,11 @@ var is_falling:bool = false
 #var last_dir
 #var just_wall_jumped:bool
 
-var is_attacking = false
-var attack_slow_cooldown = false
+var is_attacking : bool = false
+var attack_slow_cooldown : bool = false
+
+var _number_of_gold_nums : int = 0
+#var _position_of_last_gold_num : Vector2 = Vector2.ZERO
 
 func _ready():
 	if get_tree().get_first_node_in_group('Player') != self:
@@ -240,16 +243,20 @@ func gold_pickup_num(num):
 	lbl.add_theme_constant_override('shadow_offset_y', 2)
 	lbl.add_theme_font_size_override('font_size', 16)
 	lbl.text = str("+%dG" % num)
-	lbl.global_position = global_position
-	lbl.global_position.y -= 20
+	lbl.global_position = global_position 
+	
+	lbl.global_position.y -= 20 + (_number_of_gold_nums * 5)
 	lbl.scale = Vector2(.5, .5)
 	
 	get_parent().add_child(lbl)
+	_number_of_gold_nums += 1
+	#_position_of_last_gold_num = lbl.global_position
 	var tween = get_tree().create_tween()
 	tween.tween_property(lbl, 'modulate:a', 0, 1)
 	await tween.finished
 	tween.kill()
 	lbl.call_deferred('queue_free')
+	_number_of_gold_nums -= 1
 
 func _on_pickup_area_body_entered(body: Node2D) -> void:
 	if body is Pickup:

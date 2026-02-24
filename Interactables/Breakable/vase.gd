@@ -2,6 +2,9 @@ extends Interactable
 
 var hp = 1
 
+func _ready() -> void:
+	position.y += 1
+
 func _on_hurtbox_hurt(p_friendly: Variant, p_damage: Variant, p_angle: Variant, p_knockback: Variant) -> void:
 	hp -= p_damage
 	if hp <= 0:

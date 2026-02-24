@@ -14,5 +14,6 @@ physics_layer_0/collision_mask = 33
 sources/0 = SubResource("TileSetAtlasSource_mx4u7")
 
 [node name="Spikes" type="TileMapLayer"]
+z_index = 2
 tile_set = SubResource("TileSet_ppwc7")
 script = ExtResource("2_mx4u7")
