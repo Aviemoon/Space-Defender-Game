@@ -14,7 +14,7 @@ point_count = 2
 metadata/_snap_count = 30
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k53q1"]
-size = Vector2(6, 15)
+size = Vector2(6, 14)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4ntmi"]
 atlas = ExtResource("2_4ntmi")
@@ -67,7 +67,7 @@ speed = 1750.0
 jump_velocity = 320.0
 
 [node name="WallCollision" type="CollisionShape2D" parent="."]
-position = Vector2(0, 0.5)
+position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_k53q1")
 debug_color = Color(0, 0.6, 0.701961, 0.109804)
 

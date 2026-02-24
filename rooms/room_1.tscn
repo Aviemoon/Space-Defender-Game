@@ -276,13 +276,12 @@ tile_map_data = PackedByteArray("AAALAAEAAAABAAEAAAALAAAAAAAIAAIAAAAKAAEAAAABAAE
 tile_set = SubResource("TileSet_1j48i")
 
 [node name="LevelTransition" parent="." instance=ExtResource("2_j6sld")]
-position = Vector2(0, -8)
+position = Vector2(-56, -24)
 location = 0
-size = 4
 target_level = "uid://cugfsoo4pjghg"
 
 [node name="DoorArea2D" parent="LevelTransition" index="0"]
-scale = Vector2(-1, 4)
+scale = Vector2(-1, 2)
 
 [node name="Parallax2D" type="ParallaxBackground" parent="."]
 scroll_offset = Vector2(40, 21)
