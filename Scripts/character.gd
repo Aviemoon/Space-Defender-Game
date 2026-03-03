@@ -71,6 +71,7 @@ func hurt(p_friendly, p_damage, p_angle, p_knockback):
 			hp -= total_dmg 
 			print('hp is %s' % hp)
 			create_dmg_num(total_dmg)
+			GlobalSignal.character_hit.emit(self)
 			if hp <= 0:
 				die()
 	#return true

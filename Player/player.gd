@@ -61,7 +61,7 @@ func _ready():
 		self.queue_free()
 	self.call_deferred('reparent', get_tree().root)
 	GlobalSignal.player_stat_change.emit()
-	
+	update_item()
 	#if GlobalRoomChange.activate:
 		#global_position = GlobalRoomChange.player_position
 		#if GlobalRoomChange.player_jump_on_enter:
@@ -219,6 +219,10 @@ func attacking():
 			#GlobalSignal.player_ability_1.emit()
 			#$skill1Timer.start()
 
+func update_item():
+	for i in items:
+		var new = i.instantiate()
+		$Items.add_child(new)
 
 func _on_dash_cooldown_timeout():
 	can_dash = true

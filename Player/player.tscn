@@ -1,10 +1,11 @@
-[gd_scene load_steps=15 format=3 uid="uid://bn3p2gijv0tv2"]
+[gd_scene load_steps=16 format=3 uid="uid://bn3p2gijv0tv2"]
 
 [ext_resource type="Script" uid="uid://cqeyq2oh5u3v6" path="res://Player/player.gd" id="1_l8h54"]
 [ext_resource type="Texture2D" uid="uid://4rptcch4o5hb" path="res://Sprites/player temp.png" id="2_4ntmi"]
 [ext_resource type="PackedScene" uid="uid://bmfx4t03bnc6f" path="res://Skills/sword_slash.tscn" id="2_gwnis"]
 [ext_resource type="PackedScene" uid="uid://m4j6i41arew2" path="res://Utility/Hurtbox.tscn" id="3_btcbx"]
 [ext_resource type="PackedScene" uid="uid://cq24cigt53s4x" path="res://Skills/laser_blast.tscn" id="3_k53q1"]
+[ext_resource type="PackedScene" uid="uid://7n778mn7kxh4" path="res://items/explodo.tscn" id="4_vtle1"]
 [ext_resource type="Texture2D" uid="uid://cajavfyvvgq80" path="res://icon.svg" id="6_fhl08"]
 
 [sub_resource type="Curve" id="Curve_gwnis"]
@@ -62,6 +63,7 @@ dash_length = 0.21
 fall_damage_curve = SubResource("Curve_gwnis")
 friendly = true
 skills = Array[PackedScene]([ExtResource("2_gwnis"), ExtResource("3_k53q1")])
+items = Array[PackedScene]([ExtResource("4_vtle1")])
 damage = 6.0
 speed = 1750.0
 jump_velocity = 320.0
@@ -140,6 +142,8 @@ monitorable = false
 position = Vector2(0, 2)
 shape = SubResource("CircleShape2D_vtle1")
 debug_color = Color(0.044736385, 0.61828125, 0.5677669, 0.09411765)
+
+[node name="Items" type="Node2D" parent="."]
 
 [connection signal="body_exited" from="Hurtbox" to="Hurtbox" method="_on_body_exited"]
 [connection signal="hurt" from="Hurtbox" to="." method="_on_hurtbox_hurt"]
