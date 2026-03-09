@@ -17,6 +17,9 @@ var opened = false
 func _ready() -> void:
 	pass
 
+func die():
+	pass
+
 func create_explosion_effect(effect_scale = Vector2(1, 1), effect_offset = Vector2.ZERO) -> void:
 	var explosion = EXPLOSION.instantiate()
 	explosion.global_position = global_position + effect_offset

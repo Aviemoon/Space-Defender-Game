@@ -9,6 +9,7 @@ class_name PlayerCharacter extends Character
 @export_range(0, 1) var jump_deceleration = 0.1
 var fall_speed_multiplier: float = 1.0
 var just_ground_slammed: bool = false
+var ground_slam_fall_immune: bool = false
 
 var gold: int = 0
 
@@ -83,17 +84,31 @@ func calculate_gun_offset_position():
 	gun_offset.rotation += deg_to_rad(90)
 
 func ground_slam():
-	print('slammm')
 	if not is_on_floor():
+		ground_slam_fall_immune = true
 		just_ground_slammed = true
 		lock_horizontal_movement = true
 		fall_speed_multiplier = 10
 		
-#func ground_slam_damage_zone():
-	#var damage_area 
-	#
-	#add_child(damage_area)
-	#
+func _handle_ground_slam():
+	GlobalSignal.player_ground_slam.emit(self)
+	var new_slam = skills[2].instantiate()
+	new_slam.position.y += 10
+	add_child(new_slam)
+	
+	just_ground_slammed = false
+	
+	for i in range(1):
+		await get_tree().physics_frame
+	ground_slam_fall_immune = false
+
+func _calculate_fall_damage(fall_distance):
+	var fall_damage = 50 * fall_damage_curve.sample(fall_distance / 100)
+	fall_height = 0
+	hurt(false, fall_damage, 0, 0)
+	GlobalSignal.player_stat_change.emit()
+	GlobalSignal.player_hurt.emit()
+	#hp -= fall_damage
 
 func movement(delta):
 	direction = Input.get_axis("left", "right")
@@ -114,24 +129,15 @@ func movement(delta):
 		
 		
 		if just_ground_slammed:
-			print('awa awa')
-			GlobalSignal.player_ground_slam.emit(self)
-			var new_slam = skills[2].instantiate()
-			new_slam.position.y += 10
-			add_child(new_slam)
+			_handle_ground_slam()
 			
-			just_ground_slammed = false
 		var fall_distance = global_position.y - fall_height
-		if is_falling and fall_distance > 200:
-			var fall_damage = 70 * fall_damage_curve.sample(fall_distance / 100)
-			fall_height = 0
-			hurt(false, fall_damage, 0, 0)
-			GlobalSignal.player_stat_change.emit()
-			GlobalSignal.player_hurt.emit()
-			#hp -= fall_damage
+		if is_falling and fall_distance > 200 and not (fall_immunity or ground_slam_fall_immune):
+			_calculate_fall_damage(fall_distance)
 			
 		is_falling = false
 		can_coyote = true
+	
 	if Input.is_action_just_pressed('down') and is_on_floor():
 		set_collision_mask_value(2, false) #IDKKKKK
 		
