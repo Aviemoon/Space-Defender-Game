@@ -7,6 +7,8 @@ class_name PlayerCharacter extends Character
 @export_range(0,1 ) var acceleration = 0.1
 @export_range(0, 1) var deceleration = 0.1
 @export_range(0, 1) var jump_deceleration = 0.1
+var fall_speed_multiplier: float = 1.0
+var just_ground_slammed: bool = false
 
 var gold: int = 0
 
@@ -37,6 +39,8 @@ var facing_right:bool = true
 
 var fall_height = 0
 var is_falling:bool = false
+
+var lock_horizontal_movement: bool = false
 
 @onready var gun_offset: Marker2D = $GunOffset
 
@@ -78,6 +82,19 @@ func calculate_gun_offset_position():
 	
 	gun_offset.rotation += deg_to_rad(90)
 
+func ground_slam():
+	print('slammm')
+	if not is_on_floor():
+		just_ground_slammed = true
+		lock_horizontal_movement = true
+		fall_speed_multiplier = 10
+		
+#func ground_slam_damage_zone():
+	#var damage_area 
+	#
+	#add_child(damage_area)
+	#
+
 func movement(delta):
 	direction = Input.get_axis("left", "right")
 	
@@ -85,13 +102,25 @@ func movement(delta):
 		if velocity.y > 0 and !is_falling:
 			fall_height = global_position.y
 			is_falling = true
-		velocity += get_gravity() * delta
+		velocity += (get_gravity() * fall_speed_multiplier) * delta
 		if coyoteTimer.is_stopped() and can_coyote:
 			coyoteTimer.start()
 			can_coyote = false
 	elif not is_on_floor() and dashing:
 		velocity.y = 0
 	else:
+		lock_horizontal_movement = false
+		fall_speed_multiplier = 1
+		
+		
+		if just_ground_slammed:
+			print('awa awa')
+			GlobalSignal.player_ground_slam.emit(self)
+			var new_slam = skills[2].instantiate()
+			new_slam.position.y += 10
+			add_child(new_slam)
+			
+			just_ground_slammed = false
 		var fall_distance = global_position.y - fall_height
 		if is_falling and fall_distance > 200:
 			var fall_damage = 70 * fall_damage_curve.sample(fall_distance / 100)
@@ -113,11 +142,17 @@ func movement(delta):
 	if Input.is_action_just_pressed("jump") and (is_on_floor() or coyoteTimer.is_stopped() != true):
 		jump()
 		can_coyote = false
-
-	if Input.is_action_just_released("jump") and velocity.y < 0:
-		velocity.y *= jump_deceleration
 	
-	if direction:
+	if Input.is_action_pressed('down') and Input.is_action_just_pressed('jump') and not lock_horizontal_movement and not is_on_floor():
+		just_ground_slammed = false
+		
+		ground_slam()
+		
+	if Input.is_action_just_released("jump") and velocity.y < 0:
+		velocity.y *= jump_deceleration * fall_speed_multiplier
+		
+	
+	if direction and not lock_horizontal_movement:
 		#if dashing:
 			#velocity.x = move_toward(0, direction * speed, speed * acceleration * dash_mult)
 			#dash_timer -= delta

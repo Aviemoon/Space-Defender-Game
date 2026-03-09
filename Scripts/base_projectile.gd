@@ -1,5 +1,4 @@
-extends Area2D
-class_name BaseProjectile
+class_name BaseProjectile extends Area2D
 
 @export var base_damage:float = 0
 @export var base_speed:float = 0
@@ -35,4 +34,4 @@ func enemy_hit(charge = 1) -> void:
 		collision.call_deferred('set', 'disabled', true)
 		visible = false
 		await get_tree().create_timer(1).timeout
-		queue_free()
+		call_deferred('queue_free')

@@ -38,4 +38,4 @@ func _on_tree_entered() -> void:
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 	await get_tree().create_timer(3).timeout
 	print('die')
-	queue_free()
+	call_deferred('queue_free')
