@@ -10,4 +10,4 @@ signal player_stat_change
 
 signal player_enter_interact_area(interactable)
 
-signal character_hit(hit_object) #add le thing. uhhh ya
+signal character_hit(hit_object, attacker) #add le thing. uhhh ya

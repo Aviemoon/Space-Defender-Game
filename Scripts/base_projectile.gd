@@ -27,11 +27,19 @@ func go_to_rotation(delta) -> bool:
 	position += direction * delta
 	return true
 
+func death_effect(fx: AnimatedSprite2D):
+	fx.reparent(get_tree().root)
+	fx.visible = true
+	
+	fx.play('')
+	fx.animation_finished.connect(Callable(fx, 'queue_free'))
+	print('awa!')
+
 func enemy_hit(charge = 1) -> void:
 	health -= charge
 	
 	if health <= 0:
 		collision.call_deferred('set', 'disabled', true)
 		visible = false
-		await get_tree().create_timer(1).timeout
+		#await get_tree().create_timer(1).timeout
 		call_deferred('queue_free')

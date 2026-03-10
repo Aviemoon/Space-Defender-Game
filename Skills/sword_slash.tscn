@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://bmfx4t03bnc6f"]
 
 [ext_resource type="Script" uid="uid://c55osl11na2ct" path="res://Skills/sword_slash.gd" id="1_fnk5e"]
-[ext_resource type="Texture2D" uid="uid://bku630ywwg5ov" path="res://Sprites/Abilities/slash.png" id="2_a6dbj"]
+[ext_resource type="Texture2D" uid="uid://bku630ywwg5ov" path="res://Sprites/Attacks/slash.png" id="2_a6dbj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_20rp4"]
 size = Vector2(53, 30)

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://lt3g7fj7ogcc"
-path="res://.godot/imported/laser.png-767b08be4c4d3d8dbf03d90011bfbe2e.ctex"
+uid="uid://dpba0h7shkoiw"
+path="res://.godot/imported/red_explosion.png-8899b064202bff01bab2ecd0d93b3233.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Abilities/laser.png"
-dest_files=["res://.godot/imported/laser.png-767b08be4c4d3d8dbf03d90011bfbe2e.ctex"]
+source_file="res://Sprites/Effects/red_explosion.png"
+dest_files=["res://.godot/imported/red_explosion.png-8899b064202bff01bab2ecd0d93b3233.ctex"]
 
 [params]
 

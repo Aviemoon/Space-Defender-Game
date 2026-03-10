@@ -55,6 +55,10 @@ var lock_horizontal_movement: bool = false
 #var last_dir
 #var just_wall_jumped:bool
 
+@onready var sfx_jump: AudioStreamPlayer2D = $Sfx/SfxJump
+@onready var sfx_power_up: AudioStreamPlayer2D = $Sfx/SfxPowerUp
+
+
 var is_attacking : bool = false
 var attack_slow_cooldown : bool = false
 
@@ -74,6 +78,7 @@ func _ready():
 		#GlobalRoomChange.activate = false
 
 func jump(power = 1):
+	sfx_jump.play()
 	velocity.y = -jump_velocity * power
 
 #func _ready():
@@ -85,6 +90,7 @@ func calculate_gun_offset_position():
 
 func ground_slam():
 	if not is_on_floor():
+		
 		ground_slam_fall_immune = true
 		just_ground_slammed = true
 		lock_horizontal_movement = true
@@ -269,7 +275,7 @@ func _on_dash_cooldown_timeout():
 	can_dash = true
 
 
-func _on_hurtbox_hurt(p_friendly: Variant, p_damage: Variant, p_angle: Variant, p_knockback: Variant) -> void:
+func _on_hurtbox_hurt(p_friendly: Variant, p_damage: Variant, p_angle: Variant, p_knockback: Variant, p_attacker: Variant) -> void:
 	hurt(p_friendly, p_damage, p_angle, p_knockback)
 	GlobalSignal.player_hurt.emit()
 	GlobalSignal.player_stat_change.emit()

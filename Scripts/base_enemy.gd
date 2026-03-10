@@ -3,7 +3,7 @@ class_name BaseEnemy extends Character
 @export_enum("sentry", "wonder", "custom") var AI_type = "sentry"
 @export var can_fly:bool = false
 const GOLD = preload("res://Pickups/coin.tscn")
-
+const ALERT = preload("res://UI/alert_notifier.tscn")
 
 
 var direction:Vector2

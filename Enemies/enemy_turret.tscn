@@ -1,11 +1,12 @@
-[gd_scene load_steps=13 format=3 uid="uid://cqmy8hqhbyy88"]
+[gd_scene load_steps=15 format=3 uid="uid://cqmy8hqhbyy88"]
 
 [ext_resource type="Script" uid="uid://bxxru047s08qh" path="res://Enemies/enemy_turret.gd" id="1_2qo54"]
 [ext_resource type="Texture2D" uid="uid://uo332bhb3h1j" path="res://Sprites/Enemies/turret-sheet.png" id="2_2qo54"]
+[ext_resource type="PackedScene" uid="uid://c5jry430wiv30" path="res://Skills/Enemy/laser_enemy.tscn" id="2_ceo0l"]
 [ext_resource type="PackedScene" uid="uid://m4j6i41arew2" path="res://Utility/Hurtbox.tscn" id="3_44y42"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_2qo54"]
-size = Vector2(16, 18)
+[sub_resource type="CircleShape2D" id="CircleShape2D_0bf42"]
+radius = 7.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_44y42"]
 atlas = ExtResource("2_2qo54")
@@ -48,7 +49,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"fire",
-"speed": 5.0
+"speed": 19.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -65,23 +66,25 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_ceo0l"]
 radius = 9.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_44y42"]
+size = Vector2(112, 20)
+
 [node name="Enemy_turret" type="CharacterBody2D" node_paths=PackedStringArray("sprite")]
 collision_layer = 8
 collision_mask = 3
 script = ExtResource("1_2qo54")
+projectile = ExtResource("2_ceo0l")
 sprite = NodePath("AnimatedSprite2D")
 max_hp = 23.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(2, -1)
-shape = SubResource("RectangleShape2D_2qo54")
+position = Vector2(2, 1)
+shape = SubResource("CircleShape2D_0bf42")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_xn741")
 animation = &"fire"
 autoplay = "idle"
-frame = 3
-frame_progress = 1.0
 
 [node name="Hurtbox" parent="." instance=ExtResource("3_44y42")]
 collision_layer = 8
@@ -91,6 +94,27 @@ collision_mask = 16
 position = Vector2(2, 2)
 shape = SubResource("CircleShape2D_ceo0l")
 
+[node name="FieldOfView" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FieldOfView"]
+position = Vector2(-46, 0)
+shape = SubResource("RectangleShape2D_44y42")
+debug_color = Color(0.9137255, 0.25882354, 0.3372549, 0.10980392)
+
+[node name="TurnTimer" type="Timer" parent="."]
+wait_time = 4.0
+autostart = true
+
+[node name="AttackTimer" type="Timer" parent="."]
+wait_time = 0.5
+
+[connection signal="player_spotted" from="." to="." method="_on_player_spotted"]
 [connection signal="hurt" from="Hurtbox" to="." method="_on_hurtbox_hurt"]
+[connection signal="body_entered" from="FieldOfView" to="." method="_on_field_of_view_body_entered"]
+[connection signal="body_exited" from="FieldOfView" to="." method="_on_field_of_view_body_exited"]
+[connection signal="timeout" from="TurnTimer" to="." method="_on_turn_timer_timeout"]
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
 
 [editable path="Hurtbox"]

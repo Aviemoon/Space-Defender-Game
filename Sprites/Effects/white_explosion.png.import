@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dke2fswpgksdm"
-path="res://.godot/imported/ground slam.png-6ba25d43d66f8dc5b9135157d0254194.ctex"
+uid="uid://chycfdwl36qfl"
+path="res://.godot/imported/white_explosion.png-220fe4d5f1a0381e767ee192f53cc622.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Abilities/ground slam.png"
-dest_files=["res://.godot/imported/ground slam.png-6ba25d43d66f8dc5b9135157d0254194.ctex"]
+source_file="res://Sprites/Effects/white_explosion.png"
+dest_files=["res://.godot/imported/white_explosion.png-220fe4d5f1a0381e767ee192f53cc622.ctex"]
 
 [params]
 

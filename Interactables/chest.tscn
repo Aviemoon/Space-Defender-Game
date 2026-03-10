@@ -3,12 +3,10 @@
 [ext_resource type="Texture2D" uid="uid://dm2u1g8cds4or" path="res://Sprites/Interactable/chest_small.png" id="1_o08mj"]
 [ext_resource type="Script" uid="uid://m3xmp7fhmu3q" path="res://Interactables/chest.gd" id="1_odjdj"]
 [ext_resource type="PackedScene" uid="uid://4xtak6pxqe70" path="res://Pickups/coin.tscn" id="2_waagb"]
+[ext_resource type="PackedScene" uid="uid://b4v155p54qhu4" path="res://Utility/interact_handler.tscn" id="4_waagb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_enxnb"]
 size = Vector2(16, 14)
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_odjdj"]
-radius = 28.01785
 
 [node name="Chest" type="RigidBody2D"]
 collision_layer = 512
@@ -24,18 +22,14 @@ shape = SubResource("RectangleShape2D_enxnb")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_o08mj")
-
-[node name="InteractArea" type="Area2D" parent="."]
-collision_layer = 512
-collision_mask = 4
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractArea"]
-position = Vector2(0, 1)
-shape = SubResource("CircleShape2D_odjdj")
-debug_color = Color(0.14509805, 0.627451, 0.42352942, 0.12156863)
+hframes = 2
 
 [node name="DropSpawnPoint" type="Marker2D" parent="."]
 position = Vector2(0, 1)
 
-[connection signal="body_entered" from="InteractArea" to="." method="_on_interact_area_body_entered"]
-[connection signal="body_exited" from="InteractArea" to="." method="_on_interact_area_body_exited"]
+[node name="InteractHandler" parent="." instance=ExtResource("4_waagb")]
+
+[connection signal="body_entered" from="InteractHandler/InteractArea" to="." method="_on_interact_area_body_entered"]
+[connection signal="body_exited" from="InteractHandler/InteractArea" to="." method="_on_interact_area_body_exited"]
+
+[editable path="InteractHandler"]

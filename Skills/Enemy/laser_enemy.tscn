@@ -1,0 +1,113 @@
+[gd_scene load_steps=16 format=3 uid="uid://c5jry430wiv30"]
+
+[ext_resource type="Script" uid="uid://bxjcn0d5rrpj5" path="res://Skills/Enemy/laser_enemy.gd" id="1_bjh60"]
+[ext_resource type="Texture2D" uid="uid://lt3g7fj7ogcc" path="res://Sprites/Attacks/laser.png" id="2_t12ux"]
+[ext_resource type="Texture2D" uid="uid://dpba0h7shkoiw" path="res://Sprites/Effects/red_explosion.png" id="3_jbucr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t12ux"]
+size = Vector2(10, 2)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_txplh"]
+atlas = ExtResource("3_jbucr")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rejw1"]
+atlas = ExtResource("3_jbucr")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sjrs8"]
+atlas = ExtResource("3_jbucr")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_svr3e"]
+atlas = ExtResource("3_jbucr")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nrpss"]
+atlas = ExtResource("3_jbucr")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_urad0"]
+atlas = ExtResource("3_jbucr")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7me2s"]
+atlas = ExtResource("3_jbucr")
+region = Rect2(96, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ychau"]
+atlas = ExtResource("3_jbucr")
+region = Rect2(112, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s3ar4"]
+atlas = ExtResource("3_jbucr")
+region = Rect2(128, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h1cwi"]
+atlas = ExtResource("3_jbucr")
+region = Rect2(144, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ifwma"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": null
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_txplh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rejw1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sjrs8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_svr3e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nrpss")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_urad0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7me2s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ychau")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s3ar4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h1cwi")
+}],
+"loop": false,
+"name": &"default",
+"speed": 27.0
+}]
+
+[node name="Laser_enemy" type="Area2D" node_paths=PackedStringArray("collision") groups=["attack_unfriendly"]]
+top_level = true
+collision_layer = 16
+collision_mask = 5
+script = ExtResource("1_bjh60")
+base_damage = 3.0
+base_speed = 400.0
+base_health = 1
+collision = NodePath("CollisionShape2D")
+metadata/_custom_type_script = "uid://dne8bqt32xcqt"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_t12ux")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.88431424, 3.200695e-06, 1.1551381e-06, 1)
+scale = Vector2(2, 2)
+texture = ExtResource("2_t12ux")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_ifwma")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

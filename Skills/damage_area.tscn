@@ -1,31 +1,34 @@
 [gd_scene load_steps=10 format=3 uid="uid://c8dsiw1plhimt"]
 
 [ext_resource type="Script" uid="uid://crhdpgaq5btva" path="res://Skills/damage_area.gd" id="1_5gab8"]
-[ext_resource type="Texture2D" uid="uid://dke2fswpgksdm" path="res://Sprites/Abilities/ground slam.png" id="2_02ujb"]
+[ext_resource type="Texture2D" uid="uid://dke2fswpgksdm" path="res://Sprites/Attacks/ground slam.png" id="2_02ujb"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_02ujb"]
+atlas = ExtResource("2_02ujb")
+region = Rect2(0, 0, 63, 20)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8j48c"]
 atlas = ExtResource("2_02ujb")
-region = Rect2(0, 0, 63, 10)
+region = Rect2(63, 0, 63, 20)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jheaf"]
 atlas = ExtResource("2_02ujb")
-region = Rect2(63, 0, 63, 10)
+region = Rect2(126, 0, 63, 20)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_t2m74"]
 atlas = ExtResource("2_02ujb")
-region = Rect2(126, 0, 63, 10)
+region = Rect2(189, 0, 63, 20)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_utb0k"]
 atlas = ExtResource("2_02ujb")
-region = Rect2(189, 0, 63, 10)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_qo1hp"]
-atlas = ExtResource("2_02ujb")
-region = Rect2(252, 0, 63, 10)
+region = Rect2(252, 0, 63, 20)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_y0je2"]
 animations = [{
 "frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_02ujb")
+}, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_8j48c")
 }, {
@@ -37,19 +40,16 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_utb0k")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_qo1hp")
 }],
 "loop": false,
 "name": &"default",
-"speed": 25.0
+"speed": 20.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_byfwr"]
-size = Vector2(146, 19)
+size = Vector2(106, 19)
 
-[node name="DamageArea" type="Area2D" node_paths=PackedStringArray("collision", "sprite") groups=["attack_friendly"]]
+[node name="GroundSlam" type="Area2D" node_paths=PackedStringArray("collision", "sprite") groups=["attack_friendly"]]
 collision_layer = 16
 collision_mask = 8
 script = ExtResource("1_5gab8")
@@ -60,12 +60,10 @@ sprite = NodePath("AnimatedSprite2D")
 metadata/_custom_type_script = "uid://dne8bqt32xcqt"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-modulate = Color(2.454227, 2.454227, 2.454227, 1)
-position = Vector2(0, -8)
+position = Vector2(0, -15)
 scale = Vector2(1.5, 1.5)
 sprite_frames = SubResource("SpriteFrames_y0je2")
 autoplay = "default"
-frame = 4
 frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

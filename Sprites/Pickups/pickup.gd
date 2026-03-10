@@ -15,5 +15,10 @@ func collect():
 	
 	await get_tree().create_timer(1).timeout
 
+func move_to_target():
+	if target:
+		global_position = global_position.move_toward(target.global_position, speed)
+		speed += speed_modifier
+
 func item_collect():
 	pass

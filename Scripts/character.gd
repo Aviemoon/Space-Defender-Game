@@ -62,7 +62,7 @@ func create_dmg_num(num:int, color_override:String = "#ffffff", text_override:St
 	tween.kill()
 	lbl.call_deferred('queue_free')
 
-func hurt(p_friendly, p_damage, p_angle, p_knockback):
+func hurt(p_friendly, p_damage, p_angle, p_knockback, attacker = 0):
 	if p_friendly != friendly:
 		hp_lbl.text = str(hp)
 		#print('%s, %s, %s, %s' % [p_friendly, p_damage, p_angle, p_knockback])
@@ -71,7 +71,8 @@ func hurt(p_friendly, p_damage, p_angle, p_knockback):
 			hp -= total_dmg 
 			print('hp is %s' % hp)
 			create_dmg_num(total_dmg)
-			GlobalSignal.character_hit.emit(self)
+			if attacker is Area2D:
+				GlobalSignal.character_hit.emit(self)
 			if hp <= 0:
 				die()
 	#return true

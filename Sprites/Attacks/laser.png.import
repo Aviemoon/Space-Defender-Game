@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bku630ywwg5ov"
-path="res://.godot/imported/slash.png-f2c0ea0269c418e35b38931ca6579745.ctex"
+uid="uid://lt3g7fj7ogcc"
+path="res://.godot/imported/laser.png-8097b7a51f3d58658e3a63c78b7dc1d7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Abilities/slash.png"
-dest_files=["res://.godot/imported/slash.png-f2c0ea0269c418e35b38931ca6579745.ctex"]
+source_file="res://Sprites/Attacks/laser.png"
+dest_files=["res://.godot/imported/laser.png-8097b7a51f3d58658e3a63c78b7dc1d7.ctex"]
 
 [params]
 

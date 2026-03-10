@@ -1,6 +1,6 @@
 extends Area2D
 
-signal hurt(p_friendly, p_damage, p_angle, p_knockback)
+signal hurt(p_friendly, p_damage, p_angle, p_knockback, p_attackerd)
 @export var friendly = false
 @export_enum('HitOnce', 'Cooldown', 'Disable') var hurtbox_type = 0 
 @onready var disable_timer: Timer = $disableTimer
@@ -23,21 +23,20 @@ func check_body(body):
 			collision_in_hurtbox.append(body)
 		var damage = body.get('damage')
 		var attacker_type = false
-		print(collision_in_hurtbox)
-		hurt.emit(attacker_type, damage, 0, 0)
+		#print(collision_in_hurtbox)
+		hurt.emit(attacker_type, damage, 0, 0, body)
 		await get_tree().create_timer(hurt_area_cooldown).timeout
-		print(collision_in_hurtbox)
+		#print(collision_in_hurtbox)
 		if body in collision_in_hurtbox:
 			check_body(body)
 
 
 func check_area(area):
-	if (area.is_in_group('attack_friendly') or area.is_in_group('attack_unfriendly')) and area.get('damage'):
+	if ((area.is_in_group('attack_friendly') and not get_parent().is_in_group('Player')) or (area.is_in_group('attack_unfriendly'))) and area.get('damage'):
 		if area not in collision_in_hurtbox:
 			collision_in_hurtbox.append(area)
 		match hurtbox_type:
 			0:
-				
 				if area not in hit_once_array:
 					hit_once_array.append(area)
 				else:
@@ -55,9 +54,10 @@ func check_area(area):
 			attacker_type = true
 		else:
 			attacker_type = false
-		hurt.emit(attacker_type, damage, angle, knockback)
+		hurt.emit(attacker_type, damage, angle, knockback, area)
 		await get_tree().create_timer(hurt_area_cooldown).timeout
-		if area in collision_in_hurtbox:
+		if area in collision_in_hurtbox and area:
+			print(collision_in_hurtbox)
 			check_area(area)
 
 
