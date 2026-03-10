@@ -84,6 +84,11 @@ func jump(power = 1):
 #func _ready():
 	#%dashCooldown.wait_time = dash_cooldown
 
+func die():
+	GlobalSignal.player_die.emit(self)
+	#await GlobalSignal.player_finished_dying
+	super.die()
+
 func calculate_gun_offset_position():
 	
 	gun_offset.rotation += deg_to_rad(90)

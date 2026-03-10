@@ -19,3 +19,4 @@ sources/0 = SubResource("TileSetAtlasSource_mx4u7")
 z_index = 2
 tile_set = SubResource("TileSet_ppwc7")
 script = ExtResource("2_mx4u7")
+damage = 5

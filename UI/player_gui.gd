@@ -6,6 +6,9 @@ extends Control
 @onready var timer_label: Label = $MainUI/timerLabel
 @onready var gold_label: Label = $MainUI/goldLabel
 @onready var hurt_overlay: ColorRect = $Overlays/HurtOverlay
+@onready var death_overlay: ColorRect = $Death/DeathOverlay
+@onready var death: Control = $Death
+
 
 #@export var hurt_overlay_curve: Curve
 
@@ -64,6 +67,23 @@ func update_labels():
 		hp_label.text = "Health: %d / %d" % [Player.hp, Player.max_hp]
 		gold_label.text = "Gold: %d" % Player.gold
 
+func player_die(player):
+	
+	$Death/Label.scale *= 0
+	$Death/deathRestartButton.scale *= 0
+	death.visible = true
+	var tween = get_tree().create_tween()
+	tween.tween_property(death_overlay, 'modulate:a', 0.3, 1)
+	tween.set_parallel(true)
+	tween.tween_property($Death/Label, 'scale', Vector2(1,1), 1)
+	tween.tween_property($Death/deathRestartButton, 'scale', Vector2(1,1), 1)
+	
+	await tween.finished
+	tween.kill()
+	pause_game()
+	GlobalSignal.player_finished_dying.emit()
+
+
 func _on_button_pressed():
 	pause_game()
 	get_tree().reload_current_scene()
@@ -103,13 +123,16 @@ func _on_viewport_resolution_item_selected(index):
 		2:
 			DisplayServer.window_set_size(Vector2i(1280, 720))
 
+
 func _on_tree_entered() -> void:
 	GlobalSignal.player_hurt.connect(hurt_overlay_flash)
 	GlobalSignal.player_stat_change.connect(update_labels)
+	GlobalSignal.player_die.connect(player_die)
 
 func _on_tree_exited() -> void:
 	GlobalSignal.player_hurt.disconnect(hurt_overlay_flash)
 	GlobalSignal.player_stat_change.disconnect(update_labels)
+	GlobalSignal.player_die.disconnect(player_die)
 
 
 func _on_save_pressed() -> void:
@@ -120,3 +143,7 @@ func _on_save_pressed() -> void:
 func _on_load_pressed() -> void:
 	SavingManager.load_game()
 	pause_game()
+
+
+func _on_death_restart_button_pressed() -> void:
+	get_tree().reload_current_scene()
