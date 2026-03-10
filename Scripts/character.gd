@@ -65,11 +65,10 @@ func create_dmg_num(num:int, color_override:String = "#ffffff", text_override:St
 func hurt(p_friendly, p_damage, p_angle, p_knockback, attacker = 0):
 	if p_friendly != friendly:
 		hp_lbl.text = str(hp)
-		#print('%s, %s, %s, %s' % [p_friendly, p_damage, p_angle, p_knockback])
 		var total_dmg = p_damage - defense/2
 		if total_dmg > 0:
 			hp -= total_dmg 
-			print('hp is %s' % hp)
+			#print('hp is %s' % hp)
 			create_dmg_num(total_dmg)
 			if attacker is Area2D:
 				GlobalSignal.character_hit.emit(self)

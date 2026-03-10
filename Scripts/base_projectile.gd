@@ -28,12 +28,13 @@ func go_to_rotation(delta) -> bool:
 	return true
 
 func death_effect(fx: AnimatedSprite2D):
+	if not fx:
+		return
 	fx.reparent(get_tree().root)
 	fx.visible = true
 	
 	fx.play('')
 	fx.animation_finished.connect(Callable(fx, 'queue_free'))
-	print('awa!')
 
 func enemy_hit(charge = 1) -> void:
 	health -= charge

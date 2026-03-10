@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://cnw6oi4qfmamk"]
+
+[ext_resource type="Script" uid="uid://5abd1t1dgbul" path="res://Skills/damage_radius.gd" id="1_2u1kl"]
+[ext_resource type="Texture2D" uid="uid://dqsbcyxmkkggi" path="res://Sprites/misc/RedCircle.png" id="2_wnl3g"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wnl3g"]
+radius = 20.024984
+
+[node name="DamageRadius" type="Area2D" node_paths=PackedStringArray("collision") groups=["attack_friendly"]]
+collision_layer = 16
+collision_mask = 12
+script = ExtResource("1_2u1kl")
+base_damage = 10.0
+collision = NodePath("CollisionShape2D")
+metadata/_custom_type_script = "uid://dne8bqt32xcqt"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_wnl3g")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_wnl3g")

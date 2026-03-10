@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://gfbp0ulxjqgs"]
+
+[ext_resource type="Script" uid="uid://brxb15ghd3m4d" path="res://Skills/boomerang.gd" id="1_v8qu7"]
+[ext_resource type="Texture2D" uid="uid://bewpyuwqgivys" path="res://Sprites/Attacks/CorruptedExcalibur.png" id="2_gri3d"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_07bx5"]
+size = Vector2(22, 100)
+
+[node name="Boomerang" type="Area2D" node_paths=PackedStringArray("collision", "sprite") groups=["attack_friendly"]]
+collision_layer = 16
+collision_mask = 8
+script = ExtResource("1_v8qu7")
+base_damage = 5.0
+base_speed = 340.0
+collision = NodePath("CollisionShape2D")
+sprite = NodePath("Sprite2D")
+metadata/_custom_type_script = "uid://dne8bqt32xcqt"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 0)
+shape = SubResource("RectangleShape2D_07bx5")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-3, -1)
+rotation = -0.7853982
+scale = Vector2(0.99999994, 0.99999994)
+texture = ExtResource("2_gri3d")

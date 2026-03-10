@@ -15,12 +15,12 @@ func _on_hurtbox_hurt(p_friendly, p_damage, p_angle, p_knockback, p_attacker):
 
 func _on_turn_timer_timeout() -> void:
 	if can_turn:
-		print(scale)
+		#print(scale)
 		scale.x *= -1
 
 
 func attack():
-	print(scale.x)
+	#print(scale.x)
 	sprite.play('fire')
 	var proj: BaseProjectile = projectile.instantiate()
 	proj.global_position =  global_position
