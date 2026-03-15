@@ -1,4 +1,4 @@
-class_name Interactable extends RigidBody2D
+class_name InteractArea extends Area2D
 
 
 @export var action_name: String = ''
@@ -7,8 +7,6 @@ class_name Interactable extends RigidBody2D
 var _action_lbl: Label
 
 const EXPLOSION = preload("uid://dmctsbuquttft")
-
-
 
 var player = null
 var opened = false
@@ -19,15 +17,13 @@ var opened = false
 func _ready() -> void:
 	pass
 
-func die():
-	pass
 
-func create_explosion_effect(effect_scale = Vector2(1, 1), effect_offset = Vector2.ZERO) -> void:
-	var explosion = EXPLOSION.instantiate()
-	explosion.global_position = global_position + effect_offset
-	explosion.scale = effect_scale
-	
-	get_parent().call_deferred("add_child", explosion)
+#func create_explosion_effect(effect_scale = Vector2(1, 1), effect_offset = Vector2.ZERO) -> void:
+	#var explosion = EXPLOSION.instantiate()
+	#explosion.global_position = global_position + effect_offset
+	#explosion.scale = effect_scale
+	#
+	#get_parent().call_deferred("add_child", explosion)
 
 func create_action_label(x_offset = 0, y_offset = 0):
 	var lbl_scale = 0.33
@@ -48,14 +44,11 @@ func destroy_action_label():
 		_action_lbl.call_deferred('queue_free')
 
 func player_enter(body: Node2D) -> void:
-	
 	if body is PlayerCharacter: 
 		player = body
-		#print(player)
 		#GlobalSignal.player_enter_interact_area.emit(self)
 	else:
 		player = null
 
 func player_exit() -> void:
 	player = null
-	#print('exit!')

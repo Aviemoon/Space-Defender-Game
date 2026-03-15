@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://dyfpofnpvumbn"]
+
+[ext_resource type="Script" uid="uid://bc3e7jughs1bh" path="res://Special_Tiles/portal.gd" id="1_jbfkx"]
+[ext_resource type="Texture2D" uid="uid://8ywxmm221333" path="res://Sprites/tiles/portal_empty.png" id="2_410lk"]
+[ext_resource type="Texture2D" uid="uid://mxmrj5mpselx" path="res://Sprites/tiles/portal_effect.png" id="3_yqtjk"]
+[ext_resource type="PackedScene" uid="uid://b4v155p54qhu4" path="res://Utility/interact_handler.tscn" id="4_410lk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_410lk"]
+size = Vector2(48, 0)
+
+[node name="Portal" type="RigidBody2D"]
+script = ExtResource("1_jbfkx")
+action_name = "Press E to interact"
+metadata/_custom_type_script = "uid://dhsdw13cruxno"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 24)
+shape = SubResource("RectangleShape2D_410lk")
+
+[node name="Frame" type="Sprite2D" parent="."]
+z_index = 5
+texture = ExtResource("2_410lk")
+
+[node name="Effect" type="Sprite2D" parent="."]
+z_index = 4
+texture = ExtResource("3_yqtjk")
+
+[node name="InteractHandler" parent="." instance=ExtResource("4_410lk")]
+
+[node name="InteractLabel" parent="InteractHandler/Control" index="0"]
+offset_top = -18.5
+offset_bottom = 4.5
+
+[connection signal="body_entered" from="InteractHandler/InteractArea" to="." method="_on_interact_area_body_entered"]
+[connection signal="body_exited" from="InteractHandler/InteractArea" to="." method="_on_interact_area_body_exited"]
+
+[editable path="InteractHandler"]

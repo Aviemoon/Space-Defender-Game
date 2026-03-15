@@ -6,9 +6,10 @@ var _already_interacted = false
 @onready var interact_label: Label = $Control/InteractLabel
 
 
+
 func _ready() -> void:
-	if get_parent() and get_parent() is Interactable:
-		var parent: Interactable = get_parent()
+	if get_parent() and (get_parent() is Interactable or get_parent() is InteractArea):
+		var parent = get_parent()
 		interact_label.hide()
 		interact_label.text = parent.action_name
 		

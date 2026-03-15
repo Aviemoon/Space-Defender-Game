@@ -43,6 +43,7 @@ func _on_load_scene_finished() -> void:
 	await get_tree().physics_frame
 	
 	area_2d.monitoring = true
+
 func _on_player_entered(p_player: Node2D) -> void:
 	SceneManager.transition_scene(target_level, target_area, calculate_offset(p_player), '')
 	

@@ -29,6 +29,9 @@ position = Vector2(0, 1)
 
 [node name="InteractHandler" parent="." instance=ExtResource("4_waagb")]
 
+[node name="InteractLabel" parent="InteractHandler/Control" index="0"]
+text = "aaa"
+
 [connection signal="body_entered" from="InteractHandler/InteractArea" to="." method="_on_interact_area_body_entered"]
 [connection signal="body_exited" from="InteractHandler/InteractArea" to="." method="_on_interact_area_body_exited"]
 

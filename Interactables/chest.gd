@@ -41,11 +41,6 @@ func _input(event: InputEvent) -> void:
 
 func _on_interact_area_body_entered(body: Node2D) -> void:
 	player_enter(body)
-	
-	#create_action_label()
-
 
 func _on_interact_area_body_exited(body: Node2D) -> void:
 	player_exit()
-	
-	#destroy_action_label()

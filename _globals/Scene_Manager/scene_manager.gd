@@ -34,6 +34,8 @@ func transition_scene(new_scene:String, target_area:String, player_offset:Vector
 	
 	await get_tree().scene_changed
 	
+	
+	
 	new_scene_ready.emit(target_area, player_offset)
 	
 	#await fade_screen(Vector2.ZERO, -fade_pos)

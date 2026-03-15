@@ -443,18 +443,4 @@ tile_map_data = PackedByteArray("AAAKAP3/AAAAAAAAAAAMAPz/AAAAAAAAAAANAPz/AAAAAAA
 [node name="Platforms" parent="." instance=ExtResource("7_ns2yk")]
 tile_map_data = PackedByteArray("AAABAPz/AAABAAAAAAACAPz/AAACAAAAAAADAPz/AAACAAAAAAAEAPz/AAACAAAAAAAFAPz/AAADAAAAAAA=")
 
-[connection signal="body_entered" from="TileMapLayer/Vase" to="TileMapLayer/Vase" method="_on_body_entered"]
-[connection signal="body_entered" from="TileMapLayer/@RigidBody2D@231874" to="TileMapLayer/@RigidBody2D@231874" method="_on_body_entered"]
-[connection signal="body_entered" from="TileMapLayer/@RigidBody2D@231875" to="TileMapLayer/@RigidBody2D@231875" method="_on_body_entered"]
-[connection signal="body_entered" from="TileMapLayer/@RigidBody2D@231876" to="TileMapLayer/@RigidBody2D@231876" method="_on_body_entered"]
-[connection signal="body_entered" from="TileMapLayer/@RigidBody2D@231877" to="TileMapLayer/@RigidBody2D@231877" method="_on_body_entered"]
-[connection signal="body_entered" from="TileMapLayer/@RigidBody2D@231878" to="TileMapLayer/@RigidBody2D@231878" method="_on_body_entered"]
-[connection signal="body_entered" from="TileMapLayer/@RigidBody2D@231879" to="TileMapLayer/@RigidBody2D@231879" method="_on_body_entered"]
-[connection signal="body_entered" from="TileMapLayer/@RigidBody2D@231880" to="TileMapLayer/@RigidBody2D@231880" method="_on_body_entered"]
-[connection signal="body_entered" from="TileMapLayer/@RigidBody2D@231881" to="TileMapLayer/@RigidBody2D@231881" method="_on_body_entered"]
-[connection signal="body_entered" from="TileMapLayer/@RigidBody2D@231882" to="TileMapLayer/@RigidBody2D@231882" method="_on_body_entered"]
-[connection signal="body_entered" from="TileMapLayer/@RigidBody2D@231883" to="TileMapLayer/@RigidBody2D@231883" method="_on_body_entered"]
-[connection signal="body_entered" from="TileMapLayer/@RigidBody2D@231884" to="TileMapLayer/@RigidBody2D@231884" method="_on_body_entered"]
-[connection signal="body_entered" from="TileMapLayer/@RigidBody2D@231885" to="TileMapLayer/@RigidBody2D@231885" method="_on_body_entered"]
-
 [editable path="LevelTransition"]

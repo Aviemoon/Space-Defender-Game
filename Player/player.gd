@@ -66,6 +66,7 @@ var _number_of_gold_nums : int = 0
 #var _position_of_last_gold_num : Vector2 = Vector2.ZERO
 
 func _ready():
+	z_index = 8
 	if get_tree().get_first_node_in_group('Player') != self:
 		self.queue_free()
 	self.call_deferred('reparent', get_tree().root)
@@ -220,6 +221,7 @@ func attacking():
 	var used_skill:int
 	
 	if Input.is_action_pressed("ability_1"):
+		print(global_position)
 		used_skill = 1
 		if $skill1Timer.is_stopped():
 			if not attack_slow_cooldown:

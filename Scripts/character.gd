@@ -22,6 +22,7 @@ var hp_lbl = Label.new()
 
 
 func _ready():
+	z_index = 7
 	hp_lbl.global_position = global_position
 	hp_lbl.position.y += 10
 	hp_lbl.add_theme_font_size_override('font_size', 8)
