@@ -12,7 +12,7 @@ func _input(event):
 		var mouse_y = event.position.y
 		
 		var viewport_size = get_viewport().get_visible_rect().size
-		print(viewport_size)
+		#print(viewport_size)
 		
 		var relative_x = (mouse_x - (viewport_size.x/2)) / (viewport_size.x/2)
 		var relative_y = (mouse_y - (viewport_size.y/2)) / (viewport_size.y/2)

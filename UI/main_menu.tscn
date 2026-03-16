@@ -1,12 +1,28 @@
-[gd_scene load_steps=4 format=3 uid="uid://c4y786io00jka"]
+[gd_scene load_steps=6 format=3 uid="uid://c4y786io00jka"]
 
 [ext_resource type="Theme" uid="uid://7qs58mtig7i" path="res://UI/Themes/BlackNWhite.tres" id="1_p8ccj"]
 [ext_resource type="Script" uid="uid://bx7lssxn28qnw" path="res://UI/main_menu.gd" id="1_tk8dj"]
+[ext_resource type="Shader" uid="uid://clmnl6ha2gmln" path="res://Utility/fx/shaders/wavey.gdshader" id="2_4cwpn"]
 [ext_resource type="Texture2D" uid="uid://b2wd7hsbrl1tw" path="res://Sprites/Backgrounds/moon-cloud-smaller.png" id="2_d8nwk"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_f40uw"]
+shader = ExtResource("2_4cwpn")
+shader_parameter/waveAmplitude = 0.030000001425
+shader_parameter/correctVertex = true
+shader_parameter/waveFrequency = 10.0
+shader_parameter/verticalWave = true
+shader_parameter/keepTransparency = true
+shader_parameter/useTime = true
+shader_parameter/waveSpeed = 1.0
+shader_parameter/progress = 0.0
+shader_parameter/firstHalf = 0.5
+shader_parameter/secondHalf = 0.5
+shader_parameter/freezeFirstHalf = false
+shader_parameter/freezeSecondHalf = false
 
 [node name="MainMenu" type="CanvasLayer"]
 script = ExtResource("1_tk8dj")
-parallax_multiplier = 5.5
+parallax_multiplier = 4.5
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -22,13 +38,14 @@ grow_vertical = 2
 
 [node name="TextureRect" type="TextureRect" parent="Control/ParallaxBackground/ParallaxLayer"]
 z_index = -10
+material = SubResource("ShaderMaterial_f40uw")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -458.0
-offset_top = -301.0
+offset_top = -332.0
 offset_right = 1738.0
-offset_bottom = 1021.0
+offset_bottom = 990.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_d8nwk")
