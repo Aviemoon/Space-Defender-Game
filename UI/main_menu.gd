@@ -22,3 +22,7 @@ func _input(event):
 
 func _on_start_button_pressed() -> void:
 	SceneManager.transition_scene('uid://cugfsoo4pjghg', '', Vector2.ZERO, '')
+
+
+func _on_quit_button_pressed() -> void:
+	get_tree().quit()
