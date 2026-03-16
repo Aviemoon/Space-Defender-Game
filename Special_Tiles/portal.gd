@@ -10,30 +10,32 @@ const ROTATION_SPEED = 5
 var locked = false
 var spawn_point 
 
+signal unlock # this will be emitted when the mission objective is finished
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	SceneManager.load_scene_finished.connect(_on_load_scene_finished)
 	SceneManager.new_scene_ready.connect(_on_new_scene_ready)
 
 func _on_load_scene_finished() -> void:
-	
 	await get_tree().physics_frame
 	await get_tree().physics_frame
-	
-	
 
 func _physics_process(delta: float) -> void:
 	effect.rotation_degrees += ROTATION_SPEED * delta
 
 func _on_new_scene_ready(target_name:String, offset:Vector2) -> void:
-	if target_name:
-		var players: Array = get_tree().get_nodes_in_group('Player')
-		var p: PlayerCharacter = get_tree().get_first_node_in_group('Player')
-		print(target_name)
-		for i in players:
-			i.global_position = offset
-		#print(players.global_position)
-		#print(global_position + offset)
+	if not target_name:
+		return
+	
+	
+	var players: Array = get_tree().get_nodes_in_group('Player')
+	var p: PlayerCharacter = get_tree().get_first_node_in_group('Player')
+	print(target_name)
+	for i in players:
+		i.global_position = offset
+	#print(players.global_position)
+	#print(global_position + offset)
 	
 func interact():
 	if !target_area:

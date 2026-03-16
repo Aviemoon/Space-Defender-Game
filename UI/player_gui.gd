@@ -9,6 +9,8 @@ extends Control
 @onready var death_overlay: ColorRect = $Death/DeathOverlay
 @onready var death: Control = $Death
 
+@onready var options_menu: Control = $PauseUI/OptionsMenu
+
 
 #@export var hurt_overlay_curve: Curve
 
@@ -22,7 +24,6 @@ var is_in_options:bool = false
 
 
 func _process(delta):
-	
 	# -- pausing --
 	if Input.is_action_just_pressed("pause"):
 		if get_tree().paused and not is_in_options:
@@ -104,6 +105,7 @@ func _on_quit_desktop_pressed():
 
 func _on_options_pressed():
 	is_in_options = true
+	
 	$PauseUI/OptionsMenu.visible = true
 	$PauseUI/MenuUi.visible = false
 
@@ -147,3 +149,9 @@ func _on_load_pressed() -> void:
 
 func _on_death_restart_button_pressed() -> void:
 	get_tree().reload_current_scene()
+
+
+func _on_options_menu_left_options() -> void:
+	is_in_options = false
+	$PauseUI/OptionsMenu.visible = false
+	$PauseUI/MenuUi.visible = true

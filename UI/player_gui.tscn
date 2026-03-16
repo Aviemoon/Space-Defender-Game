@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://co5rx2yv2vhod"]
+[gd_scene load_steps=4 format=3 uid="uid://co5rx2yv2vhod"]
 
+[ext_resource type="Theme" uid="uid://7qs58mtig7i" path="res://UI/Themes/BlackNWhite.tres" id="1_d8ui2"]
 [ext_resource type="Script" uid="uid://mrg5myws8516" path="res://UI/player_gui.gd" id="1_g87e5"]
+[ext_resource type="PackedScene" uid="uid://dlccio1c042j0" path="res://UI/options_menu.tscn" id="2_8fhdj"]
 
 [node name="PlayerGUI" type="Control"]
 process_mode = 3
@@ -10,6 +12,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_d8ui2")
 script = ExtResource("1_g87e5")
 
 [node name="Overlays" type="Control" parent="."]
@@ -194,147 +197,9 @@ text = "Quit to menu"
 layout_mode = 2
 text = "Quit to desktop"
 
-[node name="OptionsMenu" type="Control" parent="PauseUI"]
+[node name="OptionsMenu" parent="PauseUI" instance=ExtResource("2_8fhdj")]
 visible = false
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="TabContainer" type="TabContainer" parent="PauseUI/OptionsMenu"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 256.0
-offset_top = 45.0
-offset_right = -256.0
-offset_bottom = -45.0
-grow_horizontal = 2
-grow_vertical = 2
-current_tab = 1
-
-[node name="Gameplay" type="Control" parent="PauseUI/OptionsMenu/TabContainer"]
-visible = false
-layout_mode = 2
-metadata/_tab_index = 0
-
-[node name="VboxGameplay" type="VBoxContainer" parent="PauseUI/OptionsMenu/TabContainer/Gameplay"]
-visible = false
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 31.0
-
-[node name="Button" type="Button" parent="PauseUI/OptionsMenu/TabContainer/Gameplay/VboxGameplay"]
-layout_mode = 2
-text = "awa"
-
-[node name="Audio" type="Control" parent="PauseUI/OptionsMenu/TabContainer"]
-layout_mode = 2
-metadata/_tab_index = 1
-
-[node name="VSeparator" type="VSeparator" parent="PauseUI/OptionsMenu/TabContainer/Audio"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = -418.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-
-[node name="MarginContainer" type="MarginContainer" parent="PauseUI/OptionsMenu/TabContainer/Audio"]
-layout_mode = 1
-anchors_preset = 11
-anchor_left = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -565.0
-offset_right = -267.0
-grow_horizontal = 0
-grow_vertical = 2
-
-[node name="AudioBtns" type="VBoxContainer" parent="PauseUI/OptionsMenu/TabContainer/Audio/MarginContainer"]
-layout_mode = 2
-theme_override_constants/separation = 10
-
-[node name="Mute" type="CheckBox" parent="PauseUI/OptionsMenu/TabContainer/Audio/MarginContainer/AudioBtns"]
-layout_mode = 2
-button_pressed = true
-
-[node name="MasterSlider" type="HSlider" parent="PauseUI/OptionsMenu/TabContainer/Audio/MarginContainer/AudioBtns"]
-layout_mode = 2
-value = 45.0
-
-[node name="MasterSlider2" type="HSlider" parent="PauseUI/OptionsMenu/TabContainer/Audio/MarginContainer/AudioBtns"]
-layout_mode = 2
-value = 45.0
-
-[node name="MasterSlider3" type="HSlider" parent="PauseUI/OptionsMenu/TabContainer/Audio/MarginContainer/AudioBtns"]
-layout_mode = 2
-value = 45.0
-
-[node name="VBoxContainer" type="VBoxContainer" parent="PauseUI/OptionsMenu/TabContainer/Audio"]
-layout_mode = 1
-anchors_preset = 9
-anchor_bottom = 1.0
-offset_right = 195.0
-grow_vertical = 2
-
-[node name="lblMute" type="Label" parent="PauseUI/OptionsMenu/TabContainer/Audio/VBoxContainer"]
-layout_mode = 2
-text = "Mute all audio"
-
-[node name="lblMaster" type="Label" parent="PauseUI/OptionsMenu/TabContainer/Audio/VBoxContainer"]
-layout_mode = 2
-text = "Master volume"
-
-[node name="lblMusic" type="Label" parent="PauseUI/OptionsMenu/TabContainer/Audio/VBoxContainer"]
-layout_mode = 2
-text = "Music volume"
-
-[node name="lblSFX" type="Label" parent="PauseUI/OptionsMenu/TabContainer/Audio/VBoxContainer"]
-layout_mode = 2
-text = "SFX volume"
-
-[node name="Graphics" type="Control" parent="PauseUI/OptionsMenu/TabContainer"]
-visible = false
-layout_mode = 2
-metadata/_tab_index = 2
-
-[node name="VboxGraphics" type="VBoxContainer" parent="PauseUI/OptionsMenu/TabContainer/Graphics"]
-visible = false
-layout_mode = 0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = 31.0
-offset_right = 74.0
-offset_bottom = 49.0
-
-[node name="Label" type="Label" parent="PauseUI/OptionsMenu/TabContainer/Graphics/VboxGraphics"]
-layout_mode = 2
-text = "Resolution"
-
-[node name="ViewportResolution" type="OptionButton" parent="PauseUI/OptionsMenu/TabContainer/Graphics/VboxGraphics"]
-layout_mode = 2
-selected = 2
-item_count = 3
-popup/item_0/text = "1920x1080"
-popup/item_0/id = 0
-popup/item_1/text = "1600x900"
-popup/item_1/id = 1
-popup/item_2/text = "1280x720"
-popup/item_2/id = 2
-
-[node name="OptionsBack" type="Button" parent="PauseUI/OptionsMenu"]
-layout_mode = 0
-offset_left = 25.0
-offset_top = 25.0
-offset_right = 110.0
-offset_bottom = 75.0
-text = "Back"
 
 [connection signal="tree_entered" from="." to="." method="_on_tree_entered"]
 [connection signal="tree_exited" from="." to="." method="_on_tree_exited"]
@@ -346,5 +211,6 @@ text = "Back"
 [connection signal="pressed" from="PauseUI/MenuUi/VBoxContainer/Restart" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="PauseUI/MenuUi/VBoxContainer/QuitMenu" to="." method="_on_quit_menu_pressed"]
 [connection signal="pressed" from="PauseUI/MenuUi/VBoxContainer/QuitDesktop" to="." method="_on_quit_desktop_pressed"]
-[connection signal="item_selected" from="PauseUI/OptionsMenu/TabContainer/Graphics/VboxGraphics/ViewportResolution" to="." method="_on_viewport_resolution_item_selected"]
-[connection signal="pressed" from="PauseUI/OptionsMenu/OptionsBack" to="." method="_on_options_back_pressed"]
+[connection signal="left_options" from="PauseUI/OptionsMenu" to="." method="_on_options_menu_left_options"]
+
+[editable path="PauseUI/OptionsMenu"]

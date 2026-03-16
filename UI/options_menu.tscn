@@ -1,0 +1,147 @@
+[gd_scene load_steps=2 format=3 uid="uid://dlccio1c042j0"]
+
+[ext_resource type="Script" uid="uid://bqiohsv6bxubh" path="res://UI/options_menu.gd" id="1_xf62s"]
+
+[node name="OptionsMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_xf62s")
+
+[node name="TabContainer" type="TabContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 256.0
+offset_top = 45.0
+offset_right = -256.0
+offset_bottom = -45.0
+grow_horizontal = 2
+grow_vertical = 2
+current_tab = 0
+
+[node name="Gameplay" type="Control" parent="TabContainer"]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="VboxGameplay" type="VBoxContainer" parent="TabContainer/Gameplay"]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 31.0
+
+[node name="Button" type="Button" parent="TabContainer/Gameplay/VboxGameplay"]
+layout_mode = 2
+text = "awa"
+
+[node name="Audio" type="Control" parent="TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="VSeparator" type="VSeparator" parent="TabContainer/Audio"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -418.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/Audio"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -565.0
+offset_right = -267.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="AudioBtns" type="VBoxContainer" parent="TabContainer/Audio/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Mute" type="CheckBox" parent="TabContainer/Audio/MarginContainer/AudioBtns"]
+layout_mode = 2
+button_pressed = true
+
+[node name="MasterSlider" type="HSlider" parent="TabContainer/Audio/MarginContainer/AudioBtns"]
+layout_mode = 2
+value = 45.0
+
+[node name="MasterSlider2" type="HSlider" parent="TabContainer/Audio/MarginContainer/AudioBtns"]
+layout_mode = 2
+value = 45.0
+
+[node name="MasterSlider3" type="HSlider" parent="TabContainer/Audio/MarginContainer/AudioBtns"]
+layout_mode = 2
+value = 45.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Audio"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 195.0
+grow_vertical = 2
+
+[node name="lblMute" type="Label" parent="TabContainer/Audio/VBoxContainer"]
+layout_mode = 2
+text = "Mute all audio"
+
+[node name="lblMaster" type="Label" parent="TabContainer/Audio/VBoxContainer"]
+layout_mode = 2
+text = "Master volume"
+
+[node name="lblMusic" type="Label" parent="TabContainer/Audio/VBoxContainer"]
+layout_mode = 2
+text = "Music volume"
+
+[node name="lblSFX" type="Label" parent="TabContainer/Audio/VBoxContainer"]
+layout_mode = 2
+text = "SFX volume"
+
+[node name="Graphics" type="Control" parent="TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 2
+
+[node name="VboxGraphics" type="VBoxContainer" parent="TabContainer/Graphics"]
+visible = false
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 31.0
+offset_right = 74.0
+offset_bottom = 49.0
+
+[node name="Label" type="Label" parent="TabContainer/Graphics/VboxGraphics"]
+layout_mode = 2
+text = "Resolution"
+
+[node name="ViewportResolution" type="OptionButton" parent="TabContainer/Graphics/VboxGraphics"]
+layout_mode = 2
+selected = 2
+item_count = 3
+popup/item_0/text = "1920x1080"
+popup/item_0/id = 0
+popup/item_1/text = "1600x900"
+popup/item_1/id = 1
+popup/item_2/text = "1280x720"
+popup/item_2/id = 2
+
+[node name="OptionsBack" type="Button" parent="."]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 25.0
+offset_right = 110.0
+offset_bottom = 75.0
+text = "Back"
+
+[connection signal="pressed" from="OptionsBack" to="." method="_on_options_back_pressed"]
