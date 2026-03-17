@@ -10,6 +10,7 @@ extends Control
 @onready var death: Control = $Death
 
 @onready var options_menu: Control = $PauseUI/OptionsMenu
+@onready var level_select: Control = $LevelSelect
 
 
 #@export var hurt_overlay_curve: Curve
@@ -33,6 +34,10 @@ func _process(delta):
 			is_in_options = false
 			$PauseUI/OptionsMenu.visible = false
 			$PauseUI/MenuUi.visible = true
+		elif level_select.visible:
+			level_select_visibility()
+			get_tree().paused = true
+		
 		else:
 			get_tree().paused = true
 			PauseUI.visible = true
@@ -69,7 +74,6 @@ func update_labels():
 		gold_label.text = "Gold: %d" % Player.gold
 
 func player_die(player):
-	
 	$Death/Label.scale *= 0
 	$Death/deathRestartButton.scale *= 0
 	death.visible = true
@@ -84,6 +88,13 @@ func player_die(player):
 	pause_game()
 	GlobalSignal.player_finished_dying.emit()
 
+func level_select_visibility():
+	level_select.visible = not level_select.visible
+	if level_select.visible:
+		get_tree().paused = true
+
+func hide_lvl_select():
+	level_select.visible = false
 
 func _on_button_pressed():
 	pause_game()
@@ -96,10 +107,13 @@ func _on_unpause_pressed():
 
 
 func _on_quit_menu_pressed():
-	pass
+	get_parent().get_parent().queue_free()
+	get_tree().paused = false
+	SceneManager.transition_scene('uid://c4y786io00jka', '', Vector2.ZERO, '') # add continue with/without saving here
+	#SceneManager.transition_scene()
 
 
-func _on_quit_desktop_pressed():
+func _on_quit_desktop_pressed(): # add continue with/without saving here
 	get_tree().quit()
 
 
@@ -130,12 +144,15 @@ func _on_tree_entered() -> void:
 	GlobalSignal.player_hurt.connect(hurt_overlay_flash)
 	GlobalSignal.player_stat_change.connect(update_labels)
 	GlobalSignal.player_die.connect(player_die)
+	GlobalSignal.portal_interacted_with.connect(level_select_visibility)
+	SceneManager.load_scene_finished.connect(hide_lvl_select)
 
 func _on_tree_exited() -> void:
 	GlobalSignal.player_hurt.disconnect(hurt_overlay_flash)
 	GlobalSignal.player_stat_change.disconnect(update_labels)
 	GlobalSignal.player_die.disconnect(player_die)
-
+	GlobalSignal.portal_interacted_with.disconnect(level_select_visibility)
+	SceneManager.load_scene_finished.disconnect(hide_lvl_select)
 
 func _on_save_pressed() -> void:
 	SavingManager.save_game()

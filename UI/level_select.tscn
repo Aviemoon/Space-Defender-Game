@@ -1,0 +1,81 @@
+[gd_scene load_steps=4 format=3 uid="uid://855l6hdhclf5"]
+
+[ext_resource type="Theme" uid="uid://7qs58mtig7i" path="res://UI/Themes/BlackNWhite.tres" id="1_r4dbv"]
+[ext_resource type="Script" uid="uid://cshi8uctoyuac" path="res://UI/level_select.gd" id="2_qgm14"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_r4dbv"]
+
+[node name="LevelSelect" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_r4dbv")
+script = ExtResource("2_qgm14")
+
+[node name="Choice1" type="Button" parent="."]
+custom_minimum_size = Vector2(200, 300)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -350.0
+offset_top = -150.0
+offset_right = -150.0
+offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Choice1"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Choice1Label" type="Label" parent="Choice1/VBoxContainer"]
+layout_mode = 2
+text = "Choice 1"
+label_settings = SubResource("LabelSettings_r4dbv")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Choice2" type="Button" parent="."]
+custom_minimum_size = Vector2(200, 300)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 150.0
+offset_top = -150.0
+offset_right = 350.0
+offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Choice2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Choice2Label" type="Label" parent="Choice2/VBoxContainer"]
+layout_mode = 2
+text = "Choice 2"
+label_settings = SubResource("LabelSettings_r4dbv")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="tree_entered" from="." to="." method="_on_tree_entered"]
+[connection signal="tree_exited" from="." to="." method="_on_tree_exited"]
+[connection signal="pressed" from="Choice1" to="." method="_on_choice_1_pressed"]
+[connection signal="pressed" from="Choice2" to="." method="_on_choice_2_pressed"]

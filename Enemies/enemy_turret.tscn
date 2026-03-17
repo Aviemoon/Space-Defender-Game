@@ -67,7 +67,7 @@ animations = [{
 radius = 9.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_44y42"]
-size = Vector2(112, 20)
+size = Vector2(109, 18)
 
 [node name="Enemy_turret" type="CharacterBody2D" node_paths=PackedStringArray("sprite")]
 collision_layer = 8
@@ -99,7 +99,7 @@ collision_layer = 0
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FieldOfView"]
-position = Vector2(-46, 0)
+position = Vector2(-47.5, 2)
 shape = SubResource("RectangleShape2D_44y42")
 debug_color = Color(0.9137255, 0.25882354, 0.3372549, 0.10980392)
 

@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://co5rx2yv2vhod"]
+[gd_scene load_steps=5 format=3 uid="uid://co5rx2yv2vhod"]
 
 [ext_resource type="Theme" uid="uid://7qs58mtig7i" path="res://UI/Themes/BlackNWhite.tres" id="1_d8ui2"]
 [ext_resource type="Script" uid="uid://mrg5myws8516" path="res://UI/player_gui.gd" id="1_g87e5"]
 [ext_resource type="PackedScene" uid="uid://dlccio1c042j0" path="res://UI/options_menu.tscn" id="2_8fhdj"]
+[ext_resource type="PackedScene" uid="uid://855l6hdhclf5" path="res://UI/level_select.tscn" id="4_41lji"]
 
 [node name="PlayerGUI" type="Control"]
 process_mode = 3
@@ -201,6 +202,10 @@ text = "Quit to desktop"
 visible = false
 layout_mode = 1
 
+[node name="LevelSelect" parent="." instance=ExtResource("4_41lji")]
+visible = false
+layout_mode = 1
+
 [connection signal="tree_entered" from="." to="." method="_on_tree_entered"]
 [connection signal="tree_exited" from="." to="." method="_on_tree_exited"]
 [connection signal="pressed" from="Death/deathRestartButton" to="." method="_on_death_restart_button_pressed"]
@@ -214,3 +219,4 @@ layout_mode = 1
 [connection signal="left_options" from="PauseUI/OptionsMenu" to="." method="_on_options_menu_left_options"]
 
 [editable path="PauseUI/OptionsMenu"]
+[editable path="LevelSelect"]
