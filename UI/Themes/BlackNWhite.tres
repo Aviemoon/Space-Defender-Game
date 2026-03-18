@@ -1,5 +1,6 @@
-[gd_resource type="Theme" load_steps=5 format=3 uid="uid://7qs58mtig7i"]
+[gd_resource type="Theme" load_steps=8 format=3 uid="uid://7qs58mtig7i"]
 
+[ext_resource type="FontFile" uid="uid://t6u47t0n8tny" path="res://UI/Themes/upheavtt.ttf" id="1_56faf"]
 [ext_resource type="StyleBox" uid="uid://dqtwxrd8qxrr7" path="res://UI/Themes/black_bg_white_bd.tres" id="1_wejhc"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_56faf"]
@@ -30,9 +31,46 @@ border_width_right = 2
 border_width_bottom = 2
 border_color = Color(1, 1, 1, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5fve6"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(1, 1, 1, 0.75)
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_j2a7q"]
+
 [resource]
+Button/font_sizes/font_size = 32
+Button/fonts/font = ExtResource("1_56faf")
 Button/styles/disabled = SubResource("StyleBoxFlat_56faf")
 Button/styles/focus = SubResource("StyleBoxFlat_pg5qf")
 Button/styles/hover = SubResource("StyleBoxFlat_wejhc")
 Button/styles/normal = ExtResource("1_wejhc")
+Label/colors/font_color = Color(1, 1, 1, 1)
+Label/colors/font_outline_color = Color(0, 0, 0, 1)
+Label/colors/font_shadow_color = Color(0, 0, 0, 0)
+Label/constants/line_spacing = 3
+Label/constants/outline_size = 0
+Label/constants/shadow_offset_x = 1
+Label/constants/shadow_offset_y = 1
+Label/constants/shadow_outline_size = 1
+Label/font_sizes/font_size = 20
+Label/fonts/font = ExtResource("1_56faf")
+Label/styles/focus = SubResource("StyleBoxFlat_5fve6")
+Label/styles/normal = SubResource("StyleBoxEmpty_j2a7q")
 Panel/styles/panel = ExtResource("1_wejhc")

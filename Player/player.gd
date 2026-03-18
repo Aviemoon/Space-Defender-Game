@@ -11,6 +11,8 @@ var fall_speed_multiplier: float = 1.0
 var just_ground_slammed: bool = false
 var ground_slam_fall_immune: bool = false
 
+var godmode: bool = false
+
 var gold: int = 0
 
 # --- DASHING ---
@@ -115,6 +117,8 @@ func _handle_ground_slam():
 	ground_slam_fall_immune = false
 
 func _calculate_fall_damage(fall_distance):
+	if godmode:
+		return
 	var fall_damage = 50 * fall_damage_curve.sample(fall_distance / 100)
 	fall_height = 0
 	hurt(false, fall_damage, 0, 0)
@@ -283,6 +287,8 @@ func _on_dash_cooldown_timeout():
 
 
 func _on_hurtbox_hurt(p_friendly: Variant, p_damage: Variant, p_angle: Variant, p_knockback: Variant, p_attacker: Variant) -> void:
+	if godmode: 
+		return
 	hurt(p_friendly, p_damage, p_angle, p_knockback)
 	GlobalSignal.player_hurt.emit()
 	GlobalSignal.player_stat_change.emit()

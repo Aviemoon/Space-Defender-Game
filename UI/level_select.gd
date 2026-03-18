@@ -11,7 +11,7 @@ func transition(p_scene):
 
 func set_levels(p_array):
 	chosen_levels = [] # add all this to saving somehow...
-	chosen_names = []
+	chosen_names = []# zozo go baboba
 	for i in range(2):
 		var rand_lvl: Array = Global.get_random_level_and_name()
 		

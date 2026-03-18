@@ -69,6 +69,7 @@ func save_game():
 	
 	var save_file = FileAccess.open(FILE_PATH , FileAccess.WRITE)
 	save_file.store_line(JSON.stringify(save_data))
+	GlobalSignal.save_game.emit()
 
 func load_game():
 	if !FileAccess.file_exists(FILE_PATH):

@@ -1,7 +1,7 @@
 extends Interactable
 
 @export_file("*.tscn") var target_levels: Array[String] = []
-@export_file("*.tscn") var target_level: String = ''
+#@export_file("*.tscn") var target_level: String = ''
 @export var target_area: String  = 'PlayerSpawn'
 
 
@@ -22,12 +22,15 @@ func _ready() -> void:
 	pick_levels(2)
 
 
-func pick_levels(num):
-	for i in range(num):
-		levels.append(Global.levels.pick_random())
-	
-	GlobalSignal.portal_levels_chosen.emit(levels)
-
+func pick_levels(num = 2):
+	if not target_levels:
+		for i in range(num):
+			levels.append(Global.levels.pick_random())
+		
+		GlobalSignal.portal_levels_chosen.emit(levels)
+	else:
+		for i in range(num):
+			levels.append(target_levels.pick_random())
 
 func _on_load_scene_finished() -> void:
 	await get_tree().physics_frame

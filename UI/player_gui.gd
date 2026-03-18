@@ -5,6 +5,8 @@ extends Control
 @onready var hp_label: Label = $MainUI/hpLabel
 @onready var timer_label: Label = $MainUI/timerLabel
 @onready var gold_label: Label = $MainUI/goldLabel
+@onready var autosave_label: Label = $MainUI/AutosaveLabel
+
 @onready var hurt_overlay: ColorRect = $Overlays/HurtOverlay
 @onready var death_overlay: ColorRect = $Death/DeathOverlay
 @onready var death: Control = $Death
@@ -73,6 +75,18 @@ func update_labels():
 		hp_label.text = "Health: %d / %d" % [Player.hp, Player.max_hp]
 		gold_label.text = "Gold: %d" % Player.gold
 
+func autosave_animation():
+	print('autooo')
+	autosave_label.visible = true
+	var t = get_tree().create_tween()
+	for i in range(3):
+		t.tween_property(autosave_label, 'modulate:a', 0.5, 0.3)
+		t.tween_property(autosave_label, 'modulate:a', 1, 0.3)
+	t.tween_property(autosave_label, 'modulate:a', 0, 0.35)
+	await t.finished
+	t.kill()
+	autosave_label.visible = true
+	
 func player_die(player):
 	$Death/Label.scale *= 0
 	$Death/deathRestartButton.scale *= 0
@@ -146,6 +160,7 @@ func _on_tree_entered() -> void:
 	GlobalSignal.player_die.connect(player_die)
 	GlobalSignal.portal_interacted_with.connect(level_select_visibility)
 	SceneManager.load_scene_finished.connect(hide_lvl_select)
+	GlobalSignal.save_game.connect(autosave_animation)
 
 func _on_tree_exited() -> void:
 	GlobalSignal.player_hurt.disconnect(hurt_overlay_flash)
@@ -153,6 +168,7 @@ func _on_tree_exited() -> void:
 	GlobalSignal.player_die.disconnect(player_die)
 	GlobalSignal.portal_interacted_with.disconnect(level_select_visibility)
 	SceneManager.load_scene_finished.disconnect(hide_lvl_select)
+	GlobalSignal.save_game.disconnect(autosave_animation)
 
 func _on_save_pressed() -> void:
 	SavingManager.save_game()

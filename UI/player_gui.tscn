@@ -1,9 +1,29 @@
-[gd_scene load_steps=5 format=3 uid="uid://co5rx2yv2vhod"]
+[gd_scene load_steps=9 format=3 uid="uid://co5rx2yv2vhod"]
 
 [ext_resource type="Theme" uid="uid://7qs58mtig7i" path="res://UI/Themes/BlackNWhite.tres" id="1_d8ui2"]
 [ext_resource type="Script" uid="uid://mrg5myws8516" path="res://UI/player_gui.gd" id="1_g87e5"]
 [ext_resource type="PackedScene" uid="uid://dlccio1c042j0" path="res://UI/options_menu.tscn" id="2_8fhdj"]
 [ext_resource type="PackedScene" uid="uid://855l6hdhclf5" path="res://UI/level_select.tscn" id="4_41lji"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_41lji"]
+font_size = 32
+shadow_size = 4
+shadow_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_sk0fe"]
+font_size = 32
+shadow_size = 4
+shadow_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ocnrf"]
+font_size = 20
+shadow_size = 4
+shadow_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_12w4r"]
+font_size = 52
+outline_size = 16
+outline_color = Color(0, 0, 0, 1)
 
 [node name="PlayerGUI" type="Control"]
 process_mode = 3
@@ -107,6 +127,7 @@ offset_bottom = 49.0
 grow_horizontal = 0
 theme_override_font_sizes/font_size = 32
 text = "Health 0 / 0"
+label_settings = SubResource("LabelSettings_41lji")
 horizontal_alignment = 1
 
 [node name="timerLabel" type="Label" parent="MainUI"]
@@ -126,12 +147,28 @@ offset_left = -107.0
 offset_top = 40.0
 offset_bottom = 89.0
 grow_horizontal = 0
-theme_override_font_sizes/font_size = 32
 text = "Gold: 0"
+label_settings = SubResource("LabelSettings_sk0fe")
 horizontal_alignment = 1
 
-[node name="PauseUI" type="Control" parent="."]
+[node name="AutosaveLabel" type="Label" parent="MainUI"]
 visible = false
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -84.0
+offset_top = -43.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Saving..."
+label_settings = SubResource("LabelSettings_ocnrf")
+
+[node name="PauseUI" type="Control" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -157,46 +194,69 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PauseUI/MenuUi"]
+custom_minimum_size = Vector2(0, 300)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -120.0
-offset_top = -85.5
-offset_right = 120.0
-offset_bottom = 85.5
+offset_left = -150.0
+offset_top = -160.0
+offset_right = 150.0
+offset_bottom = 160.0
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Unpause" type="Button" parent="PauseUI/MenuUi/VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 3
 text = "Unpause"
 
 [node name="Save" type="Button" parent="PauseUI/MenuUi/VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 3
 text = "Save Game"
 
 [node name="Load" type="Button" parent="PauseUI/MenuUi/VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 3
 text = "Load Game"
 
 [node name="Options" type="Button" parent="PauseUI/MenuUi/VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 3
 text = "Options"
 
 [node name="Restart" type="Button" parent="PauseUI/MenuUi/VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 3
 text = "Restart"
 
 [node name="QuitMenu" type="Button" parent="PauseUI/MenuUi/VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 3
 text = "Quit to menu"
 
 [node name="QuitDesktop" type="Button" parent="PauseUI/MenuUi/VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 3
 text = "Quit to desktop"
+
+[node name="Label" type="Label" parent="PauseUI/MenuUi"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -206.5
+offset_top = 70.0
+offset_right = 206.5
+offset_bottom = 117.0
+grow_horizontal = 2
+text = "Game is paused"
+label_settings = SubResource("LabelSettings_12w4r")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="OptionsMenu" parent="PauseUI" instance=ExtResource("2_8fhdj")]
 visible = false
