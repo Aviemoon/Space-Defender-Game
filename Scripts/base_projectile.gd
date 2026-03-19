@@ -36,8 +36,12 @@ func death_effect(fx: AnimatedSprite2D):
 	fx.play('')
 	fx.animation_finished.connect(Callable(fx, 'queue_free'))
 
-func enemy_hit(charge = 1) -> void:
+func enemy_hit(enemy, charge = 1) -> void:
 	health -= charge
+	
+	#if enemy is Character:
+		#GlobalSignal.character_hit.emit(enemy, self)
+	
 	
 	if health <= 0:
 		collision.call_deferred('set', 'disabled', true)

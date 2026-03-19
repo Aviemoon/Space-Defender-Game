@@ -71,8 +71,8 @@ func hurt(p_friendly, p_damage, p_angle, p_knockback, attacker = 0):
 			hp -= total_dmg 
 			#print('hp is %s' % hp)
 			create_dmg_num(total_dmg)
-			if attacker is Area2D:
-				GlobalSignal.character_hit.emit(self)
+			#if attacker is Area2D:
+				#GlobalSignal.character_hit.emit(self)
 			if hp <= 0:
 				die()
 	#return true

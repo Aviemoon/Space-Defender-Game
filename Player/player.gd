@@ -221,6 +221,12 @@ func _physics_process(delta):
 	attacking()
 	move_and_slide()
 
+func heal(num):
+	hp += num
+	if hp > max_hp:
+		hp = max_hp
+	GlobalSignal.player_stat_change.emit()
+
 func attacking():
 	var used_skill:int
 	
@@ -298,15 +304,15 @@ func _on_magnet_area_body_entered(body: Node2D) -> void:
 	if body is Pickup:
 		body.target = self
 
-func gold_pickup_num(num):
+func pickup_num(num = 1, color: String = '#ffffff', extra: String = ''):
 	var lbl = Label.new()
 	#lbl.scale = Vector2.ZERO
-	lbl.add_theme_color_override('font_color', '#ffff00')
+	lbl.add_theme_color_override('font_color', color)
 	lbl.add_theme_color_override('font_shadow_color', Color.BLACK)
 	lbl.add_theme_constant_override('shadow_offset_x', 2)
 	lbl.add_theme_constant_override('shadow_offset_y', 2)
 	lbl.add_theme_font_size_override('font_size', 16)
-	lbl.text = str("+%dG" % num)
+	lbl.text = str("+%d%s" % [num, extra])
 	lbl.global_position = global_position 
 	
 	lbl.global_position.y -= 20 + (_number_of_gold_nums * 5)
@@ -323,7 +329,13 @@ func gold_pickup_num(num):
 	_number_of_gold_nums -= 1
 
 func _on_pickup_area_body_entered(body: Node2D) -> void:
-	if body is Pickup:
-		gold += body.collect()
-		gold_pickup_num(body.collect())
+	var value
+	if body.get('collect'):
+		value = body.collect()
+	
+	if body is Coin:
+		gold += value
+		pickup_num(body.collect(), '#ffff00', 'G')
 		GlobalSignal.player_stat_change.emit()
+	elif body is Pickup and body is not Coin:
+		pickup_num(value, '#00ff00', ' HP')

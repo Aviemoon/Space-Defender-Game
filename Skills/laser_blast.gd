@@ -20,7 +20,7 @@ func _on_body_entered(body: Node2D) -> void:
 	if not (body.is_in_group('Player')):
 		if $AnimatedSprite2D:
 			death_effect($AnimatedSprite2D)
-		enemy_hit(1)
+		enemy_hit(body, 1)
 
 
 

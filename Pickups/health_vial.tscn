@@ -1,0 +1,85 @@
+[gd_scene load_steps=13 format=3 uid="uid://0volkhlhw1ai"]
+
+[ext_resource type="Script" uid="uid://c73sie6pif75q" path="res://Pickups/health_vial.gd" id="1_7fv11"]
+[ext_resource type="Texture2D" uid="uid://biw03jf7u45yp" path="res://Sprites/Pickups/HealthVialSmall.png" id="2_kga18"]
+[ext_resource type="Texture2D" uid="uid://c8e8hehaq5nas" path="res://Sprites/Pickups/healthvialcoresmall.png" id="3_7fv11"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7fv11"]
+radius = 5.0000005
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_geag0"]
+atlas = ExtResource("2_kga18")
+region = Rect2(0, 0, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vpjdf"]
+atlas = ExtResource("2_kga18")
+region = Rect2(10, 0, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7gpqo"]
+atlas = ExtResource("2_kga18")
+region = Rect2(20, 0, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5ik45"]
+atlas = ExtResource("2_kga18")
+region = Rect2(30, 0, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3lcn4"]
+atlas = ExtResource("2_kga18")
+region = Rect2(40, 0, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0f1ja"]
+atlas = ExtResource("2_kga18")
+region = Rect2(50, 0, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jdlx3"]
+atlas = ExtResource("2_kga18")
+region = Rect2(60, 0, 10, 10)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_idl06"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_geag0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vpjdf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7gpqo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5ik45")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3lcn4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0f1ja")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jdlx3")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="HealthVial" type="RigidBody2D"]
+collision_layer = 256
+collision_mask = 515
+script = ExtResource("1_7fv11")
+metadata/_custom_type_script = "uid://dgrk8qm5mx1t2"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(0.9999999, 0.9999999)
+shape = SubResource("CircleShape2D_7fv11")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_idl06")
+autoplay = "default"
+frame_progress = 0.014304632
+
+[node name="Glow" type="Sprite2D" parent="."]
+self_modulate = Color(0, 3.2944162, 0, 1)
+z_index = 1
+texture = ExtResource("3_7fv11")

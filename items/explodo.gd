@@ -4,7 +4,7 @@ extends Item
 const DAMAGE_RADIUS = preload("uid://cnw6oi4qfmamk")
 
 
-func explode(hit_object: Node2D):
+func explode(hit_object: Node2D, idk):
 	var new_explosion = effect.instantiate()
 	new_explosion.global_position = hit_object.global_position
 	get_tree().root.add_child(new_explosion)

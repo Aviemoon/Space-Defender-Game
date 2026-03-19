@@ -6,6 +6,7 @@ extends CanvasLayer
 
 
 
+
 func _input(event):
 	if event is InputEventMouseMotion:
 		var mouse_x = event.position.x
@@ -26,3 +27,10 @@ func _on_start_button_pressed() -> void:
 
 func _on_quit_button_pressed() -> void:
 	get_tree().quit()
+
+
+func _on_load_button_pressed() -> void:
+	#SceneManager.transition_scene('uid://cugfsoo4pjghg', '', Vector2.ZERO, '')
+	#await get_tree().physics_frame
+	#await get_tree().physics_frame
+	SavingManager.load_game()

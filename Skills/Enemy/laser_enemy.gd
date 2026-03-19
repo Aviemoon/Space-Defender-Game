@@ -21,5 +21,5 @@ func _physics_process(delta: float) -> void:
 func _on_body_entered(body: Node2D) -> void:
 	
 	death_effect($AnimatedSprite2D)
-	enemy_hit(1)
+	enemy_hit(body, 1)
 	#queue_free()

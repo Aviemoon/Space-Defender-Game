@@ -6,6 +6,7 @@ var save_data : Dictionary
 var persistent_data : Dictionary = {}
 
 const FILE_PATH = 'user://save.sav'
+#const PLAYER = preload("uid://bn3p2gijv0tv2")
 
 
 
@@ -50,6 +51,7 @@ func save_game():
 	var player : PlayerCharacter = get_tree().get_first_node_in_group('Player') # deal with this later for multiplayer stuff
 	print(player)
 	save_data = {
+		'player' : player,
 		'scene_path' : SceneManager.current_scene_uid,
 		'location_x' : player.global_position.x,
 		'location_y' : player.global_position.y,
@@ -82,12 +84,23 @@ func load_game():
 	var scene_path = save_data.get('scene_path', 'uid://cugfsoo4pjghg')
 	print('scenepath:  ', SceneManager.current_scene_uid)
 	SceneManager.transition_scene(scene_path, '', Vector2.ZERO, 'up')
+	await SceneManager.load_scene_finished
 	load_player()
 
 func load_player():
-	var player : PlayerCharacter = get_tree().get_first_node_in_group('Player') # deal with this later for multiplayer stuff
-	print(Vector2(save_data.get('location_x', 0), save_data.get('location_y', 0)))
+	#var player = save_data.get('player')
+	var player = get_tree().get_first_node_in_group('Player')
+	#print(player)
+	#print(Vector2(save_data.get('location_x', 0), save_data.get('location_y', 0)))
+	#if not player:
+		#spawn_player()
+		#print('aaa')
+		#player = get_tree().get_first_node_in_group('Player') # deal with this later for multiplayer stuff
 	player.global_position = Vector2(save_data.get('location_x', 0), save_data.get('location_y', 0))
 	player.gold = save_data.get('gold', 0)
 	player.max_hp = save_data.get('max_hp', 100)
 	player.hp = save_data.get('hp', 100)
+
+#func spawn_player():
+	#var player = PLAYER.instantiate()
+	#get_tree().root.call_deferred('add_child', player)
