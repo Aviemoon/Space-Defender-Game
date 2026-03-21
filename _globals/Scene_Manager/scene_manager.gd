@@ -37,10 +37,14 @@ func transition_scene(new_scene:String, target_area:String, player_offset:Vector
 	
 	
 	new_scene_ready.emit(target_area, player_offset)
-	
+	#await GlobalSignal.load_animation
 	#await fade_screen(Vector2.ZERO, -fade_pos)
 	
 	load_scene_finished.emit()
+	
+	
+	
+	SavingManager.save_game()
 
 #
 #func fade_screen(from:Vector2, to:Vector2) -> Signal:

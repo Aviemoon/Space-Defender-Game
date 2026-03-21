@@ -1,0 +1,142 @@
+[gd_scene load_steps=18 format=3 uid="uid://c5yf3t6dical1"]
+
+[ext_resource type="Script" uid="uid://bt17cbxthcn5e" path="res://Enemies/beast.gd" id="1_jo2xd"]
+[ext_resource type="PackedScene" uid="uid://ica72w0sx42l" path="res://Skills/Enemy/evil_slash.tscn" id="2_6vn8v"]
+[ext_resource type="Texture2D" uid="uid://buvisoks7xqn5" path="res://Sprites/Enemies/beast.png" id="2_fig5s"]
+[ext_resource type="PackedScene" uid="uid://m4j6i41arew2" path="res://Utility/Hurtbox.tscn" id="3_fig5s"]
+[ext_resource type="AudioStream" uid="uid://cx234hnebi7se" path="res://sfx/swordhit.mp3" id="4_dboa0"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dboa0"]
+radius = 8.0
+height = 20.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dboa0"]
+atlas = ExtResource("2_fig5s")
+region = Rect2(144, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hh6be"]
+atlas = ExtResource("2_fig5s")
+region = Rect2(192, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6vn8v"]
+atlas = ExtResource("2_fig5s")
+region = Rect2(168, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fig5s"]
+atlas = ExtResource("2_fig5s")
+region = Rect2(120, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y0x34"]
+atlas = ExtResource("2_fig5s")
+region = Rect2(48, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n0pib"]
+atlas = ExtResource("2_fig5s")
+region = Rect2(72, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mxrgb"]
+atlas = ExtResource("2_fig5s")
+region = Rect2(96, 0, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5q8de"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dboa0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hh6be")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6vn8v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fig5s")
+}],
+"loop": false,
+"name": &"attack",
+"speed": 9.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y0x34")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n0pib")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mxrgb")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 6.5
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dboa0"]
+radius = 11.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fig5s"]
+size = Vector2(18, 4)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6vn8v"]
+radius = 33.13608
+
+[node name="Beast" type="CharacterBody2D" node_paths=PackedStringArray("sprite") groups=["enemy"]]
+collision_layer = 8
+collision_mask = 35
+script = ExtResource("1_jo2xd")
+AI_type = "wander"
+sprite = NodePath("Sprite2D")
+skills = Array[PackedScene]([ExtResource("2_6vn8v")])
+max_hp = 20.0
+speed = 90.0
+jump_velocity = 333.0
+metadata/_custom_type_script = "uid://clyllgqnhrexe"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+z_index = 2
+shape = SubResource("CapsuleShape2D_dboa0")
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(-1.25, 1.25)
+sprite_frames = SubResource("SpriteFrames_5q8de")
+animation = &"attack"
+autoplay = "walk"
+
+[node name="Hurtbox" parent="." instance=ExtResource("3_fig5s")]
+collision_layer = 8
+collision_mask = 16
+
+[node name="CollisionShape2D" parent="Hurtbox" index="0"]
+shape = SubResource("CircleShape2D_dboa0")
+
+[node name="WallCheck" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WallCheck"]
+position = Vector2(8, 0)
+shape = SubResource("RectangleShape2D_fig5s")
+
+[node name="sfxHit" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_dboa0")
+volume_db = -6.0
+pitch_scale = 1.5
+
+[node name="TargetAttackZone" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TargetAttackZone"]
+shape = SubResource("CircleShape2D_6vn8v")
+
+[node name="attackTimer" type="Timer" parent="."]
+wait_time = 1.25
+
+[connection signal="hurt" from="Hurtbox" to="." method="_on_hurtbox_hurt"]
+[connection signal="body_entered" from="WallCheck" to="." method="_on_wall_check_body_entered"]
+[connection signal="body_entered" from="TargetAttackZone" to="." method="_on_target_attack_zone_body_entered"]
+[connection signal="body_exited" from="TargetAttackZone" to="." method="_on_target_attack_zone_body_exited"]
+[connection signal="timeout" from="attackTimer" to="." method="_on_attack_timer_timeout"]
+
+[editable path="Hurtbox"]

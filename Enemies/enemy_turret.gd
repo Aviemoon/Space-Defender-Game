@@ -34,9 +34,6 @@ func _on_field_of_view_body_entered(body: Node2D) -> void:
 	target = body
 	can_turn = false
 	#print('player in view')
-	
-	
-	
 	player_spotted.emit()
 
 

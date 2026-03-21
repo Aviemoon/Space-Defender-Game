@@ -15,10 +15,12 @@ class_name Character extends CharacterBody2D
 @export var speed : float = 233.0
 @export var jump_velocity = 312.0
 @export var fall_immunity:bool = false
+@export var knockback_immunity: bool = false
 
 @onready var hp : float = max_hp
 var hp_lbl = Label.new()
 
+var knockback: Vector2
 
 
 func _ready():
@@ -67,12 +69,14 @@ func hurt(p_friendly, p_damage, p_angle, p_knockback, attacker = 0):
 	if p_friendly != friendly:
 		hp_lbl.text = str(hp)
 		var total_dmg = p_damage - defense/2
+		if ! knockback_immunity:
+			knockback = p_knockback * p_angle
+			print('angle isssss:!!!!!! %s' %  p_angle)
 		if total_dmg > 0:
 			hp -= total_dmg 
 			#print('hp is %s' % hp)
 			create_dmg_num(total_dmg)
-			#if attacker is Area2D:
-				#GlobalSignal.character_hit.emit(self)
+			
 			if hp <= 0:
 				die()
 	#return true

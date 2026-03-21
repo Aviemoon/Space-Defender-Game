@@ -22,6 +22,7 @@ z_index = 5
 texture = ExtResource("2_410lk")
 
 [node name="Effect" type="Sprite2D" parent="."]
+self_modulate = Color(1.4586968, 1.4586968, 1.4586968, 1)
 z_index = 4
 texture = ExtResource("3_yqtjk")
 

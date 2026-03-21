@@ -18,4 +18,5 @@ signal portal_levels_chosen(levels: Array, level_names)
 signal portal_interacted_with
 
 signal save_game
+signal load_animation
 signal load_game

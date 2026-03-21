@@ -70,6 +70,7 @@ items = Array[PackedScene]([ExtResource("4_vtle1")])
 damage = 6.0
 speed = 1350.0
 jump_velocity = 320.0
+knockback_immunity = true
 
 [node name="WallCollision" type="CollisionShape2D" parent="."]
 position = Vector2(0, 1)

@@ -23,7 +23,7 @@ func check_body(body):
 			collision_in_hurtbox.append(body)
 		var damage = body.get('damage')
 		var attacker_type = false
-		#print(collision_in_hurtbox)
+		print('oww ow spike')
 		hurt.emit(attacker_type, damage, 0, 0, body)
 		await get_tree().create_timer(hurt_area_cooldown).timeout
 		#print(collision_in_hurtbox)
@@ -51,6 +51,10 @@ func check_area(area):
 		var knockback = 1
 		var damage = area.get('damage')
 		var attacker_type = ''
+		if area.get('angle'):
+			angle = area.angle
+		if area.get('knockback'):
+			knockback = area.knockback
 		if area.is_in_group('attack_friendly'):
 			attacker_type = true
 		else:

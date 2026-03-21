@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b771th0hhsm6c" path="res://Pickups/coin.gd" id="1_qgrjt"]
 [ext_resource type="Texture2D" uid="uid://cbnenind6yqpe" path="res://Sprites/Pickups/coin-Sheet.png" id="2_qgrjt"]
-[ext_resource type="AudioStream" uid="uid://c1ou3iqeejn2g" path="res://sfx/power_up.wav" id="3_1pu3x"]
+[ext_resource type="AudioStream" uid="uid://dwc5s5p2qh7hn" path="res://sfx/coin.mp3" id="3_1pu3x"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_qgrjt"]
 
@@ -135,8 +135,6 @@ frame_progress = 0.09009858
 
 [node name="SFXPickup" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_1pu3x")
-volume_db = -15.276
-pitch_scale = 1.74
 max_polyphony = 2
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

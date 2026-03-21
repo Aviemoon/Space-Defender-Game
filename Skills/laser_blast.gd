@@ -9,6 +9,7 @@ func _ready() -> void:
 
 func attack():
 	rotate(get_angle_to(get_global_mouse_position()))
+	angle = Vector2.RIGHT.rotated(rotation)
 	GlobalSignal.player_ability_2.disconnect(attack)
 
 func _physics_process(delta: float) -> void:

@@ -8,7 +8,8 @@ const ROOM_DIR = "res://rooms/"
 const ITEM_DIR = "res://items/"
 const SKILL_DIR = "res://Skills/"
 
-
+var enemy_limit = 50
+var enemies_alive = 0
 
 func _ready() -> void:
 	levels = load_directory(ROOM_DIR)

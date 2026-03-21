@@ -89,8 +89,10 @@ func jump(power = 1):
 
 func die():
 	GlobalSignal.player_die.emit(self)
+	
+	
 	#await GlobalSignal.player_finished_dying
-	super.die()
+	#super.die()
 
 func calculate_gun_offset_position():
 	
@@ -127,6 +129,11 @@ func _calculate_fall_damage(fall_distance):
 	#hp -= fall_damage
 
 func movement(delta):
+	#if Input.is_action_pressed('down'):
+		#set_collision_mask_value(2,  false)
+	#else:
+		#set_collision_mask_value(2, true)
+	
 	direction = Input.get_axis("left", "right")
 	
 	if not is_on_floor():

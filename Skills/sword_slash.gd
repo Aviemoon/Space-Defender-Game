@@ -6,6 +6,10 @@ func _ready():
 	
 
 func attack():
+	if scale.x > 0:
+		angle = Vector2.RIGHT
+	else:
+		angle = Vector2.LEFT
 	$Sprite2D.visible = true
 
 	var tween = get_tree().create_tween()

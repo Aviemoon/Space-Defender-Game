@@ -35,6 +35,7 @@ Player="player character group"
 attack_friendly="group for projectiles, hurt areas etc"
 attack_unfriendly="attack for enemies"
 loot="this is loot."
+enemy=""
 
 [input]
 

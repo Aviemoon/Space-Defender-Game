@@ -8,6 +8,7 @@ extends Control
 @onready var autosave_label: Label = $MainUI/AutosaveLabel
 
 @onready var hurt_overlay: ColorRect = $Overlays/HurtOverlay
+@onready var load_color_rect: ColorRect = $Overlays/LoadColorRect
 @onready var death_overlay: ColorRect = $Death/DeathOverlay
 @onready var death: Control = $Death
 
@@ -45,11 +46,12 @@ func _process(delta):
 			PauseUI.visible = true
 	
 	# -- timer --
-	seconds += delta
-	if seconds > 60:
-		seconds -= 60
-		minutes += 1
-	timer_label.text = "Timer: %d:%02d" % [minutes, seconds]
+	if not get_tree().paused:
+		seconds += delta
+		if seconds > 60:
+			seconds -= 60
+			minutes += 1
+		timer_label.text = "Timer: %d:%02d" % [minutes, seconds]
 
 func hurt_overlay_flash():
 	print("YESSSSSSSSSSS")
@@ -88,6 +90,8 @@ func autosave_animation():
 	autosave_label.visible = true
 	
 func player_die(player):
+	await get_tree().physics_frame
+	get_tree().paused = true
 	$Death/Label.scale *= 0
 	$Death/deathRestartButton.scale *= 0
 	death.visible = true
@@ -109,6 +113,14 @@ func level_select_visibility():
 
 func hide_lvl_select():
 	level_select.visible = false
+
+func load_anim():
+	var tween = get_tree().create_tween()
+	tween.tween_property(load_color_rect, 'self_modulate:a', 1, 1)
+	GlobalSignal.load_animation.emit()
+	tween.tween_property(load_color_rect, 'self_modulate:a', 0, 1)
+	await tween.finished
+	tween.kill()
 
 func _on_button_pressed():
 	pause_game()
@@ -160,6 +172,7 @@ func _on_tree_entered() -> void:
 	GlobalSignal.player_die.connect(player_die)
 	GlobalSignal.portal_interacted_with.connect(level_select_visibility)
 	SceneManager.load_scene_finished.connect(hide_lvl_select)
+	#SceneManager.load_scene_finished.connect(load_anim)
 	GlobalSignal.save_game.connect(autosave_animation)
 
 func _on_tree_exited() -> void:
@@ -168,6 +181,7 @@ func _on_tree_exited() -> void:
 	GlobalSignal.player_die.disconnect(player_die)
 	GlobalSignal.portal_interacted_with.disconnect(level_select_visibility)
 	SceneManager.load_scene_finished.disconnect(hide_lvl_select)
+	#SceneManager.load_scene_finished.disconnect(load_anim)
 	GlobalSignal.save_game.disconnect(autosave_animation)
 
 func _on_save_pressed() -> void:

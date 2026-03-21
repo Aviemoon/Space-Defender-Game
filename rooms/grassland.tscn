@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=4 uid="uid://bokhnneg8q0hc"]
+[gd_scene load_steps=22 format=4 uid="uid://bokhnneg8q0hc"]
 
 [ext_resource type="Texture2D" uid="uid://cbtwjiburs5f0" path="res://Sprites/tiles/grass.png" id="1_tcx6p"]
 [ext_resource type="Texture2D" uid="uid://c1l0wkjc4hhd0" path="res://Sprites/tiles/tilesheet01.png" id="2_rg6li"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://25oj3kuylntt" path="res://Sprites/tiles/grass_invert.png" id="5_q0vty"]
 [ext_resource type="PackedScene" uid="uid://dv3163hyhfsmm" path="res://Special_Tiles/spikes.tscn" id="6_evi1c"]
 [ext_resource type="PackedScene" uid="uid://dyfpofnpvumbn" path="res://Special_Tiles/portal.tscn" id="7_dtemn"]
+[ext_resource type="Environment" uid="uid://cf0o50jm3wy3v" path="res://Utility/base_worldenvironment.tres" id="8_rg6li"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gipov"]
 texture = ExtResource("1_tcx6p")
@@ -902,7 +903,9 @@ tile_set = SubResource("TileSet_7va6w")
 
 [node name="Portal" parent="." instance=ExtResource("7_dtemn")]
 position = Vector2(448, -472)
-target_level = "uid://cugfsoo4pjghg"
 
 [node name="PlayerSpawn" type="Marker2D" parent="."]
 position = Vector2(56, 16)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("8_rg6li")

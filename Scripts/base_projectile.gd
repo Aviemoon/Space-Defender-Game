@@ -13,6 +13,7 @@ var damage
 var speed = base_speed
 var knockback = base_knockback
 var health = base_health
+
 var angle = Vector2.ZERO
 
 func calculate_stats():
