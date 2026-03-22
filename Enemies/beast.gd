@@ -31,8 +31,9 @@ func attack():
 	#inst.damage = 
 	if facing_left:
 		inst.scale.x = -1
+	inst.scale *= weapon_size_mult
 	print('ENEMYYY ATTACKK!!')
-	get_tree().root.call_deferred('add_child', inst)
+	call_deferred('add_child', inst)
 	await sprite.animation_finished
 	sprite.play('walk')
 

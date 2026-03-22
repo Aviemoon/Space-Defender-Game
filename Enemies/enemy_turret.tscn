@@ -104,11 +104,11 @@ shape = SubResource("RectangleShape2D_44y42")
 debug_color = Color(0.9137255, 0.25882354, 0.3372549, 0.10980392)
 
 [node name="TurnTimer" type="Timer" parent="."]
-wait_time = 4.0
+wait_time = 3.4
 autostart = true
 
 [node name="AttackTimer" type="Timer" parent="."]
-wait_time = 0.5
+wait_time = 0.23
 
 [node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
 

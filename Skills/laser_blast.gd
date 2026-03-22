@@ -19,8 +19,8 @@ func _physics_process(delta: float) -> void:
 
 func _on_body_entered(body: Node2D) -> void:
 	if not (body.is_in_group('Player')):
-		if $AnimatedSprite2D:
-			death_effect($AnimatedSprite2D)
+		if death_fx:
+			death_effect(death_fx)
 		enemy_hit(body, 1)
 
 

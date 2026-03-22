@@ -1,44 +1,44 @@
-[gd_scene load_steps=18 format=3 uid="uid://c5yf3t6dical1"]
+[gd_scene load_steps=18 format=3 uid="uid://b3xiu7auw08nf"]
 
-[ext_resource type="Script" uid="uid://bt17cbxthcn5e" path="res://Enemies/beast.gd" id="1_jo2xd"]
-[ext_resource type="PackedScene" uid="uid://ica72w0sx42l" path="res://Skills/Enemy/evil_slash.tscn" id="2_6vn8v"]
-[ext_resource type="Texture2D" uid="uid://buvisoks7xqn5" path="res://Sprites/Enemies/beast.png" id="2_fig5s"]
-[ext_resource type="PackedScene" uid="uid://m4j6i41arew2" path="res://Utility/Hurtbox.tscn" id="3_fig5s"]
-[ext_resource type="AudioStream" uid="uid://cx234hnebi7se" path="res://sfx/swordhit.mp3" id="4_dboa0"]
+[ext_resource type="Script" uid="uid://bt17cbxthcn5e" path="res://Enemies/beast.gd" id="1_287cv"]
+[ext_resource type="Texture2D" uid="uid://buvisoks7xqn5" path="res://Sprites/Enemies/beast.png" id="2_0f0ke"]
+[ext_resource type="PackedScene" uid="uid://ica72w0sx42l" path="res://Skills/Enemy/evil_slash.tscn" id="2_v10ok"]
+[ext_resource type="PackedScene" uid="uid://m4j6i41arew2" path="res://Utility/Hurtbox.tscn" id="3_v10ok"]
+[ext_resource type="AudioStream" uid="uid://cx234hnebi7se" path="res://sfx/swordhit.mp3" id="4_aeuqb"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dboa0"]
-radius = 8.0
-height = 20.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8gw44"]
+radius = 9.0
+height = 32.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dboa0"]
-atlas = ExtResource("2_fig5s")
+atlas = ExtResource("2_0f0ke")
 region = Rect2(144, 0, 24, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hh6be"]
-atlas = ExtResource("2_fig5s")
+atlas = ExtResource("2_0f0ke")
 region = Rect2(192, 0, 24, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6vn8v"]
-atlas = ExtResource("2_fig5s")
+atlas = ExtResource("2_0f0ke")
 region = Rect2(168, 0, 24, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fig5s"]
-atlas = ExtResource("2_fig5s")
+atlas = ExtResource("2_0f0ke")
 region = Rect2(120, 0, 24, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_y0x34"]
-atlas = ExtResource("2_fig5s")
+atlas = ExtResource("2_0f0ke")
 region = Rect2(48, 0, 24, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_n0pib"]
-atlas = ExtResource("2_fig5s")
+atlas = ExtResource("2_0f0ke")
 region = Rect2(72, 0, 24, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mxrgb"]
-atlas = ExtResource("2_fig5s")
+atlas = ExtResource("2_0f0ke")
 region = Rect2(96, 0, 24, 24)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_5q8de"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_gyjia"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -72,56 +72,59 @@ animations = [{
 "speed": 6.5
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_dboa0"]
-radius = 11.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_vf7ps"]
+radius = 17.029387
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_fig5s"]
-size = Vector2(23, 7)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dn88n"]
+size = Vector2(42, 12)
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6vn8v"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_206yl"]
 radius = 4.0
 height = 106.0
 
-[node name="Beast" type="CharacterBody2D" node_paths=PackedStringArray("sprite") groups=["enemy"]]
+[node name="EliteDeathBeast" type="CharacterBody2D" node_paths=PackedStringArray("sprite")]
+z_index = 6
 collision_layer = 8
 collision_mask = 35
-script = ExtResource("1_jo2xd")
+script = ExtResource("1_287cv")
 AI_type = "wander"
+weapon_size_mult = 2.0
 sprite = NodePath("Sprite2D")
-skills = Array[PackedScene]([ExtResource("2_6vn8v")])
-max_hp = 20.0
-speed = 84.0
-jump_velocity = 333.0
+skills = Array[PackedScene]([ExtResource("2_v10ok")])
+speed = 100.0
+jump_velocity = 415.0
+fall_immunity = true
 metadata/_custom_type_script = "uid://clyllgqnhrexe"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 z_index = 2
-shape = SubResource("CapsuleShape2D_dboa0")
+shape = SubResource("CapsuleShape2D_8gw44")
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(-1.25, 1.25)
-sprite_frames = SubResource("SpriteFrames_5q8de")
+self_modulate = Color(2.2459714, 1.312819, 2.042771, 1)
+scale = Vector2(-2, 2)
+sprite_frames = SubResource("SpriteFrames_gyjia")
 animation = &"attack"
 autoplay = "walk"
 
-[node name="Hurtbox" parent="." instance=ExtResource("3_fig5s")]
+[node name="Hurtbox" parent="." instance=ExtResource("3_v10ok")]
 collision_layer = 8
 collision_mask = 16
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
-shape = SubResource("CircleShape2D_dboa0")
+shape = SubResource("CircleShape2D_vf7ps")
 
 [node name="WallCheck" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 33
-monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WallCheck"]
-position = Vector2(10.5, 1.5)
-shape = SubResource("RectangleShape2D_fig5s")
+position = Vector2(20, 4)
+shape = SubResource("RectangleShape2D_dn88n")
+debug_color = Color(0.81226295, 0.0021006186, 0.98340744, 0.41960785)
 
 [node name="sfxHit" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("4_dboa0")
+stream = ExtResource("4_aeuqb")
 volume_db = -6.0
 pitch_scale = 1.5
 
@@ -132,7 +135,7 @@ monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TargetAttackZone"]
 rotation = 1.5707964
-shape = SubResource("CapsuleShape2D_6vn8v")
+shape = SubResource("CapsuleShape2D_206yl")
 
 [node name="attackTimer" type="Timer" parent="."]
 wait_time = 1.25

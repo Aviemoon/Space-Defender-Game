@@ -4,6 +4,8 @@ var levels: Array
 var items: Array
 var skills: Array
 
+var difficulty_modifier = 1
+
 const ROOM_DIR = "res://rooms/"
 const ITEM_DIR = "res://items/"
 const SKILL_DIR = "res://Skills/"

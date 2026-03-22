@@ -88,11 +88,12 @@ animations = [{
 "speed": 20.0
 }]
 
-[node name="LaserBlast" type="Area2D" node_paths=PackedStringArray("collision") groups=["attack_friendly"]]
+[node name="LaserBlast" type="Area2D" node_paths=PackedStringArray("death_fx", "collision") groups=["attack_friendly"]]
 top_level = true
 collision_layer = 16
 collision_mask = 9
 script = ExtResource("1_a7yug")
+death_fx = NodePath("Deathfx")
 base_damage = 3.0
 base_speed = 666.0
 base_health = 1
@@ -101,7 +102,7 @@ collision = NodePath("CollisionShape2D")
 metadata/_custom_type_script = "uid://dne8bqt32xcqt"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-self_modulate = Color(1.353256, 1.353256, 1.353256, 1)
+self_modulate = Color(1.6372112, 1.6372112, 1.6372112, 1)
 scale = Vector2(2.5, 2.5)
 texture = ExtResource("2_tbqin")
 
@@ -111,7 +112,7 @@ shape = SubResource("RectangleShape2D_qocid")
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 rect = Rect2(-4, -1, 8, 2)
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="Deathfx" type="AnimatedSprite2D" parent="."]
 modulate = Color(1.353256, 0.6681771, 1.353256, 1)
 sprite_frames = SubResource("SpriteFrames_2cpdy")
 

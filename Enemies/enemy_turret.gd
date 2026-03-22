@@ -28,7 +28,7 @@ func attack():
 		proj.rotation = deg_to_rad(180)
 	else:
 		proj.rotation = deg_to_rad(0)
-	get_tree().root.call_deferred('add_child', proj)
+	call_deferred('add_child', proj)
 
 func _on_field_of_view_body_entered(body: Node2D) -> void:
 	target = body

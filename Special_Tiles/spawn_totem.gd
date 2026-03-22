@@ -1,10 +1,16 @@
 extends Node2D
 
+@export var spawn_time: float = 1.5
 @export var things_to_spawn: Array[SpawnInfo]
+
 @onready var effect: Sprite2D = $Effect
+@onready var spawn_timer: Timer = $spawnTimer
 
 func _physics_process(delta: float) -> void:
 	effect.rotation_degrees += delta * 3
+
+func _ready() -> void:
+	spawn_timer.wait_time = spawn_time
 
 func spawn_stuff():
 	if not things_to_spawn or Global.enemies_alive >= Global.enemy_limit:

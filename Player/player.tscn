@@ -67,7 +67,6 @@ fall_damage_curve = SubResource("Curve_gwnis")
 friendly = true
 skills = Array[PackedScene]([ExtResource("2_gwnis"), ExtResource("3_k53q1"), ExtResource("4_od3ui")])
 items = Array[PackedScene]([ExtResource("4_vtle1")])
-damage = 6.0
 speed = 1350.0
 jump_velocity = 320.0
 knockback_immunity = true
@@ -108,7 +107,7 @@ wait_time = 0.3
 one_shot = true
 
 [node name="skill2Timer" type="Timer" parent="."]
-wait_time = 0.3
+wait_time = 0.235
 one_shot = true
 
 [node name="RotationPoint" type="Marker2D" parent="."]

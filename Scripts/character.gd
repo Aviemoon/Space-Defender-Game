@@ -9,13 +9,19 @@ class_name Character extends CharacterBody2D
 
 @export var max_hp : float = 100
 
-@export var damage : float = 1
+
 @export var defense = 0
 
 @export var speed : float = 233.0
 @export var jump_velocity = 312.0
 @export var fall_immunity:bool = false
 @export var knockback_immunity: bool = false
+
+@export var weapon_damage_bonus : float = 0
+@export var weapon_speed_bonus: float = 0
+@export var weapon_knockback_bonus: float = 0
+@export var weapon_hp_bonus: float = 0
+
 
 @onready var hp : float = max_hp
 var hp_lbl = Label.new()

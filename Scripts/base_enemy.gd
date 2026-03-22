@@ -3,6 +3,7 @@ class_name BaseEnemy extends Character
 @export_enum("sentry", "wander", "custom") var AI_type = "sentry"
 @export var can_fly:bool = false
 @export var knockback_recovery:float = 10
+@export var weapon_size_mult:float = 1
 const GOLD = preload("res://Pickups/coin.tscn")
 const ALERT = preload("res://UI/alert_notifier.tscn")
 #var knockback
@@ -61,7 +62,7 @@ func movement(delta):
 				jump()
 			elif player.global_position.y + 10 > (global_position.y - 35) and (is_on_floor() and get_collision_mask_value(2)):
 				#print('player: %d' % player.global_position.y, '\n', 'me %d' % global_position.y)
-				call_deferred('set_collision_mask_value', 2, false)
+				set_collision_mask_value(2, false)
 				platform_collision_mask_defer()
 			#else:
 				#call_deferred('set_collision_mask_value', 2, true)
@@ -69,8 +70,13 @@ func movement(delta):
 	direction_flip()
 
 func platform_collision_mask_defer():
-	await get_tree().create_timer(0.1).timeout
-	call_deferred('set_collision_mask_value', 2, true)
+	#await get_tree().create_timer(0.01).timeout
+	await get_tree().physics_frame
+
+	#call_deferred('set_collision_mask_value', 2, true)
+	set_collision_mask_value(2, true)
+
+	
 
 func direction_flip():
 	#print(direction)

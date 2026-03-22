@@ -66,7 +66,11 @@ func save_game():
 		'speed' : player.speed, 
 		'jump_velocity' : player.jump_velocity,
 		'fall_immunity' : player.fall_immunity,
-		'items' : player.items
+		'items' : player.items,
+		'global_difficulty' : Global.difficulty_modifier,
+		'global_items' : Global.items,
+		'global_skills' : Global.skills,
+		'global_levels' : Global.levels
 	}
 	
 	var save_file = FileAccess.open(FILE_PATH , FileAccess.WRITE)

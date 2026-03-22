@@ -23,3 +23,7 @@ func _on_body_entered(body: Node2D) -> void:
 	death_effect($AnimatedSprite2D)
 	enemy_hit(body, 1)
 	#queue_free()
+
+
+func _on_timer_timeout() -> void:
+	call_deferred('queue_free')

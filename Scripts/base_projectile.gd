@@ -1,5 +1,7 @@
 class_name BaseProjectile extends Area2D
 
+@export var death_fx: AnimatedSprite2D
+
 @export var base_damage:float = 0
 @export var base_speed:float = 0
 @export var base_health:int = 0
@@ -17,17 +19,21 @@ var health = base_health
 var angle = Vector2.ZERO
 
 func calculate_stats():
-	damage = base_damage
-	speed = base_speed
-	knockback = base_knockback
-	health = base_health
+	var parent = get_parent()
+	if parent is Marker2D:
+		parent = parent.get_parent()
+	damage = base_damage + parent.get("weapon_damage_bonus")
+	speed = base_speed + parent.get('weapon_speed_bonus')
+	knockback = base_knockback + parent.get('weapon_knockback_bonus') 
+	health = base_health + parent.get('weapon_hp_bonus')
+
 
 func go_to_rotation(delta) -> bool:
 	angle = Vector2.RIGHT.rotated(rotation)
 	var direction = angle * speed
 	position += direction * delta
 	return true
-
+ 
 func death_effect(fx: AnimatedSprite2D):
 	if not fx:
 		return

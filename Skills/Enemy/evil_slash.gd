@@ -10,7 +10,7 @@ func _ready():
 
 func attack():
 	sprite_2d.visible = true
-
+	#print('parent is %s' % get_parent())
 	var tween = get_tree().create_tween()
 	tween.tween_property(sprite_2d, "modulate:a", 0, 0.1)
 	await tween.finished

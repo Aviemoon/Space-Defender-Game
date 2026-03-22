@@ -260,6 +260,8 @@ func attacking():
 		used_skill = 2
 		if $skill2Timer.is_stopped():
 			is_attacking = true
+			if not attack_slow_cooldown:
+				attack_move_speed(1.5, 0.5)
 			var new_skill = skills[1]
 			var skill_inst = new_skill.instantiate()
 			skill_inst.global_position = global_position
@@ -268,7 +270,7 @@ func attacking():
 			#else:
 				#skill_inst.scale.x = 1
 			calculate_gun_offset_position()
-			gun_offset.add_child(skill_inst)
+			$GunOffset.add_child(skill_inst)
 			GlobalSignal.player_ability_2.emit()
 			
 			$skill2Timer.start()
