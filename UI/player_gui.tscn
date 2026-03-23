@@ -1,9 +1,14 @@
-[gd_scene load_steps=9 format=3 uid="uid://co5rx2yv2vhod"]
+[gd_scene load_steps=10 format=3 uid="uid://co5rx2yv2vhod"]
 
 [ext_resource type="Theme" uid="uid://7qs58mtig7i" path="res://UI/Themes/BlackNWhite.tres" id="1_d8ui2"]
 [ext_resource type="Script" uid="uid://mrg5myws8516" path="res://UI/player_gui.gd" id="1_g87e5"]
 [ext_resource type="PackedScene" uid="uid://dlccio1c042j0" path="res://UI/options_menu.tscn" id="2_8fhdj"]
 [ext_resource type="PackedScene" uid="uid://855l6hdhclf5" path="res://UI/level_select.tscn" id="4_41lji"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ushsi"]
+font_size = 42
+outline_size = 12
+outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_41lji"]
 font_size = 32
@@ -65,6 +70,30 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.14044744, 0.14044744, 0.14044744, 1)
+
+[node name="ObjectiveVbox" type="VBoxContainer" parent="Overlays"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -100.0
+offset_top = 23.0
+offset_right = 100.0
+offset_bottom = 63.0
+grow_horizontal = 2
+
+[node name="title" type="Label" parent="Overlays/ObjectiveVbox"]
+layout_mode = 2
+text = "Current objective:"
+label_settings = SubResource("LabelSettings_ushsi")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ObjectiveName" type="Label" parent="Overlays/ObjectiveVbox"]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_ushsi")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Death" type="Control" parent="."]
 process_mode = 1

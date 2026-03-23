@@ -22,7 +22,8 @@ func _input(event):
 		parallax_layer.motion_offset.y = parallax_multiplier * relative_y
 
 func _on_start_button_pressed() -> void:
-	get_tree().change_scene_to_file('uid://cugfsoo4pjghg')
+	#get_tree().change_scene_to_file('uid://cugfsoo4pjghg')
+	SceneManager.transition_scene('uid://cugfsoo4pjghg', '', Vector2.ZERO, '')
 
 
 func _on_quit_button_pressed() -> void:

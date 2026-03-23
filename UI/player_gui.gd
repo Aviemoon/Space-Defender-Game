@@ -15,6 +15,8 @@ extends Control
 @onready var options_menu: Control = $PauseUI/OptionsMenu
 @onready var level_select: Control = $LevelSelect
 
+@onready var objective_name: Label = $Overlays/ObjectiveVbox/ObjectiveName
+
 
 #@export var hurt_overlay_curve: Curve
 
@@ -122,6 +124,37 @@ func load_anim():
 	await tween.finished
 	tween.kill()
 
+func change_objective_title(p_name):
+	objective_name.text = p_name
+	
+func done():
+	objective_name.self_modulate.b = 0
+	objective_name.text = 'complete'
+	
+func _on_tree_entered() -> void:
+	GlobalSignal.player_hurt.connect(hurt_overlay_flash)
+	GlobalSignal.player_stat_change.connect(update_labels)
+	GlobalSignal.player_die.connect(player_die)
+	GlobalSignal.portal_interacted_with.connect(level_select_visibility)
+	SceneManager.load_scene_finished.connect(hide_lvl_select)
+	#SceneManager.load_scene_finished.connect(load_anim)
+	GlobalSignal.save_game.connect(autosave_animation)
+	Global.objective_title.connect(change_objective_title)
+	Global.objective_complete.connect(done)
+	#GlobalSignal.enemy_die.connect(change_objective_title)
+
+func _on_tree_exited() -> void:
+	GlobalSignal.player_hurt.disconnect(hurt_overlay_flash)
+	GlobalSignal.player_stat_change.disconnect(update_labels)
+	GlobalSignal.player_die.disconnect(player_die)
+	GlobalSignal.portal_interacted_with.disconnect(level_select_visibility)
+	SceneManager.load_scene_finished.disconnect(hide_lvl_select)
+	#SceneManager.load_scene_finished.disconnect(load_anim)
+	GlobalSignal.save_game.disconnect(autosave_animation)
+	Global.objective_title.disconnect(change_objective_title)
+	Global.objective_complete.disconnect(done)
+
+
 func _on_button_pressed():
 	pause_game()
 	get_tree().reload_current_scene()
@@ -137,6 +170,7 @@ func _on_quit_menu_pressed():
 	get_tree().paused = false
 	SceneManager.transition_scene('uid://c4y786io00jka', '', Vector2.ZERO, '') # add continue with/without saving here
 	#SceneManager.transition_scene()
+
 
 
 func _on_quit_desktop_pressed(): # add continue with/without saving here
@@ -166,23 +200,6 @@ func _on_viewport_resolution_item_selected(index):
 			DisplayServer.window_set_size(Vector2i(1280, 720))
 
 
-func _on_tree_entered() -> void:
-	GlobalSignal.player_hurt.connect(hurt_overlay_flash)
-	GlobalSignal.player_stat_change.connect(update_labels)
-	GlobalSignal.player_die.connect(player_die)
-	GlobalSignal.portal_interacted_with.connect(level_select_visibility)
-	SceneManager.load_scene_finished.connect(hide_lvl_select)
-	#SceneManager.load_scene_finished.connect(load_anim)
-	GlobalSignal.save_game.connect(autosave_animation)
-
-func _on_tree_exited() -> void:
-	GlobalSignal.player_hurt.disconnect(hurt_overlay_flash)
-	GlobalSignal.player_stat_change.disconnect(update_labels)
-	GlobalSignal.player_die.disconnect(player_die)
-	GlobalSignal.portal_interacted_with.disconnect(level_select_visibility)
-	SceneManager.load_scene_finished.disconnect(hide_lvl_select)
-	#SceneManager.load_scene_finished.disconnect(load_anim)
-	GlobalSignal.save_game.disconnect(autosave_animation)
 
 func _on_save_pressed() -> void:
 	SavingManager.save_game()

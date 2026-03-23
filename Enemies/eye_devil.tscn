@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://ba65ipsfuj0kv"]
+
+[ext_resource type="Script" uid="uid://clyllgqnhrexe" path="res://Scripts/base_enemy.gd" id="1_klmbk"]
+[ext_resource type="Texture2D" uid="uid://dma5x1xth8eo5" path="res://Sprites/Enemies/eye wip png.png" id="2_6v376"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fcrof"]
+atlas = ExtResource("2_6v376")
+region = Rect2(0, 0, 42, 42)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xy6oq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fcrof")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6v376"]
+radius = 21.0
+
+[node name="Eye devil" type="CharacterBody2D" node_paths=PackedStringArray("sprite") groups=["enemy"]]
+collision_layer = 8
+motion_mode = 1
+script = ExtResource("1_klmbk")
+AI_type = "wander"
+can_fly = true
+sprite = NodePath("AnimatedSprite2D")
+fall_immunity = true
+metadata/_custom_type_script = "uid://clyllgqnhrexe"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+self_modulate = Color(1.4164544, 1.0699846, 1.0296942, 1)
+sprite_frames = SubResource("SpriteFrames_xy6oq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_6v376")

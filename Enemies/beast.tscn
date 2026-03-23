@@ -137,10 +137,15 @@ shape = SubResource("CapsuleShape2D_6vn8v")
 [node name="attackTimer" type="Timer" parent="."]
 wait_time = 1.25
 
+[node name="platformTimer" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true
+
 [connection signal="hurt" from="Hurtbox" to="." method="_on_hurtbox_hurt"]
 [connection signal="body_entered" from="WallCheck" to="." method="_on_wall_check_body_entered"]
 [connection signal="body_entered" from="TargetAttackZone" to="." method="_on_target_attack_zone_body_entered"]
 [connection signal="body_exited" from="TargetAttackZone" to="." method="_on_target_attack_zone_body_exited"]
 [connection signal="timeout" from="attackTimer" to="." method="_on_attack_timer_timeout"]
+[connection signal="timeout" from="platformTimer" to="." method="_on_platform_timer_timeout"]
 
 [editable path="Hurtbox"]

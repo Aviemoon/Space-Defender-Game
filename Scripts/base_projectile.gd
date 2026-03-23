@@ -39,9 +39,14 @@ func death_effect(fx: AnimatedSprite2D):
 		return
 	fx.reparent(get_tree().root)
 	fx.visible = true
+	var death = Callable(fx, 'queue_free')
+	if not fx.animation_finished.is_connected(death):
+		fx.animation_finished.connect(death)
 	
 	fx.play('')
-	fx.animation_finished.connect(Callable(fx, 'queue_free'))
+	#await fx.animation_finished
+	#fx.call_deferred('queue_free')
+	
 
 func enemy_hit(enemy, charge = 1) -> void:
 	health -= charge

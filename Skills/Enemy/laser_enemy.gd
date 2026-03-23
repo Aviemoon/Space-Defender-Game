@@ -6,7 +6,7 @@ var direction = Vector2.RIGHT
 func _ready() -> void:
 	calculate_stats()
 	attack()
-	print(rotation)
+	#print(rotation)
 
 func attack():
 	pass

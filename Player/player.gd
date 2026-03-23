@@ -164,7 +164,7 @@ func movement(delta):
 	if Input.is_action_just_pressed('down') and is_on_floor():
 		set_collision_mask_value(2, false) #IDKKKKK
 		
-		print('awawa')
+		#print('awawa')
 	else:
 		set_collision_mask_value(2, true)
 	
@@ -205,7 +205,7 @@ func movement(delta):
 
 func attack_move_speed(power:float = 1.0, duration:float = 1.0):
 	attack_slow_cooldown = true
-	print('yay')
+	#print('yay')
 	var old_speed = speed
 	speed /= power
 	await get_tree().create_timer(duration).timeout
@@ -238,7 +238,7 @@ func attacking():
 	var used_skill:int
 	
 	if Input.is_action_pressed("ability_1"):
-		print(global_position)
+		#print(global_position)
 		used_skill = 1
 		if $skill1Timer.is_stopped():
 			if not attack_slow_cooldown:
@@ -307,7 +307,7 @@ func _on_hurtbox_hurt(p_friendly: Variant, p_damage: Variant, p_angle: Variant, 
 	hurt(p_friendly, p_damage, p_angle, p_knockback)
 	GlobalSignal.player_hurt.emit()
 	GlobalSignal.player_stat_change.emit()
-	print(p_friendly, p_damage, p_angle, p_knockback)
+	#print(p_friendly, p_damage, p_angle, p_knockback)
 
 func _on_magnet_area_body_entered(body: Node2D) -> void:
 	if body is Pickup:

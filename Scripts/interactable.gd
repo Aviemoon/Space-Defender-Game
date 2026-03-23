@@ -2,7 +2,7 @@ class_name Interactable extends RigidBody2D
 
 
 @export var action_name: String = ''
-@export var drops: Array[PackedScene]
+@export var drops: Array[Drops]
 
 var _action_lbl: Label
 
@@ -10,7 +10,7 @@ const EXPLOSION = preload("uid://dmctsbuquttft")
 
 
 
-var player = null
+var player: PlayerCharacter = null
 var opened = false
 
 

@@ -19,6 +19,8 @@ func _ready() -> void:
 func create_new_save():
 	var new_game_scene : String = ''
 	save_data = {
+		'current_objective' : Global.current_objective,
+		
 		'scene_path' : new_game_scene,
 		# player stats
 		'location_x' : 0,
@@ -93,6 +95,7 @@ func load_game():
 	load_player()
 
 func load_player():
+	Global.choose_objective(save_data.get('current_objective'))
 	#var player = save_data.get('player')
 	var player = get_tree().get_first_node_in_group('Player')
 	#print(player)

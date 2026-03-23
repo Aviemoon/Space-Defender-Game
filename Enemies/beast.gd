@@ -32,19 +32,21 @@ func attack():
 	if facing_left:
 		inst.scale.x = -1
 	inst.scale *= weapon_size_mult
-	print('ENEMYYY ATTACKK!!')
+	#print('ENEMYYY ATTACKK!!')
 	call_deferred('add_child', inst)
 	await sprite.animation_finished
 	sprite.play('walk')
 
 func _on_hurtbox_hurt(p_friendly: Variant, p_damage: Variant, p_angle: Variant, p_knockback: Variant, p_attackerd: Variant) -> void:
 	hurt(p_friendly, p_damage, p_angle, p_knockback, p_attackerd)
+	#if randi_range(1, 15) == 5:
+			#attack()
 	$sfxHit.play()
 
 
 func _on_wall_check_body_entered(body: Node2D) -> void:
-	if is_on_floor():
-		jump() #:3
+	#if is_on_floor():
+	jump() #:3
 
 
 func _on_attack_timer_timeout() -> void:
@@ -53,9 +55,14 @@ func _on_attack_timer_timeout() -> void:
 
 func _on_target_attack_zone_body_entered(body: Node2D) -> void:
 	if attack_timer.is_stopped():
-		attack()
+		if randi_range(1, 5) == 5:
+			attack()
 		attack_timer.start()
 
 
 func _on_target_attack_zone_body_exited(body: Node2D) -> void:
 	attack_timer.stop()
+
+
+func _on_platform_timer_timeout() -> void:
+	jump_check()

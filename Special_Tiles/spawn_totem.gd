@@ -32,4 +32,5 @@ func spawn_stuff():
 
 
 func _on_spawn_timer_timeout() -> void:
+	spawn_timer.wait_time = spawn_time + randi_range(-1, 1)
 	spawn_stuff()

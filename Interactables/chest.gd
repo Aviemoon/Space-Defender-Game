@@ -1,40 +1,52 @@
 extends Interactable
 
 @onready var drop_spawn_point: Marker2D = $DropSpawnPoint
+@onready var cost_label: Label = $Control/costLabel
 
 
+@export var cost: int = 0
+@export_enum( 'random', 'all') var loot_type = 'all'
 
-@export var number_of_coins: int = 5
-
-
+func _ready() -> void:
+	super._ready()
+	cost_label.text = str(cost) + 'G'
 
 func interact():
+	
+	
 	$Sprite2D.frame += 1
-	for i in drops:
-		#var position_offset = drop_spawn_point.global_position.x - (len(drops) * number_of_coins)
-		var position_offset = drop_spawn_point.global_position
-		for j in range(1, number_of_coins + 1):
-			var new_drop = i.instantiate()
-			new_drop.global_position = position_offset
-			if new_drop is Coin:
-				new_drop.gravity_scale = 0.25
-			
-			var velocity_modifier = (j) * 3
-			if j < number_of_coins / 2:
-				velocity_modifier *= -1
-			elif j > (number_of_coins / 2):
-				velocity_modifier /= 2
-			else:
-				velocity_modifier = 0
-			print(velocity_modifier)
-			
-			new_drop.linear_velocity = Vector2(velocity_modifier, -150)
-			get_parent().call_deferred('add_child', new_drop)
-	opened = true
-	$Sprite2D.modulate = Color(0.4, 0.4, 0.3)
+	match loot_type:
+		'random':
+			pass
+		
+		'all':
+			for i in drops:
+				var position_offset = drop_spawn_point.global_position
+				for j in range(1, i.num + 1):
+					var new_drop = i.drop.instantiate()
+					new_drop.global_position = position_offset
+					#if new_drop is Coin:
+					new_drop.gravity_scale = 0.25
+					var velocity_modifier = (j) * 3
+					if j < i.num / 2:
+						velocity_modifier *= -1
+					elif j > (i.num / 2):
+						velocity_modifier /= 2
+					else:
+						velocity_modifier = 0
+					print(velocity_modifier)
+					
+					new_drop.linear_velocity = Vector2(velocity_modifier, -150)
+					get_parent().call_deferred('add_child', new_drop)
+			opened = true
+			$Sprite2D.modulate = Color(0.4, 0.4, 0.3)
+	
+	player.gold -= cost
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("interact") and player and not opened:
+	if event.is_action_pressed("interact") and player and player.gold >= cost and !opened:
+		
+		
 		interact()
 		$InteractHandler.interact.emit()
 

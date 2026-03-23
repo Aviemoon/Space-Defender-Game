@@ -42,10 +42,10 @@ func transition_scene(new_scene:String, target_area:String, player_offset:Vector
 	
 	load_scene_finished.emit()
 	
-	
-	
-	SavingManager.save_game()
-
+	if Global.room_count > 0:
+		SavingManager.save_game()
+		
+	Global.objective_init()
 #
 #func fade_screen(from:Vector2, to:Vector2) -> Signal:
 	#fade.position = from

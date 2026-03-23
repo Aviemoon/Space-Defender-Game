@@ -27,6 +27,7 @@ func _physics_process(delta):
 	
 func die():
 	Global.enemies_alive -= 1
+	GlobalSignal.enemy_die.emit(self)
 	for i in range(randi_range(1, 3)):
 		var new_coin = GOLD.instantiate()
 		
@@ -40,8 +41,9 @@ func jump(power = 1):
 	velocity.y = -jump_velocity * power
 
 func movement(delta):
-	if not (is_on_floor() and can_fly):
+	if not is_on_floor() or can_fly:
 		velocity += get_gravity() * delta
+		#print('aaa')
 
 	
 	
@@ -58,19 +60,30 @@ func movement(delta):
 			velocity.x = direction.x * speed
 			velocity += knockback 
 			
-			if (player.global_position.y < global_position.y and abs(player.global_position.x - global_position.x) < 50) and is_on_floor():
+			if player.global_position.y < global_position.y  and is_on_floor():
 				jump()
-			elif player.global_position.y + 10 > (global_position.y - 35) and (is_on_floor() and get_collision_mask_value(2)):
-				#print('player: %d' % player.global_position.y, '\n', 'me %d' % global_position.y)
-				set_collision_mask_value(2, false)
-				platform_collision_mask_defer()
-			#else:
-				#call_deferred('set_collision_mask_value', 2, true)
+				#print('i should jump')
+			
 	
 	direction_flip()
 
+func jump_check():
+	
+
+	if player.global_position.y +1 > global_position.y :
+		#print('player: %d' % player.global_position.y, '\n', 'me %d' % global_position.y)
+
+		
+		platform_collision_mask_defer()
+		
+	#elif is_on_floor() and !get_collision_mask_value(2):
+		#set_collision_mask_value(2, true)
+	#else:
+		#call_deferred('set_collision_mask_value', 2, true)
+
 func platform_collision_mask_defer():
 	#await get_tree().create_timer(0.01).timeout
+	set_collision_mask_value(2, false)
 	await get_tree().physics_frame
 
 	#call_deferred('set_collision_mask_value', 2, true)
