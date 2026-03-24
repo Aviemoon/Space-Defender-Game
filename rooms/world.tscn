@@ -754,11 +754,11 @@ tile_set = SubResource("TileSet_mu24a")
 position = Vector2(1000, -8)
 
 [node name="SpawnTotem" parent="Tiles" instance=ExtResource("15_rvmc5")]
-position = Vector2(416, -192)
+position = Vector2(120, -160)
 things_to_spawn = Array[ExtResource("16_30ace")]([SubResource("Resource_8hgy7")])
 
 [node name="SpawnTotem4" parent="Tiles" instance=ExtResource("15_rvmc5")]
-position = Vector2(-176, -144)
+position = Vector2(-264, -48)
 things_to_spawn = Array[ExtResource("16_30ace")]([SubResource("Resource_4owcq")])
 
 [node name="SpawnTotem5" parent="Tiles" instance=ExtResource("15_rvmc5")]
@@ -772,22 +772,3 @@ things_to_spawn = Array[ExtResource("16_30ace")]([SubResource("Resource_en1l5"),
 
 [node name="Eye devil" parent="." instance=ExtResource("20_en1l5")]
 position = Vector2(-64, -6)
-
-[connection signal="player_spotted" from="Tiles/WorldTileMapLayer/Enemy_turret" to="Tiles/WorldTileMapLayer/Enemy_turret" method="_on_player_spotted"]
-[connection signal="body_entered" from="Tiles/Interactables/Vase" to="Tiles/Interactables/Vase" method="_on_body_entered"]
-[connection signal="body_entered" from="Tiles/Interactables/@RigidBody2D@42330" to="Tiles/Interactables/@RigidBody2D@42330" method="_on_body_entered"]
-[connection signal="body_entered" from="Tiles/Interactables/@RigidBody2D@42331" to="Tiles/Interactables/@RigidBody2D@42331" method="_on_body_entered"]
-[connection signal="body_entered" from="Tiles/Interactables/@RigidBody2D@42332" to="Tiles/Interactables/@RigidBody2D@42332" method="_on_body_entered"]
-[connection signal="body_entered" from="Tiles/Interactables/@RigidBody2D@42333" to="Tiles/Interactables/@RigidBody2D@42333" method="_on_body_entered"]
-[connection signal="body_entered" from="Tiles/Interactables/@RigidBody2D@42334" to="Tiles/Interactables/@RigidBody2D@42334" method="_on_body_entered"]
-[connection signal="body_entered" from="Tiles/Interactables/@RigidBody2D@42335" to="Tiles/Interactables/@RigidBody2D@42335" method="_on_body_entered"]
-[connection signal="body_entered" from="Tiles/Interactables/@RigidBody2D@42336" to="Tiles/Interactables/@RigidBody2D@42336" method="_on_body_entered"]
-[connection signal="body_entered" from="Tiles/Interactables/@RigidBody2D@42337" to="Tiles/Interactables/@RigidBody2D@42337" method="_on_body_entered"]
-[connection signal="body_entered" from="Tiles/Interactables/@RigidBody2D@42338" to="Tiles/Interactables/@RigidBody2D@42338" method="_on_body_entered"]
-[connection signal="body_entered" from="Tiles/Interactables/@RigidBody2D@42339" to="Tiles/Interactables/@RigidBody2D@42339" method="_on_body_entered"]
-[connection signal="body_entered" from="Tiles/Interactables/@RigidBody2D@42340" to="Tiles/Interactables/@RigidBody2D@42340" method="_on_body_entered"]
-[connection signal="body_entered" from="Tiles/Interactables/@RigidBody2D@42341" to="Tiles/Interactables/@RigidBody2D@42341" method="_on_body_entered"]
-[connection signal="body_entered" from="Tiles/Interactables/@RigidBody2D@42342" to="Tiles/Interactables/@RigidBody2D@42342" method="_on_body_entered"]
-[connection signal="body_entered" from="Tiles/Interactables/@RigidBody2D@42343" to="Tiles/Interactables/@RigidBody2D@42343" method="_on_body_entered"]
-[connection signal="body_entered" from="Tiles/Interactables/@RigidBody2D@42344" to="Tiles/Interactables/@RigidBody2D@42344" method="_on_body_entered"]
-[connection signal="body_entered" from="Tiles/Interactables/@RigidBody2D@42345" to="Tiles/Interactables/@RigidBody2D@42345" method="_on_body_entered"]

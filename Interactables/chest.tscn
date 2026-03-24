@@ -48,11 +48,14 @@ position = Vector2(0, 1)
 
 [node name="InteractHandler" parent="." instance=ExtResource("4_waagb")]
 
+[node name="Arrow" parent="InteractHandler/InteractArea" index="1"]
+position = Vector2(0, -16)
+
 [node name="InteractLabel" parent="InteractHandler/Control" index="0"]
 visible = true
 offset_top = -3.5
 offset_bottom = 19.5
-text = "aaa"
+text = ""
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3

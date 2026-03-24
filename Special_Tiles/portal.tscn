@@ -22,16 +22,23 @@ z_index = 5
 texture = ExtResource("2_410lk")
 
 [node name="Effect" type="Sprite2D" parent="."]
+visible = false
 self_modulate = Color(1.4586968, 1.4586968, 1.4586968, 1)
 z_index = 4
 texture = ExtResource("3_yqtjk")
 
 [node name="InteractHandler" parent="." instance=ExtResource("4_410lk")]
+can_show = false
+
+[node name="Arrow" parent="InteractHandler/InteractArea" index="1"]
+position = Vector2(0, -34.000004)
 
 [node name="InteractLabel" parent="InteractHandler/Control" index="0"]
 offset_top = -18.5
 offset_bottom = 4.5
 
+[connection signal="tree_entered" from="." to="." method="_on_tree_entered"]
+[connection signal="tree_exited" from="." to="." method="_on_tree_exited"]
 [connection signal="body_entered" from="InteractHandler/InteractArea" to="." method="_on_interact_area_body_entered"]
 [connection signal="body_exited" from="InteractHandler/InteractArea" to="." method="_on_interact_area_body_exited"]
 

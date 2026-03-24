@@ -6,9 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://m4j6i41arew2" path="res://Utility/Hurtbox.tscn" id="3_fig5s"]
 [ext_resource type="AudioStream" uid="uid://cx234hnebi7se" path="res://sfx/swordhit.mp3" id="4_dboa0"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dboa0"]
-radius = 8.0
-height = 20.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6vn8v"]
+size = Vector2(7, 19.5)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dboa0"]
 atlas = ExtResource("2_fig5s")
@@ -96,7 +95,8 @@ metadata/_custom_type_script = "uid://clyllgqnhrexe"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 z_index = 2
-shape = SubResource("CapsuleShape2D_dboa0")
+position = Vector2(0, 0.25)
+shape = SubResource("RectangleShape2D_6vn8v")
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(-1.25, 1.25)

@@ -8,7 +8,7 @@ extends Interactable
 @onready var effect: Sprite2D = $Effect
 @onready var interact_area: Area2D = $InteractHandler/InteractArea
 const ROTATION_SPEED = 5
-var locked = false
+var locked = true
 var spawn_point 
 
 var levels = []
@@ -54,7 +54,11 @@ func interact():
 		pass
 	GlobalSignal.portal_interacted_with.emit()
 	#SceneManager.transition_scene(target_level, target_area, Vector2.ZERO, '')
-	
+
+func turn_on():
+	locked = false
+	effect.visible = true
+	$InteractHandler.can_show = true
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("interact") and player and not locked:
@@ -69,3 +73,11 @@ func _on_interact_area_body_entered(body: Node2D) -> void:
 
 func _on_interact_area_body_exited(body: Node2D) -> void:
 	player_exit()
+
+
+func _on_tree_entered() -> void:
+	Global.objective_complete.connect(turn_on)
+
+
+func _on_tree_exited() -> void:
+	Global.objective_complete.disconnect(turn_on)
