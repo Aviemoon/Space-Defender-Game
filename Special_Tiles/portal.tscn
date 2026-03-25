@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://dyfpofnpvumbn"]
+[gd_scene load_steps=7 format=3 uid="uid://dyfpofnpvumbn"]
 
 [ext_resource type="Script" uid="uid://bc3e7jughs1bh" path="res://Special_Tiles/portal.gd" id="1_jbfkx"]
 [ext_resource type="Texture2D" uid="uid://8ywxmm221333" path="res://Sprites/tiles/portal_empty.png" id="2_410lk"]
 [ext_resource type="Texture2D" uid="uid://mxmrj5mpselx" path="res://Sprites/tiles/portal_effect.png" id="3_yqtjk"]
 [ext_resource type="PackedScene" uid="uid://b4v155p54qhu4" path="res://Utility/interact_handler.tscn" id="4_410lk"]
+[ext_resource type="AudioStream" uid="uid://bpnpdoh78pkv0" path="res://sfx/portal.mp3" id="5_yqtjk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_410lk"]
 size = Vector2(48, 0)
@@ -36,6 +37,11 @@ position = Vector2(0, -34.000004)
 [node name="InteractLabel" parent="InteractHandler/Control" index="0"]
 offset_top = -18.5
 offset_bottom = 4.5
+
+[node name="OpenSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_yqtjk")
+volume_db = -2.019
+bus = &"SFX"
 
 [connection signal="tree_entered" from="." to="." method="_on_tree_entered"]
 [connection signal="tree_exited" from="." to="." method="_on_tree_exited"]

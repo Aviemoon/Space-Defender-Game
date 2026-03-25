@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=4 uid="uid://cugfsoo4pjghg"]
+[gd_scene load_steps=43 format=4 uid="uid://cugfsoo4pjghg"]
 
 [ext_resource type="Environment" uid="uid://cf0o50jm3wy3v" path="res://Utility/base_worldenvironment.tres" id="1_6txnh"]
 [ext_resource type="Texture2D" uid="uid://c1l0wkjc4hhd0" path="res://Sprites/tiles/tilesheet01.png" id="2_wllj5"]
@@ -22,6 +22,7 @@
 [ext_resource type="Script" uid="uid://cxax878ppwtx7" path="res://Utility/resources/drops.gd" id="19_aibtd"]
 [ext_resource type="PackedScene" uid="uid://ddfq4nf6ibvhg" path="res://Pickups/damage_syringe.tscn" id="19_en1l5"]
 [ext_resource type="PackedScene" uid="uid://0volkhlhw1ai" path="res://Pickups/health_vial.tscn" id="20_y1ja7"]
+[ext_resource type="PackedScene" uid="uid://b3nijim6vdj57" path="res://Pickups/knockback_upgrade.tscn" id="22_y1ja7"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rvmc5"]
 texture = ExtResource("2_wllj5")
@@ -791,25 +792,9 @@ things_to_spawn = Array[ExtResource("16_30ace")]([SubResource("Resource_en1l5"),
 position = Vector2(568, 88)
 drops = Array[ExtResource("19_aibtd")]([SubResource("Resource_1anhx"), SubResource("Resource_ovu33"), SubResource("Resource_eb7vr")])
 
+[node name="KnockbackUpgrade" parent="Tiles" instance=ExtResource("22_y1ja7")]
+position = Vector2(88, -14)
+
 [node name="dungeon_generator" parent="." instance=ExtResource("6_q45av")]
 
 [node name="PlayerSpawn" type="Marker2D" parent="."]
-
-[connection signal="player_spotted" from="Tiles/WorldTileMapLayer/Enemy_turret" to="Tiles/WorldTileMapLayer/Enemy_turret" method="_on_player_spotted"]
-[connection signal="body_entered" from="Tiles/Interactables/Vase" to="Tiles/Interactables/Vase" method="_on_body_entered"]
-[connection signal="body_entered" from="Tiles/Interactables/@RigidBody2D@82850" to="Tiles/Interactables/@RigidBody2D@82850" method="_on_body_entered"]
-[connection signal="body_entered" from="Tiles/Interactables/@RigidBody2D@82851" to="Tiles/Interactables/@RigidBody2D@82851" method="_on_body_entered"]
-[connection signal="body_entered" from="Tiles/Interactables/@RigidBody2D@82852" to="Tiles/Interactables/@RigidBody2D@82852" method="_on_body_entered"]
-[connection signal="body_entered" from="Tiles/Interactables/@RigidBody2D@82853" to="Tiles/Interactables/@RigidBody2D@82853" method="_on_body_entered"]
-[connection signal="body_entered" from="Tiles/Interactables/@RigidBody2D@82854" to="Tiles/Interactables/@RigidBody2D@82854" method="_on_body_entered"]
-[connection signal="body_entered" from="Tiles/Interactables/@RigidBody2D@82855" to="Tiles/Interactables/@RigidBody2D@82855" method="_on_body_entered"]
-[connection signal="body_entered" from="Tiles/Interactables/@RigidBody2D@82856" to="Tiles/Interactables/@RigidBody2D@82856" method="_on_body_entered"]
-[connection signal="body_entered" from="Tiles/Interactables/@RigidBody2D@82857" to="Tiles/Interactables/@RigidBody2D@82857" method="_on_body_entered"]
-[connection signal="body_entered" from="Tiles/Interactables/@RigidBody2D@82858" to="Tiles/Interactables/@RigidBody2D@82858" method="_on_body_entered"]
-[connection signal="body_entered" from="Tiles/Interactables/@RigidBody2D@82859" to="Tiles/Interactables/@RigidBody2D@82859" method="_on_body_entered"]
-[connection signal="body_entered" from="Tiles/Interactables/@RigidBody2D@82860" to="Tiles/Interactables/@RigidBody2D@82860" method="_on_body_entered"]
-[connection signal="body_entered" from="Tiles/Interactables/@RigidBody2D@82861" to="Tiles/Interactables/@RigidBody2D@82861" method="_on_body_entered"]
-[connection signal="body_entered" from="Tiles/Interactables/@RigidBody2D@82862" to="Tiles/Interactables/@RigidBody2D@82862" method="_on_body_entered"]
-[connection signal="body_entered" from="Tiles/Interactables/@RigidBody2D@82863" to="Tiles/Interactables/@RigidBody2D@82863" method="_on_body_entered"]
-[connection signal="body_entered" from="Tiles/Interactables/@RigidBody2D@82864" to="Tiles/Interactables/@RigidBody2D@82864" method="_on_body_entered"]
-[connection signal="body_entered" from="Tiles/Interactables/@RigidBody2D@82865" to="Tiles/Interactables/@RigidBody2D@82865" method="_on_body_entered"]

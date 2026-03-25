@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://bmfx4t03bnc6f"]
+[gd_scene load_steps=5 format=3 uid="uid://bmfx4t03bnc6f"]
 
 [ext_resource type="Script" uid="uid://c55osl11na2ct" path="res://Skills/sword_slash.gd" id="1_fnk5e"]
 [ext_resource type="Texture2D" uid="uid://bku630ywwg5ov" path="res://Sprites/Attacks/slash.png" id="2_a6dbj"]
+[ext_resource type="AudioStream" uid="uid://cysw51r5dckvx" path="res://sfx/sword-swing.mp3" id="3_a6dbj"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fnk5e"]
 radius = 11.0
@@ -29,6 +30,11 @@ shape = SubResource("CapsuleShape2D_fnk5e")
 disabled = true
 
 [node name="Marker2D" type="Marker2D" parent="." groups=["attack_friendly"]]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_a6dbj")
+volume_db = -6.0
+bus = &"SFX"
 
 [connection signal="tree_entered" from="." to="." method="_on_tree_entered"]
 [connection signal="tree_exiting" from="." to="." method="_on_tree_exiting"]

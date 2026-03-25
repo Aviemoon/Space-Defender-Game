@@ -22,11 +22,12 @@ var objective_exterminate_killed: int = 0
 var objective_exterminate_needed: int = 50
 
 var survive_time_passed: float = 0
-var survive_time_needed: float = 150
+var survive_time_needed: float = 60
 
 var objective_types: Array = [_EXTERMINATE, _SURVIVE] 
 var current_objective
 
+var completed = false
 
 signal objective_title(name)
 signal objective_complete
@@ -46,6 +47,7 @@ func _process(delta: float) -> void:
 func purge_objective_values():
 	objective_exterminate_killed = 0
 	survive_time_passed = 0
+	completed = false
 
 func _kill_increment() -> void:
 	objective_exterminate_killed += 1
@@ -65,14 +67,17 @@ func choose_title():
 func check_objective(idk = ''):
 	_kill_increment()
 	choose_title()
-	
+	if completed:
+		return
 	match current_objective:
 		_EXTERMINATE:
 			if objective_exterminate_killed >= objective_exterminate_needed:
 				objective_complete.emit()
+				completed = true
 		_SURVIVE:
 			if survive_time_passed >= survive_time_needed:
 				objective_complete.emit()
+				completed = true
 	
 
 func choose_objective(p_objective = null):

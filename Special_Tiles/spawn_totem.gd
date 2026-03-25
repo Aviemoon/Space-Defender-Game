@@ -15,7 +15,7 @@ func _ready() -> void:
 func spawn_stuff():
 	if not things_to_spawn or Global.enemies_alive >= Global.enemy_limit:
 		return
-	
+	var diff = Global.difficulty_modifier
 	
 	var thing = things_to_spawn.pick_random()
 	for i in range(thing.num):
@@ -25,6 +25,12 @@ func spawn_stuff():
 			inst.damage += thing.stats.dmg
 			inst.speed += thing.stats.speed
 			inst.jump_velocity += thing.stats.jumpspeed
+			
+			inst.max_hp *= diff
+			inst.defense += diff
+			inst.weapon_bonus_damage += (diff) / 2
+			inst.speed += diff
+			inst.knockback_recovery += diff/4
 		inst.speed += randi_range(-5, 12)
 		inst.global_position = Vector2(global_position.x, global_position.y - 10)
 		get_tree().root.add_child(inst)

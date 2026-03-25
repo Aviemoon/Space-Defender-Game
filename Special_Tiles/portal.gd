@@ -58,7 +58,10 @@ func interact():
 func turn_on():
 	locked = false
 	effect.visible = true
+	$OpenSFX.play()
 	$InteractHandler.can_show = true
+	Global.objective_complete.disconnect(turn_on)
+	
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("interact") and player and not locked:
@@ -80,4 +83,5 @@ func _on_tree_entered() -> void:
 
 
 func _on_tree_exited() -> void:
-	Global.objective_complete.disconnect(turn_on)
+	if Global.objective_complete.is_connected(turn_on):
+		Global.objective_complete.disconnect(turn_on)

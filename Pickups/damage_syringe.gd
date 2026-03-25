@@ -2,6 +2,7 @@ extends Pickup
 
 
 func _physics_process(delta: float) -> void:
+	rotation_degrees += 7.5*delta
 	move_to_target()
 
 
