@@ -69,6 +69,7 @@ skills = Array[PackedScene]([ExtResource("2_gwnis"), ExtResource("3_k53q1"), Ext
 items = Array[PackedScene]([ExtResource("4_vtle1")])
 speed = 1350.0
 jump_velocity = 320.0
+fall_immunity = true
 knockback_immunity = true
 
 [node name="WallCollision" type="CollisionShape2D" parent="."]

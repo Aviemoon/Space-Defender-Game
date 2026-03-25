@@ -75,6 +75,8 @@ func hurt(p_friendly, p_damage, p_angle, p_knockback, attacker = 0):
 	if p_friendly != friendly:
 		hp_lbl.text = str(hp)
 		var total_dmg = p_damage - defense/2
+		if total_dmg < 1:
+			total_dmg = 1
 		if ! knockback_immunity:
 			knockback = p_knockback * Vector2(p_angle.x, 0)
 			

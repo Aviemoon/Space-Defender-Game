@@ -1,35 +1,35 @@
-[gd_scene load_steps=13 format=3 uid="uid://b3nijim6vdj57"]
+[gd_scene load_steps=13 format=3 uid="uid://cue2oosxgxu2"]
 
-[ext_resource type="Script" uid="uid://cyqsevtdpo4m1" path="res://Pickups/knockback_upgrade.gd" id="1_c7ibk"]
-[ext_resource type="Texture2D" uid="uid://biw03jf7u45yp" path="res://Sprites/Pickups/HealthVialSmall.png" id="2_4inmo"]
-[ext_resource type="Texture2D" uid="uid://c8e8hehaq5nas" path="res://Sprites/Pickups/healthvialcoresmall.png" id="3_jqte0"]
+[ext_resource type="Script" uid="uid://ch1qicimj2myt" path="res://Pickups/max_hp_upgrade.gd" id="1_7tiiu"]
+[ext_resource type="Texture2D" uid="uid://biw03jf7u45yp" path="res://Sprites/Pickups/HealthVialSmall.png" id="2_f875o"]
+[ext_resource type="Texture2D" uid="uid://c8e8hehaq5nas" path="res://Sprites/Pickups/healthvialcoresmall.png" id="3_voigt"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_436ej"]
-atlas = ExtResource("2_4inmo")
+atlas = ExtResource("2_f875o")
 region = Rect2(0, 0, 10, 10)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_f81iq"]
-atlas = ExtResource("2_4inmo")
+atlas = ExtResource("2_f875o")
 region = Rect2(10, 0, 10, 10)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_y4r83"]
-atlas = ExtResource("2_4inmo")
+atlas = ExtResource("2_f875o")
 region = Rect2(20, 0, 10, 10)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ykfkw"]
-atlas = ExtResource("2_4inmo")
+atlas = ExtResource("2_f875o")
 region = Rect2(30, 0, 10, 10)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6bs1w"]
-atlas = ExtResource("2_4inmo")
+atlas = ExtResource("2_f875o")
 region = Rect2(40, 0, 10, 10)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_02fh3"]
-atlas = ExtResource("2_4inmo")
+atlas = ExtResource("2_f875o")
 region = Rect2(50, 0, 10, 10)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4odw3"]
-atlas = ExtResource("2_4inmo")
+atlas = ExtResource("2_f875o")
 region = Rect2(60, 0, 10, 10)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_63wbn"]
@@ -64,15 +64,17 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_bb7po"]
 radius = 8.0
 
-[node name="KnockbackUpgrade" type="RigidBody2D"]
+[node name="MaxHPUpgrade" type="RigidBody2D"]
 z_index = 2
 collision_layer = 256
 collision_mask = 515
-script = ExtResource("1_c7ibk")
-value = 35
+script = ExtResource("1_7tiiu")
+speed_modifier = 2
+value = 15
 metadata/_custom_type_script = "uid://dgrk8qm5mx1t2"
 
 [node name="animSprite2D" type="AnimatedSprite2D" parent="."]
+self_modulate = Color(0.30065963, 0.8476179, 1.4164544, 1)
 sprite_frames = SubResource("SpriteFrames_63wbn")
 frame_progress = 0.369726
 
@@ -81,6 +83,6 @@ z_index = -3
 shape = SubResource("CircleShape2D_bb7po")
 
 [node name="core" type="Sprite2D" parent="."]
-self_modulate = Color(0, 0, 0.8307705, 1)
+self_modulate = Color(1, 0, 0.16078432, 1)
 z_index = 1
-texture = ExtResource("3_jqte0")
+texture = ExtResource("3_voigt")

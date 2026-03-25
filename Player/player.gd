@@ -53,6 +53,8 @@ var lock_horizontal_movement: bool = false
 @export var wall_slide_multiplier = 0.7
 @export var wall_pushoff = 333
 
+@export var crit_chance = 0.0
+
 
 #var last_dir
 #var just_wall_jumped:bool
@@ -72,7 +74,7 @@ func _ready():
 	if get_tree().get_first_node_in_group('Player') != self:
 		self.queue_free()
 	self.call_deferred('reparent', get_tree().root)
-	GlobalSignal.player_stat_change.emit()
+	GlobalSignal.player_stat_change.emit(self)
 	update_item()
 	#if GlobalRoomChange.activate:
 		#global_position = GlobalRoomChange.player_position
@@ -232,7 +234,7 @@ func heal(num):
 	hp += num
 	if hp > max_hp:
 		hp = max_hp
-	GlobalSignal.player_stat_change.emit()
+	GlobalSignal.player_stat_change.emit(self)
 
 func attacking():
 	var used_skill:int
@@ -245,7 +247,14 @@ func attacking():
 				attack_move_speed(1.5, 0.5)
 			is_attacking = true
 			var new_skill = skills[0]
-			var skill_inst = new_skill.instantiate()
+			var skill_inst: BaseProjectile = new_skill.instantiate()
+			
+			var crit_proc: float = randi_range(0, 100)
+			#crit_proc /= 100
+			#print(crit_proc)
+			if crit_proc < crit_chance:
+				skill_inst.base_damage *= 2
+			
 			if not facing_right:
 				skill_inst.scale.x = -1
 			else:
@@ -306,14 +315,31 @@ func _on_hurtbox_hurt(p_friendly: Variant, p_damage: Variant, p_angle: Variant, 
 		return
 	hurt(p_friendly, p_damage, p_angle, p_knockback)
 	GlobalSignal.player_hurt.emit()
-	GlobalSignal.player_stat_change.emit()
+	GlobalSignal.player_stat_change.emit(self)
 	#print(p_friendly, p_damage, p_angle, p_knockback)
 
-func change_weapon_stats(dmg = 0, spd = 0, kb = 0, whp = 0):
+func change_player_stats(mhp = 0, def = 0, spd = 0, jmp_h = 0, fall_imm: bool = false):
+	if mhp:
+		max_hp += mhp
+		heal(mhp)
+	
+	defense += def
+	speed += spd
+	jump_velocity += jmp_h
+	
+	if fall_imm and !fall_immunity:
+		fall_immunity = true
+	elif fall_imm:
+		defense += 1
+	print(max_hp)
+	GlobalSignal.player_stat_change.emit(self)
+
+func change_weapon_stats(dmg = 0, spd = 0, kb = 0, whp = 0, cc = 0):
 	weapon_damage_bonus += dmg
 	weapon_speed_bonus += spd
 	weapon_knockback_bonus += kb
 	weapon_hp_bonus += whp
+	crit_chance += cc
 
 func _on_magnet_area_body_entered(body: Node2D) -> void:
 	if body is Pickup:
@@ -351,7 +377,9 @@ func _on_pickup_area_body_entered(body: Node2D) -> void:
 	
 	if body is Coin:
 		gold += value
-		pickup_num(body.collect(), '#ffff00', 'G')
-		GlobalSignal.player_stat_change.emit()
+		pickup_num(value, '#ffff00', 'G')
+		
 	elif body is Pickup and body is not Coin:
 		pickup_num(value, '#00ff00', ' HP')
+	
+	GlobalSignal.player_stat_change.emit(self)

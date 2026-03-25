@@ -78,10 +78,10 @@ func pause_game():
 	get_tree().paused = false
 	PauseUI.visible = false
 
-func update_labels():
-	if Player is PlayerCharacter:
-		hp_label.text = "Health: %d / %d" % [Player.hp, Player.max_hp]
-		gold_label.text = "Gold: %d" % Player.gold
+func update_labels(playa):
+	if playa is PlayerCharacter:
+		hp_label.text = "Health: %d / %d" % [playa.hp, playa.max_hp]
+		gold_label.text = "Gold: %d" % playa.gold
 
 func autosave_animation():
 	print('autooo')
