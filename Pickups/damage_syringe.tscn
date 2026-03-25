@@ -1,0 +1,86 @@
+[gd_scene load_steps=13 format=3 uid="uid://ddfq4nf6ibvhg"]
+
+[ext_resource type="Script" uid="uid://b1rn6wu6khl6d" path="res://Pickups/damage_syringe.gd" id="1_e5txb"]
+[ext_resource type="Texture2D" uid="uid://biw03jf7u45yp" path="res://Sprites/Pickups/HealthVialSmall.png" id="2_sghf4"]
+[ext_resource type="Texture2D" uid="uid://c8e8hehaq5nas" path="res://Sprites/Pickups/healthvialcoresmall.png" id="3_ihv4a"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_436ej"]
+atlas = ExtResource("2_sghf4")
+region = Rect2(0, 0, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f81iq"]
+atlas = ExtResource("2_sghf4")
+region = Rect2(10, 0, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y4r83"]
+atlas = ExtResource("2_sghf4")
+region = Rect2(20, 0, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ykfkw"]
+atlas = ExtResource("2_sghf4")
+region = Rect2(30, 0, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6bs1w"]
+atlas = ExtResource("2_sghf4")
+region = Rect2(40, 0, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_02fh3"]
+atlas = ExtResource("2_sghf4")
+region = Rect2(50, 0, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4odw3"]
+atlas = ExtResource("2_sghf4")
+region = Rect2(60, 0, 10, 10)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_63wbn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_436ej")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f81iq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y4r83")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ykfkw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6bs1w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_02fh3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4odw3")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bb7po"]
+
+[node name="DamageSyringe" type="RigidBody2D"]
+z_index = 2
+collision_layer = 256
+collision_mask = 515
+script = ExtResource("1_e5txb")
+metadata/_custom_type_script = "uid://dgrk8qm5mx1t2"
+
+[node name="animSprite2D" type="AnimatedSprite2D" parent="."]
+self_modulate = Color(1.5790963, 0.30352628, 0.30352628, 1)
+sprite_frames = SubResource("SpriteFrames_63wbn")
+frame_progress = 0.369726
+
+[node name="core" type="Sprite2D" parent="animSprite2D"]
+visible = false
+self_modulate = Color(0.5794312, 0.5456939, 0.5119565, 1)
+z_index = 1
+texture = ExtResource("3_ihv4a")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+z_index = -3
+shape = SubResource("CircleShape2D_bb7po")

@@ -17,6 +17,7 @@ extends Control
 
 @onready var objective_name: Label = $Overlays/ObjectiveVbox/ObjectiveName
 
+@onready var damage_lbl: Label = $Overlays/Stats/Damage
 
 #@export var hurt_overlay_curve: Curve
 
@@ -30,6 +31,9 @@ var is_in_options:bool = false
 
 
 func _process(delta):
+	
+	if Player:
+		damage_lbl.text = "damage = %s" % Player.get("weapon_damage_bonus")
 	# -- pausing --
 	if Input.is_action_just_pressed("pause"):
 		if get_tree().paused and not is_in_options:

@@ -309,6 +309,12 @@ func _on_hurtbox_hurt(p_friendly: Variant, p_damage: Variant, p_angle: Variant, 
 	GlobalSignal.player_stat_change.emit()
 	#print(p_friendly, p_damage, p_angle, p_knockback)
 
+func change_weapon_stats(dmg = 0, spd = 0, kb = 0, whp = 0):
+	weapon_damage_bonus += dmg
+	weapon_speed_bonus += spd
+	weapon_knockback_bonus += kb
+	weapon_hp_bonus += whp
+
 func _on_magnet_area_body_entered(body: Node2D) -> void:
 	if body is Pickup:
 		body.target = self
@@ -316,12 +322,13 @@ func _on_magnet_area_body_entered(body: Node2D) -> void:
 func pickup_num(num = 1, color: String = '#ffffff', extra: String = ''):
 	var lbl = Label.new()
 	#lbl.scale = Vector2.ZERO
+	print([num, extra])
 	lbl.add_theme_color_override('font_color', color)
 	lbl.add_theme_color_override('font_shadow_color', Color.BLACK)
 	lbl.add_theme_constant_override('shadow_offset_x', 2)
 	lbl.add_theme_constant_override('shadow_offset_y', 2)
 	lbl.add_theme_font_size_override('font_size', 16)
-	lbl.text = str("+%d%s" % [num, extra])
+	lbl.text = str("+%s%s" % [num, extra])
 	lbl.global_position = global_position 
 	
 	lbl.global_position.y -= 20 + (_number_of_gold_nums * 5)

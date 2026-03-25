@@ -35,7 +35,8 @@ func interact():
 					else:
 						velocity_modifier = 0
 					print(velocity_modifier)
-					
+					if new_drop.get('value'):
+						new_drop.value += i.value_bonus
 					new_drop.linear_velocity = Vector2(velocity_modifier, -150)
 					get_parent().call_deferred('add_child', new_drop)
 			opened = true
