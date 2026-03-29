@@ -14,6 +14,7 @@ var speed = -0.25
 	#set_collision_mask_value(3, true)
 
 func collect():
+	print(self)
 	$CollisionShape2D.call_deferred('set', 'disabled', true)
 	visible = false
 	

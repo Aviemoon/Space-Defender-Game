@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://m4j6i41arew2" path="res://Utility/Hurtbox.tscn" id="3_btcbx"]
 [ext_resource type="PackedScene" uid="uid://cq24cigt53s4x" path="res://Skills/laser_blast.tscn" id="3_k53q1"]
 [ext_resource type="PackedScene" uid="uid://c8dsiw1plhimt" path="res://Skills/damage_area.tscn" id="4_od3ui"]
-[ext_resource type="PackedScene" uid="uid://7n778mn7kxh4" path="res://items/explodo.tscn" id="4_vtle1"]
+[ext_resource type="PackedScene" uid="uid://7n778mn7kxh4" path="res://items/death_catalyzer.tscn" id="4_vtle1"]
 [ext_resource type="Texture2D" uid="uid://cajavfyvvgq80" path="res://icon.svg" id="6_fhl08"]
 [ext_resource type="AudioStream" uid="uid://3t2rrwdkpp2d" path="res://sfx/jump.wav" id="9_00tjw"]
 [ext_resource type="AudioStream" uid="uid://c1ou3iqeejn2g" path="res://sfx/power_up.wav" id="10_x3vf3"]
@@ -104,11 +104,11 @@ shape = SubResource("CapsuleShape2D_gwnis")
 wait_time = 0.2
 
 [node name="skill1Timer" type="Timer" parent="."]
-wait_time = 0.3
+wait_time = 0.4
 one_shot = true
 
 [node name="skill2Timer" type="Timer" parent="."]
-wait_time = 0.235
+wait_time = 0.33
 one_shot = true
 
 [node name="RotationPoint" type="Marker2D" parent="."]

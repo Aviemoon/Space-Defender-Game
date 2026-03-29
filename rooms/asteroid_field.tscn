@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://dv3163hyhfsmm" path="res://Special_Tiles/spikes.tscn" id="7_cgkyi"]
 [ext_resource type="TileSet" uid="uid://cb75rmyddj0ny" path="res://Utility/foliage.tres" id="7_oq3rx"]
 [ext_resource type="PackedScene" uid="uid://dyfpofnpvumbn" path="res://Special_Tiles/portal.tscn" id="8_6tth5"]
-[ext_resource type="Environment" uid="uid://cf0o50jm3wy3v" path="res://Utility/base_worldenvironment.tres" id="9_qxag3"]
+[ext_resource type="Environment" uid="uid://cf0o50jm3wy3v" path="res://Utility/resources/base_worldenvironment.tres" id="9_qxag3"]
 [ext_resource type="PackedScene" uid="uid://0volkhlhw1ai" path="res://Pickups/health_vial.tscn" id="10_cythx"]
 [ext_resource type="PackedScene" uid="uid://bt2e5rxx6m4uq" path="res://Interactables/chest.tscn" id="12_724b7"]
 [ext_resource type="Script" uid="uid://cxax878ppwtx7" path="res://Utility/resources/drops.gd" id="13_ts5lq"]

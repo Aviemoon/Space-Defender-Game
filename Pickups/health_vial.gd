@@ -11,4 +11,4 @@ func collect():
 	if target and target.get('heal'):
 		#print('haaa')
 		target.heal(value)
-		return value
+		return [value, txt_color, txt_extra]

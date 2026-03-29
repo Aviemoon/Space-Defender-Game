@@ -70,6 +70,8 @@ collision_layer = 256
 collision_mask = 515
 script = ExtResource("1_2coy7")
 value = 50
+txt_color = "#990099"
+txt_extra = "Jump height"
 metadata/_custom_type_script = "uid://dgrk8qm5mx1t2"
 
 [node name="animSprite2D" type="AnimatedSprite2D" parent="."]

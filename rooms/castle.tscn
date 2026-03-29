@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://03ltrccw6m38" path="res://Sprites/tiles/background/foliage.png" id="6_0xt27"]
 [ext_resource type="PackedScene" uid="uid://dv3163hyhfsmm" path="res://Special_Tiles/spikes.tscn" id="7_eat6w"]
 [ext_resource type="PackedScene" uid="uid://dyfpofnpvumbn" path="res://Special_Tiles/portal.tscn" id="8_uye1s"]
-[ext_resource type="Environment" uid="uid://cf0o50jm3wy3v" path="res://Utility/base_worldenvironment.tres" id="9_tfdrk"]
+[ext_resource type="Environment" uid="uid://cf0o50jm3wy3v" path="res://Utility/resources/base_worldenvironment.tres" id="9_tfdrk"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gipov"]
 texture = ExtResource("1_s6o12")

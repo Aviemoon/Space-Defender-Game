@@ -9,7 +9,7 @@
 [ext_resource type="TileSet" uid="uid://cb75rmyddj0ny" path="res://Utility/foliage.tres" id="7_4wgn2"]
 [ext_resource type="PackedScene" uid="uid://dyfpofnpvumbn" path="res://Special_Tiles/portal.tscn" id="7_dtemn"]
 [ext_resource type="PackedScene" uid="uid://jcandckf7dtw" path="res://Special_Tiles/spawn_totem.tscn" id="8_et86u"]
-[ext_resource type="Environment" uid="uid://cf0o50jm3wy3v" path="res://Utility/base_worldenvironment.tres" id="8_rg6li"]
+[ext_resource type="Environment" uid="uid://cf0o50jm3wy3v" path="res://Utility/resources/base_worldenvironment.tres" id="8_rg6li"]
 [ext_resource type="Script" uid="uid://c2xaalpg2wvfj" path="res://Utility/resources/spawn_info.gd" id="9_dtsho"]
 [ext_resource type="PackedScene" uid="uid://c5yf3t6dical1" path="res://Enemies/beast.tscn" id="10_3kiqo"]
 [ext_resource type="Script" uid="uid://dgcnebbdsneu0" path="res://Utility/resources/stat_mods.gd" id="11_w60do"]

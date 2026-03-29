@@ -69,6 +69,8 @@ z_index = 2
 collision_layer = 256
 collision_mask = 515
 script = ExtResource("1_lo5br")
+txt_color = "#fbfb01"
+txt_extra = "Punch Thru"
 metadata/_custom_type_script = "uid://dgrk8qm5mx1t2"
 
 [node name="animSprite2D" type="AnimatedSprite2D" parent="."]

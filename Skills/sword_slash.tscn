@@ -5,8 +5,8 @@
 [ext_resource type="AudioStream" uid="uid://cysw51r5dckvx" path="res://sfx/sword-swing.mp3" id="3_a6dbj"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fnk5e"]
-radius = 11.0
-height = 78.0
+radius = 8.0
+height = 60.0
 
 [node name="SwordSlash" type="Area2D" node_paths=PackedStringArray("sprite") groups=["attack_friendly"]]
 collision_layer = 16
@@ -20,11 +20,11 @@ metadata/_custom_type_script = "uid://dne8bqt32xcqt"
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = 1
 position = Vector2(19.499996, 0)
-scale = Vector2(0.375, 0.6666666)
+scale = Vector2(0.285, 0.5333333)
 texture = ExtResource("2_a6dbj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["attack_friendly"]]
-position = Vector2(20, 0)
+position = Vector2(19, 0)
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_fnk5e")
 disabled = true

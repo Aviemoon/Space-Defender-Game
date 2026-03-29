@@ -380,6 +380,6 @@ func _on_pickup_area_body_entered(body: Node2D) -> void:
 		pickup_num(value, '#ffff00', 'G')
 		
 	elif body is Pickup and body is not Coin:
-		pickup_num(value, '#00ff00', ' HP')
+		pickup_num(value[0], value[1], ' '+value[2])
 	
 	GlobalSignal.player_stat_change.emit(self)

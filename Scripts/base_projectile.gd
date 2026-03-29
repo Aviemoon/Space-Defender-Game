@@ -22,6 +22,13 @@ func calculate_stats():
 	var parent = get_parent()
 	if parent is Marker2D:
 		parent = parent.get_parent()
+	elif parent == get_tree().root:
+		parent = get_tree().get_first_node_in_group("Player")
+		damage = base_damage
+		speed = base_speed
+		knockback = base_knockback
+		health = base_health
+	
 	damage = base_damage + parent.get("weapon_damage_bonus")
 	speed = base_speed + parent.get('weapon_speed_bonus')
 	knockback = base_knockback + parent.get('weapon_knockback_bonus') 

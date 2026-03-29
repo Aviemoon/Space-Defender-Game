@@ -45,8 +45,10 @@ func _on_hurtbox_hurt(p_friendly: Variant, p_damage: Variant, p_angle: Variant, 
 
 
 func _on_wall_check_body_entered(body: Node2D) -> void:
-	#if is_on_floor():
-	jump() #:3
+	if is_on_floor():
+		jump() #:3
+	await get_tree().create_timer(0.3).timeout
+	if body:jump()
 
 
 func _on_attack_timer_timeout() -> void:

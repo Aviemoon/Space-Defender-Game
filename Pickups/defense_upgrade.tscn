@@ -70,6 +70,7 @@ collision_layer = 256
 collision_mask = 515
 script = ExtResource("1_7ji3m")
 value = 2
+txt_color = "#ffff00"
 txt_extra = "Def"
 metadata/_custom_type_script = "uid://dgrk8qm5mx1t2"
 

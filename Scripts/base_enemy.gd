@@ -60,7 +60,7 @@ func movement(delta):
 			velocity.x = direction.x * speed
 			velocity += knockback 
 			
-			if player.global_position.y < global_position.y  and is_on_floor():
+			if player.global_position.y < global_position.y  and is_on_floor() and abs(player.global_position.x - global_position.x) < 180:
 				jump()
 				#print('i should jump')
 			

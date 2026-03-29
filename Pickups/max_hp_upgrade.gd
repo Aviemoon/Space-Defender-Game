@@ -11,4 +11,4 @@ func collect():
 	if target and target.get("change_player_stats"):
 		if target is PlayerCharacter:
 			target.change_player_stats(value)
-		return value
+		return [value, txt_color, txt_extra]
