@@ -8,7 +8,7 @@ extends Interactable
 @onready var effect: Sprite2D = $Effect
 @onready var interact_area: Area2D = $InteractHandler/InteractArea
 const ROTATION_SPEED = 5
-var locked = true
+@export var locked = true
 var spawn_point 
 
 var levels = []
@@ -17,6 +17,8 @@ signal unlock # this will be emitted when the mission objective is finished
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	if !locked:
+		turn_on()
 	SceneManager.load_scene_finished.connect(_on_load_scene_finished)
 	SceneManager.new_scene_ready.connect(_on_new_scene_ready)
 	pick_levels(2)

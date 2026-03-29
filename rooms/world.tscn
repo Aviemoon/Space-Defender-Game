@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=4 uid="uid://cugfsoo4pjghg"]
+[gd_scene load_steps=43 format=4 uid="uid://cugfsoo4pjghg"]
 
 [ext_resource type="Environment" uid="uid://cf0o50jm3wy3v" path="res://Utility/resources/base_worldenvironment.tres" id="1_6txnh"]
 [ext_resource type="Texture2D" uid="uid://c1l0wkjc4hhd0" path="res://Sprites/tiles/tilesheet01.png" id="2_wllj5"]
@@ -23,13 +23,6 @@
 [ext_resource type="PackedScene" uid="uid://ddfq4nf6ibvhg" path="res://Pickups/damage_syringe.tscn" id="19_en1l5"]
 [ext_resource type="PackedScene" uid="uid://0volkhlhw1ai" path="res://Pickups/health_vial.tscn" id="20_y1ja7"]
 [ext_resource type="PackedScene" uid="uid://cbchrxtryto0a" path="res://Pickups/crit_chance_upgrade.tscn" id="22_y1ja7"]
-[ext_resource type="PackedScene" uid="uid://cue2oosxgxu2" path="res://Pickups/max_hp_upgrade.tscn" id="23_eb7vr"]
-[ext_resource type="PackedScene" uid="uid://75ngs8g5trpg" path="res://Pickups/weapon_hp_upgrade.tscn" id="23_g6l24"]
-[ext_resource type="PackedScene" uid="uid://bswb2t8fj26e8" path="res://Pickups/projectile_speed_upgrade.tscn" id="24_dvi5k"]
-[ext_resource type="PackedScene" uid="uid://c1j481u2ol204" path="res://Pickups/jump_height_upgrade.tscn" id="24_h4gao"]
-[ext_resource type="PackedScene" uid="uid://bps6ll5h3bb2t" path="res://Pickups/movement_speed_upgrade.tscn" id="25_sjri6"]
-[ext_resource type="PackedScene" uid="uid://di31ob7i7rkcj" path="res://Pickups/defense_upgrade.tscn" id="26_hxfuj"]
-[ext_resource type="PackedScene" uid="uid://b3nijim6vdj57" path="res://Pickups/knockback_upgrade.tscn" id="27_kv6m1"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rvmc5"]
 texture = ExtResource("2_wllj5")
@@ -675,7 +668,6 @@ metadata/_custom_type_script = "uid://c2xaalpg2wvfj"
 [sub_resource type="Resource" id="Resource_1anhx"]
 script = ExtResource("19_aibtd")
 drop = ExtResource("20_y1ja7")
-num = 1
 metadata/_custom_type_script = "uid://cxax878ppwtx7"
 
 [sub_resource type="Resource" id="Resource_ovu33"]
@@ -779,9 +771,6 @@ z_index = 2
 tile_map_data = PackedByteArray("AAAFAPz/AAAAAAAAAQAEAPz/AAAAAAAAAQANAPr/AAAAAAAAAQARAPr/AAAAAAAAAQAPAPb/AAAAAAAAAQD5/wIAAAAAAAAAAQD4/wEAAAAAAAAAAQAKAAIAAAAAAAAAAQAQAAIAAAAAAAAAAQAdAAIAAAAAAAAAAQAeAAIAAAAAAAAAAQAuAP//AAAAAAAAAQAvAP//AAAAAAAAAQAnAP//AAAAAAAAAQAaAPr/AAAAAAAAAQAGAPb/AAAAAAAAAQAFAPf/AAAAAAAAAQAPAP//AAAAAAAAAwA9AP//AAAAAAAABQD2//f/AAAAAAAAAwA=")
 tile_set = SubResource("TileSet_mu24a")
 
-[node name="Portal" parent="Tiles" instance=ExtResource("12_6txnh")]
-position = Vector2(1000, -8)
-
 [node name="SpawnTotem" parent="Tiles" instance=ExtResource("15_rvmc5")]
 position = Vector2(120, -160)
 things_to_spawn = Array[ExtResource("16_30ace")]([SubResource("Resource_8hgy7")])
@@ -802,34 +791,29 @@ drops = Array[ExtResource("19_aibtd")]([SubResource("Resource_1anhx"), SubResour
 [node name="CritChanceUpgrade" parent="Tiles" instance=ExtResource("22_y1ja7")]
 position = Vector2(88, -8)
 
-[node name="upgrade" type="Node2D" parent="Tiles"]
-position = Vector2(77, -13)
-
-[node name="WeaponHPUpgrade" parent="Tiles/upgrade" instance=ExtResource("23_g6l24")]
-position = Vector2(-173, -43)
-
-[node name="ProjectileSpeedUpgrade" parent="Tiles/upgrade" instance=ExtResource("24_dvi5k")]
-position = Vector2(-145, -43)
-
-[node name="MovementSpeedUpgrade" parent="Tiles/upgrade" instance=ExtResource("25_sjri6")]
-position = Vector2(-117, -43)
-
-[node name="MaxHPUpgrade" parent="Tiles/upgrade" instance=ExtResource("23_eb7vr")]
-position = Vector2(-88, -43)
-
-[node name="KnockbackUpgrade" parent="Tiles/upgrade" instance=ExtResource("27_kv6m1")]
-position = Vector2(-61, -43)
-
-[node name="JumpHeightUpgrade" parent="Tiles/upgrade" instance=ExtResource("24_h4gao")]
-
-[node name="HealthVial" parent="Tiles/upgrade" instance=ExtResource("20_y1ja7")]
-
-[node name="DefenseUpgrade" parent="Tiles/upgrade" instance=ExtResource("26_hxfuj")]
-
-[node name="DamageSyringe" parent="Tiles/upgrade" instance=ExtResource("19_en1l5")]
-
-[node name="CritChanceUpgrade" parent="Tiles/upgrade" instance=ExtResource("22_y1ja7")]
+[node name="Portal" parent="Tiles" instance=ExtResource("12_6txnh")]
+position = Vector2(1000, -8)
+locked = false
 
 [node name="dungeon_generator" parent="." instance=ExtResource("6_q45av")]
 
 [node name="PlayerSpawn" type="Marker2D" parent="."]
+
+[connection signal="player_spotted" from="Tiles/WorldTileMapLayer/@CharacterBody2D@130662" to="Tiles/WorldTileMapLayer/@CharacterBody2D@130662" method="_on_player_spotted"]
+[connection signal="body_entered" from="Tiles/Interactables/@RigidBody2D@130663" to="Tiles/Interactables/@RigidBody2D@130663" method="_on_body_entered"]
+[connection signal="body_entered" from="Tiles/Interactables/@RigidBody2D@130664" to="Tiles/Interactables/@RigidBody2D@130664" method="_on_body_entered"]
+[connection signal="body_entered" from="Tiles/Interactables/@RigidBody2D@130665" to="Tiles/Interactables/@RigidBody2D@130665" method="_on_body_entered"]
+[connection signal="body_entered" from="Tiles/Interactables/@RigidBody2D@130666" to="Tiles/Interactables/@RigidBody2D@130666" method="_on_body_entered"]
+[connection signal="body_entered" from="Tiles/Interactables/@RigidBody2D@130667" to="Tiles/Interactables/@RigidBody2D@130667" method="_on_body_entered"]
+[connection signal="body_entered" from="Tiles/Interactables/@RigidBody2D@130668" to="Tiles/Interactables/@RigidBody2D@130668" method="_on_body_entered"]
+[connection signal="body_entered" from="Tiles/Interactables/@RigidBody2D@130669" to="Tiles/Interactables/@RigidBody2D@130669" method="_on_body_entered"]
+[connection signal="body_entered" from="Tiles/Interactables/@RigidBody2D@130670" to="Tiles/Interactables/@RigidBody2D@130670" method="_on_body_entered"]
+[connection signal="body_entered" from="Tiles/Interactables/@RigidBody2D@130671" to="Tiles/Interactables/@RigidBody2D@130671" method="_on_body_entered"]
+[connection signal="body_entered" from="Tiles/Interactables/@RigidBody2D@130672" to="Tiles/Interactables/@RigidBody2D@130672" method="_on_body_entered"]
+[connection signal="body_entered" from="Tiles/Interactables/@RigidBody2D@130673" to="Tiles/Interactables/@RigidBody2D@130673" method="_on_body_entered"]
+[connection signal="body_entered" from="Tiles/Interactables/@RigidBody2D@130674" to="Tiles/Interactables/@RigidBody2D@130674" method="_on_body_entered"]
+[connection signal="body_entered" from="Tiles/Interactables/@RigidBody2D@130675" to="Tiles/Interactables/@RigidBody2D@130675" method="_on_body_entered"]
+[connection signal="body_entered" from="Tiles/Interactables/@RigidBody2D@130676" to="Tiles/Interactables/@RigidBody2D@130676" method="_on_body_entered"]
+[connection signal="body_entered" from="Tiles/Interactables/@RigidBody2D@130677" to="Tiles/Interactables/@RigidBody2D@130677" method="_on_body_entered"]
+[connection signal="body_entered" from="Tiles/Interactables/@RigidBody2D@130678" to="Tiles/Interactables/@RigidBody2D@130678" method="_on_body_entered"]
+[connection signal="body_entered" from="Tiles/Interactables/@RigidBody2D@130679" to="Tiles/Interactables/@RigidBody2D@130679" method="_on_body_entered"]

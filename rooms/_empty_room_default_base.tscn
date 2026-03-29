@@ -2,9 +2,9 @@
 
 [ext_resource type="Texture2D" uid="uid://cbtwjiburs5f0" path="res://Sprites/tiles/grass.png" id="1_d77co"]
 [ext_resource type="Environment" uid="uid://cf0o50jm3wy3v" path="res://Utility/resources/base_worldenvironment.tres" id="1_dstjm"]
-[ext_resource type="TileSet" uid="uid://dk6k62ld4npaf" path="res://rooms/world.tres" id="2_i67g1"]
+[ext_resource type="TileSet" uid="uid://dk6k62ld4npaf" path="res://Utility/resources/world.tres" id="2_i67g1"]
 [ext_resource type="Texture2D" uid="uid://c1l0wkjc4hhd0" path="res://Sprites/tiles/tilesheet01.png" id="2_wl4oc"]
-[ext_resource type="TileSet" uid="uid://b2843p2axbng4" path="res://rooms/details.tres" id="3_p3yfy"]
+[ext_resource type="TileSet" uid="uid://b2843p2axbng4" path="res://Utility/resources/details.tres" id="3_p3yfy"]
 [ext_resource type="Texture2D" uid="uid://dxe6f2vrn7gju" path="res://Sprites/tiles/brick_tileset.png" id="4_pg5ft"]
 [ext_resource type="PackedScene" uid="uid://dv3163hyhfsmm" path="res://Special_Tiles/spikes.tscn" id="7_3g5ae"]
 [ext_resource type="PackedScene" uid="uid://dyfpofnpvumbn" path="res://Special_Tiles/portal.tscn" id="9_p6gu1"]
