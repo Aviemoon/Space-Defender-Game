@@ -17,7 +17,30 @@ func interact():
 	$Sprite2D.frame += 1
 	match loot_type:
 		'random':
-			pass
+			var rand = drops.pick_random()
+			var position_offset = drop_spawn_point.global_position
+			for j in range(1, rand.num + 1):
+				var new_drop = rand.drop.instantiate()
+				new_drop.global_position = position_offset
+
+				new_drop.gravity_scale = 0.25
+				var velocity_modifier = (j) * 3
+				if j < rand.num / 2:
+					velocity_modifier *= -1
+				elif j > (rand.num / 2):
+					velocity_modifier /= 2
+				else:
+					velocity_modifier = 0
+
+				if new_drop.get('value'):
+					new_drop.value += rand.value_bonus
+				new_drop.linear_velocity = Vector2(velocity_modifier, -150)
+				get_parent().call_deferred('add_child', new_drop)
+			opened = true
+			$Sprite2D.modulate = Color(0.4, 0.4, 0.3)
+	
+	
+			
 		
 		'all':
 			for i in drops:
@@ -25,7 +48,7 @@ func interact():
 				for j in range(1, i.num + 1):
 					var new_drop = i.drop.instantiate()
 					new_drop.global_position = position_offset
-					#if new_drop is Coin:
+
 					new_drop.gravity_scale = 0.25
 					var velocity_modifier = (j) * 3
 					if j < i.num / 2:
@@ -34,7 +57,7 @@ func interact():
 						velocity_modifier /= 2
 					else:
 						velocity_modifier = 0
-					print(velocity_modifier)
+
 					if new_drop.get('value'):
 						new_drop.value += i.value_bonus
 					new_drop.linear_velocity = Vector2(velocity_modifier, -150)

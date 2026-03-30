@@ -10,7 +10,6 @@
 [sub_resource type="Resource" id="Resource_1anhx"]
 script = ExtResource("3_2ccwf")
 drop = ExtResource("3_25v8b")
-num = 1
 metadata/_custom_type_script = "uid://cxax878ppwtx7"
 
 [sub_resource type="Resource" id="Resource_ovu33"]
@@ -58,6 +57,7 @@ offset_bottom = 19.5
 text = ""
 
 [node name="Control" type="Control" parent="."]
+z_index = 3
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5

@@ -42,7 +42,7 @@ func objective_init():
 func _process(delta: float) -> void:
 	if current_objective == _SURVIVE and ! get_tree().paused:
 		survive_time_passed += delta
-		choose_title()
+		check_objective()
 
 func purge_objective_values():
 	objective_exterminate_killed = 0
