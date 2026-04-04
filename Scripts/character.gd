@@ -1,6 +1,5 @@
 class_name Character extends CharacterBody2D
 
-
 @export var friendly : bool = false
 @export var skills : Array[PackedScene]
 @export var items : Array[PackedScene]
@@ -8,7 +7,6 @@ class_name Character extends CharacterBody2D
 @export_group('Stats', '')
 
 @export var max_hp : float = 100
-
 
 @export var defense = 0
 
@@ -21,7 +19,6 @@ class_name Character extends CharacterBody2D
 @export var weapon_speed_bonus: float = 0
 @export var weapon_knockback_bonus: float = 0
 @export var weapon_hp_bonus: float = 0
-
 
 @onready var hp : float = max_hp
 var hp_lbl = Label.new()

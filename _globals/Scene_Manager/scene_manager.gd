@@ -15,7 +15,7 @@ func _ready() -> void:
 	load_scene_finished.emit()
 	
 
-func transition_scene(new_scene:String, target_area:String, player_offset:Vector2, dir:String) -> void:
+func transition_scene(new_scene:String, target_area:String = '', player_offset:Vector2 = Vector2.ZERO, dir:String = '') -> void:
 	#if !fade:
 		#fade = %Fade
 	#fade.visible = false

@@ -103,7 +103,14 @@ func load_directory(source: String):
 	for file_name in DirAccess.get_files_at(source):
 		if (file_name.get_extension() == "import"):
 			file_name = file_name.replace('.import', '')
-			
+		if (file_name.get_extension() == "remap"):
+			file_name = file_name.replace('.remap', '')
+		
+		#if '.tres.remap' in file_name or '.tscn.remap' in file_name: # <---- NEW
+			#print('whoop whopp!!!')
+			#print(file_name)
+			#file_name = file_name.trim_suffix('.remap') # <---- NEW
+			#print(file_name)
 		var scene_uid = ResourceUID.path_to_uid(ROOM_DIR + file_name)
 		if file_name[0] != '_':
 			target.append(scene_uid)
@@ -115,6 +122,8 @@ func get_random_level_and_name():
 	for file_name in DirAccess.get_files_at(ROOM_DIR):
 		if (file_name.get_extension() == "import"):
 			file_name = file_name.replace('.import', '')
+		if (file_name.get_extension() == "remap"):
+			file_name = file_name.replace('.remap', '')
 		var scene_uid = ResourceUID.path_to_uid(ROOM_DIR + file_name)
 		if file_name[0] != '_':
 			list.append([scene_uid, file_name])

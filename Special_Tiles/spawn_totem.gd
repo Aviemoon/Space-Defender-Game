@@ -22,13 +22,12 @@ func spawn_stuff():
 		var inst: BaseEnemy = thing.enemy.instantiate()
 		if thing.stats:
 			inst.max_hp += thing.stats.hp
-			inst.weapon_damage_bonusddd += thing.stats.dmg
+			inst.weapon_damage_bonus += thing.stats.dmg
 			inst.speed += thing.stats.speed
 			inst.jump_velocity += thing.stats.jumpspeed
 			
 			inst.max_hp *= diff
 			inst.defense += diff
-			#inst.weapon_bonus_damage += (diff) / 2
 			inst.speed += diff
 			inst.knockback_recovery += diff/4
 		inst.speed += randi_range(-5, 12)

@@ -68,7 +68,8 @@ func movement(delta):
 	direction_flip()
 
 func jump_check():
-	
+	if !player:
+		return
 
 	if player.global_position.y +1 > global_position.y :
 		#print('player: %d' % player.global_position.y, '\n', 'me %d' % global_position.y)

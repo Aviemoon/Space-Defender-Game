@@ -10,17 +10,10 @@ const FILE_PATH = 'user://save.sav'
 
 
 
-
-
-func _ready() -> void:
-	pass
-
-
 func create_new_save():
 	var new_game_scene : String = ''
 	save_data = {
 		'current_objective' : Global.current_objective,
-		
 		'scene_path' : new_game_scene,
 		# player stats
 		'location_x' : 0,
@@ -40,14 +33,6 @@ func create_new_save():
 	}
 	var save_file = FileAccess.open(FILE_PATH, FileAccess.WRITE)
 	save_file.store_line(JSON.stringify(save_data))
-
-#func _unhandled_key_input(event: InputEvent) -> void:
-	#if event is InputEventKey and event.pressed:
-		#if event.keycode == KEY_F5:
-			#save_game()
-		#elif event.keycode == KEY_F7:
-			#load_game()
-	#pass
 
 func save_game():
 	var player : PlayerCharacter = get_tree().get_first_node_in_group('Player') # deal with this later for multiplayer stuff

@@ -48,11 +48,8 @@ func destroy_action_label():
 		_action_lbl.call_deferred('queue_free')
 
 func player_enter(body: Node2D) -> void:
-	
 	if body is PlayerCharacter: 
 		player = body
-		#print(player)
-		#GlobalSignal.player_enter_interact_area.emit(self)
 	else:
 		player = null
 

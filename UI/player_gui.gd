@@ -9,8 +9,8 @@ extends Control
 
 @onready var hurt_overlay: ColorRect = $Overlays/HurtOverlay
 @onready var load_color_rect: ColorRect = $Overlays/LoadColorRect
-@onready var death_overlay: ColorRect = $Death/DeathOverlay
-@onready var death: Control = $Death
+#@onready var death_overlay: ColorRect = $Death/DeathOverlay
+@onready var death: Control = $MainUI/Death
 
 @onready var options_menu: Control = $PauseUI/OptionsMenu
 @onready var level_select: Control = $LevelSelect
@@ -28,14 +28,14 @@ var minutes = 0
 
 var is_in_options:bool = false
 
-
+var player_dead: bool = false
 
 func _process(delta):
 	
 	if Player:
 		damage_lbl.text = "damage = %s" % Player.get("weapon_damage_bonus")
 	# -- pausing --
-	if Input.is_action_just_pressed("pause"):
+	if Input.is_action_just_pressed("pause") and !player_dead:
 		if get_tree().paused and not is_in_options:
 			get_tree().paused = false
 			PauseUI.visible = false
@@ -96,19 +96,20 @@ func autosave_animation():
 	autosave_label.visible = true
 	
 func player_die(player):
+	player_dead = true
 	await get_tree().physics_frame
 	get_tree().paused = true
-	$Death/Label.scale *= 0
-	$Death/deathRestartButton.scale *= 0
+	#$Death/Label.scale *= 0
+	#$Death/deathRestartButton.scale *= 0
 	death.visible = true
-	var tween = get_tree().create_tween()
-	tween.tween_property(death_overlay, 'modulate:a', 0.3, 1)
-	tween.set_parallel(true)
-	tween.tween_property($Death/Label, 'scale', Vector2(1,1), 1)
-	tween.tween_property($Death/deathRestartButton, 'scale', Vector2(1,1), 1)
-	
-	await tween.finished
-	tween.kill()
+	#var tween = get_tree().create_tween()
+	#tween.tween_property(death_overlay, 'modulate:a', 0.3, 1)
+	#tween.set_parallel(true)
+	#tween.tween_property($Death/Label, 'scale', Vector2(1,1), 1)
+	#tween.tween_property($Death/deathRestartButton, 'scale', Vector2(1,1), 1)
+	#
+	#await tween.finished
+	#tween.kill()
 	pause_game()
 	GlobalSignal.player_finished_dying.emit()
 
@@ -216,7 +217,13 @@ func _on_load_pressed() -> void:
 
 
 func _on_death_restart_button_pressed() -> void:
-	get_tree().reload_current_scene()
+	#get_tree().reload_current_scene()
+	if Player:
+		Player.call_deferred('queue_free')
+	SceneManager.transition_scene('uid://cugfsoo4pjghg')
+	death.visible = false
+	player_dead = false
+	
 
 
 func _on_options_menu_left_options() -> void:

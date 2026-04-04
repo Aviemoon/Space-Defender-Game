@@ -27,8 +27,8 @@ func _ready() -> void:
 func pick_levels(num = 2):
 	if not target_levels:
 		for i in range(num):
+			#print(Global.levels)
 			levels.append(Global.levels.pick_random())
-		
 		GlobalSignal.portal_levels_chosen.emit(levels)
 	else:
 		for i in range(num):
@@ -71,8 +71,6 @@ func _input(event: InputEvent) -> void:
 		$InteractHandler.interact.emit()
 
 func _on_interact_area_body_entered(body: Node2D) -> void:
-
-	
 	player_enter(body)
 
 

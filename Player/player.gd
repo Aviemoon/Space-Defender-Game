@@ -131,13 +131,7 @@ func _calculate_fall_damage(fall_distance):
 	#hp -= fall_damage
 
 func movement(delta):
-	#if Input.is_action_pressed('down'):
-		#set_collision_mask_value(2,  false)
-	#else:
-		#set_collision_mask_value(2, true)
-	
 	direction = Input.get_axis("left", "right")
-	
 	if not is_on_floor():
 		if velocity.y > 0 and !is_falling:
 			fall_height = global_position.y
@@ -184,19 +178,9 @@ func movement(delta):
 		
 	
 	if direction and not lock_horizontal_movement:
-		#if dashing:
-			#velocity.x = move_toward(0, direction * speed, speed * acceleration * dash_mult)
-			#dash_timer -= delta
-			#if dash_timer < 0:
-				#dash_timer = dash_length
-				#dashing = false
-			#print(dash_timer)
-		#else:
-		
 		velocity.x = move_toward(0, direction * speed, speed * acceleration)
 	else:
 		velocity.x = move_toward(velocity.x, 0, speed * deceleration)
-
 	
 	if get_global_mouse_position().x < position.x:
 		player_sprite.flip_h = true
@@ -250,8 +234,7 @@ func attacking():
 			var skill_inst: BaseProjectile = new_skill.instantiate()
 			
 			var crit_proc: float = randi_range(0, 100)
-			#crit_proc /= 100
-			#print(crit_proc)
+
 			if crit_proc < crit_chance:
 				skill_inst.base_damage *= 2
 			
@@ -283,8 +266,7 @@ func attacking():
 			GlobalSignal.player_ability_2.emit()
 			
 			$skill2Timer.start()
-	
-	
+
 #func _unhandled_input(event):
 	#pass
 

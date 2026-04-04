@@ -110,59 +110,6 @@ grow_vertical = 2
 layout_mode = 2
 text = "123"
 
-[node name="Death" type="Control" parent="."]
-process_mode = 1
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="DeathOverlay" type="ColorRect" parent="Death"]
-visible = false
-modulate = Color(1, 1, 1, 0)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 1)
-
-[node name="Label" type="Label" parent="Death"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -65.0
-offset_top = -11.5
-offset_right = 65.0
-offset_bottom = 11.5
-grow_horizontal = 2
-grow_vertical = 2
-text = "YOU HAVE DIED!!"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="deathRestartButton" type="Button" parent="Death"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -4.0
-offset_top = 25.0
-offset_right = 4.0
-offset_bottom = 33.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "restart"
-
 [node name="MainUI" type="Control" parent="."]
 process_mode = 1
 layout_mode = 1
@@ -222,6 +169,53 @@ grow_horizontal = 0
 grow_vertical = 0
 text = "Saving..."
 label_settings = SubResource("LabelSettings_ocnrf")
+
+[node name="Death" type="Control" parent="MainUI"]
+process_mode = 1
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="MainUI/Death"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -65.0
+offset_top = -11.5
+offset_right = 65.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "YOU HAVE DIED!!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="deathRestartButton" type="Button" parent="MainUI/Death"]
+z_index = 50
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -4.0
+offset_top = 25.0
+offset_right = 4.0
+offset_bottom = 33.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "restart"
 
 [node name="PauseUI" type="Control" parent="."]
 visible = false
@@ -324,7 +318,7 @@ layout_mode = 1
 
 [connection signal="tree_entered" from="." to="." method="_on_tree_entered"]
 [connection signal="tree_exited" from="." to="." method="_on_tree_exited"]
-[connection signal="pressed" from="Death/deathRestartButton" to="." method="_on_death_restart_button_pressed"]
+[connection signal="pressed" from="MainUI/Death/deathRestartButton" to="." method="_on_death_restart_button_pressed"]
 [connection signal="pressed" from="PauseUI/MenuUi/VBoxContainer/Unpause" to="." method="_on_unpause_pressed"]
 [connection signal="pressed" from="PauseUI/MenuUi/VBoxContainer/Save" to="." method="_on_save_pressed"]
 [connection signal="pressed" from="PauseUI/MenuUi/VBoxContainer/Load" to="." method="_on_load_pressed"]

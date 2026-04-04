@@ -14,9 +14,7 @@ func _ready() -> void:
 		var parent = get_parent()
 		interact_label.hide()
 		interact_label.text = parent.action_name
-		#arrow.position.y += arrow_y_offset
 		
-
 
 func _on_interact_area_body_entered(body: Node2D) -> void:
 	if not _already_interacted and can_show:
