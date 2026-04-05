@@ -1,15 +1,27 @@
 extends BaseProjectile
 
 var direction = Vector2.RIGHT
-
+var playertype = 0
+var target: Node2D
 
 func _ready() -> void:
 	calculate_stats()
 	
 
 func attack():
-	rotate(get_angle_to(get_global_mouse_position()))
-	angle = Vector2.RIGHT.rotated(rotation)
+	print(playertype)
+	match playertype:
+		0:
+			rotate(get_angle_to(get_global_mouse_position()))
+			angle = Vector2.RIGHT.rotated(rotation)
+		1:
+			var targetnode = target.global_position
+			print(target)
+			print(target.global_position)
+			print(rotation)
+			rotate(get_angle_to(Vector2.UP))
+			rotation = get_angle_to(targetnode)
+			angle = rotation
 	GlobalSignal.player_ability_2.disconnect(attack)
 
 func _physics_process(delta: float) -> void:

@@ -279,6 +279,7 @@ size_flags_vertical = 3
 text = "Options"
 
 [node name="Restart" type="Button" parent="PauseUI/MenuUi/VBoxContainer"]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 text = "Restart"

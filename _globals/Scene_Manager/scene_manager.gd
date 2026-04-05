@@ -15,7 +15,7 @@ func _ready() -> void:
 	load_scene_finished.emit()
 	
 
-func transition_scene(new_scene:String, target_area:String = '', player_offset:Vector2 = Vector2.ZERO, dir:String = '') -> void:
+func transition_scene(new_scene:String, target_area:String = '', player_offset:Vector2 = Vector2.ZERO, dir:String = '', quitting = false) -> void:
 	#if !fade:
 		#fade = %Fade
 	#fade.visible = false
@@ -42,7 +42,7 @@ func transition_scene(new_scene:String, target_area:String = '', player_offset:V
 	
 	load_scene_finished.emit()
 	
-	if Global.room_count > 0:
+	if Global.room_count > 0 and ! quitting:
 		SavingManager.save_game()
 		
 	Global.objective_init()

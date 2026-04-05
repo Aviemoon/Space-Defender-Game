@@ -36,7 +36,7 @@ func create_new_save():
 
 func save_game():
 	var player : PlayerCharacter = get_tree().get_first_node_in_group('Player') # deal with this later for multiplayer stuff
-	print(player)
+	#print(player)
 	save_data = {
 		'player' : player,
 		'scene_path' : SceneManager.current_scene_uid,

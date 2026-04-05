@@ -1,0 +1,177 @@
+[gd_scene load_steps=8 format=3 uid="uid://ce0mhddokgdlv"]
+
+[ext_resource type="Theme" uid="uid://7qs58mtig7i" path="res://UI/Themes/BlackNWhite.tres" id="1_rrete"]
+[ext_resource type="Script" uid="uid://b74lmng5ir65" path="res://UI/multiplayer_ui.gd" id="2_hqbrw"]
+[ext_resource type="LabelSettings" uid="uid://chmgdva6j0erw" path="res://Utility/resources/lbl_settings.tres" id="3_dgakj"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_2x4g0"]
+font_size = 64
+
+[sub_resource type="LabelSettings" id="LabelSettings_dgakj"]
+font_size = 52
+font_color = Color(0.40725437, 0.33476165, 1.1638972, 1)
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_fehr3"]
+font_size = 52
+font_color = Color(0.7833103, 0, 0, 1)
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_hqbrw"]
+font_size = 52
+outline_size = 16
+outline_color = Color(0, 0, 0, 1)
+
+[node name="MultiplayerUI" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_rrete")
+script = ExtResource("2_hqbrw")
+
+[node name="TimerLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 18.0
+grow_horizontal = 2
+text = "time go here :3"
+label_settings = SubResource("LabelSettings_2x4g0")
+
+[node name="player1vbox" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 146.0
+offset_bottom = 105.0
+
+[node name="p1titleLabel" type="Label" parent="player1vbox"]
+layout_mode = 2
+text = "Player 1"
+label_settings = SubResource("LabelSettings_dgakj")
+
+[node name="p1hpLabel" type="Label" parent="player1vbox"]
+layout_mode = 2
+text = "Health"
+label_settings = ExtResource("3_dgakj")
+
+[node name="p1goldLabel" type="Label" parent="player1vbox"]
+layout_mode = 2
+text = "Gold"
+label_settings = ExtResource("3_dgakj")
+
+[node name="player2vbox" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -231.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = 143.0
+grow_horizontal = 0
+
+[node name="p2titleLabel" type="Label" parent="player2vbox"]
+layout_mode = 2
+text = "Player 2"
+label_settings = SubResource("LabelSettings_fehr3")
+horizontal_alignment = 2
+
+[node name="p2hpLabel" type="Label" parent="player2vbox"]
+layout_mode = 2
+text = "Health"
+label_settings = ExtResource("3_dgakj")
+horizontal_alignment = 2
+
+[node name="p2goldLabel" type="Label" parent="player2vbox"]
+layout_mode = 2
+text = "Gold"
+label_settings = ExtResource("3_dgakj")
+horizontal_alignment = 2
+
+[node name="PauseUI" type="Control" parent="."]
+process_mode = 3
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="bg_overlay" type="ColorRect" parent="PauseUI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.20392157)
+
+[node name="MenuUi" type="Control" parent="PauseUI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseUI/MenuUi"]
+custom_minimum_size = Vector2(0, 300)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -160.0
+offset_right = 150.0
+offset_bottom = 160.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Unpause" type="Button" parent="PauseUI/MenuUi/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Unpause"
+
+[node name="QuitMenu" type="Button" parent="PauseUI/MenuUi/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Quit to menu"
+
+[node name="QuitDesktop" type="Button" parent="PauseUI/MenuUi/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Quit to desktop"
+
+[node name="Label" type="Label" parent="PauseUI/MenuUi"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -206.5
+offset_top = 70.0
+offset_right = 206.5
+offset_bottom = 117.0
+grow_horizontal = 2
+text = "Game is paused"
+label_settings = SubResource("LabelSettings_hqbrw")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="tree_entered" from="." to="." method="_on_tree_entered"]
+[connection signal="tree_exited" from="." to="." method="_on_tree_exited"]
+[connection signal="pressed" from="PauseUI/MenuUi/VBoxContainer/Unpause" to="." method="_on_unpause_pressed"]
+[connection signal="pressed" from="PauseUI/MenuUi/VBoxContainer/QuitMenu" to="." method="_on_quit_menu_pressed"]
+[connection signal="pressed" from="PauseUI/MenuUi/VBoxContainer/QuitDesktop" to="." method="_on_quit_desktop_pressed"]

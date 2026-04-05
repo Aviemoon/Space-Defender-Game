@@ -1,5 +1,9 @@
 class_name PlayerCharacter extends Character
 
+@export var is_multiplayer: bool = false
+@export_enum('player1', 'player2') var player_type = 0
+var mlp = false
+
 @export var player_sprite:AnimatedSprite2D
 
 @export_group('Speed', '')
@@ -69,10 +73,54 @@ var attack_slow_cooldown : bool = false
 var _number_of_gold_nums : int = 0
 #var _position_of_last_gold_num : Vector2 = Vector2.ZERO
 
+## Init with invalid device id
+
+@export var mov_left = 'left'
+@export var mov_right = 'right'
+@export var mov_up = 'up'
+@export var mov_down = 'down'
+@export var jmp = 'jump'
+@export var attack1 = 'ability_1'
+@export var attack2 = 'ability_2'
+
+#var deviceId = -1
+
+#func _input(event):
+	#if !mlp:
+		#return
+	#
+	### do nothing if device id does not match the assigned id
+	#if event.device != deviceId:
+		#return
+#
+	### do nothing if no device id assigned
+	#if deviceId == -1:
+		#return
+#
+	### Process events!
+	##if (Input.is_action_just_pressed("melee")):
+	##at
+#
+
 func _ready():
+	
+		
+	match player_type:
+		0:
+			pass
+		1:
+			const PREFIX = 'p2_'
+			mov_left = PREFIX + mov_left
+			mov_right = PREFIX + mov_right
+			mov_up = PREFIX + mov_up
+			mov_down = PREFIX + mov_down
+			jmp = PREFIX + jmp
+			attack1 = PREFIX + attack1
+			attack2 = PREFIX + attack2
 	z_index = 8
-	if get_tree().get_first_node_in_group('Player') != self:
-		self.queue_free()
+	if !is_multiplayer:
+		if get_tree().get_first_node_in_group('Player') != self:
+			self.queue_free()
 	self.call_deferred('reparent', get_tree().root)
 	GlobalSignal.player_stat_change.emit(self)
 	update_item()
@@ -91,7 +139,9 @@ func jump(power = 1):
 
 func die():
 	GlobalSignal.player_die.emit(self)
-	
+	if is_multiplayer:
+		queue_free()
+	print('dead')
 	
 	#await GlobalSignal.player_finished_dying
 	#super.die()
@@ -109,6 +159,8 @@ func ground_slam():
 		fall_speed_multiplier = 10
 		
 func _handle_ground_slam():
+	if ! len(skills) > 2:
+		return
 	GlobalSignal.player_ground_slam.emit(self)
 	var new_slam = skills[2].instantiate()
 	new_slam.position.y += 10
@@ -131,7 +183,11 @@ func _calculate_fall_damage(fall_distance):
 	#hp -= fall_damage
 
 func movement(delta):
-	direction = Input.get_axis("left", "right")
+	#print('yaa')
+	#print(player_type)
+	
+	direction = Input.get_axis(mov_left, mov_right)
+
 	if not is_on_floor():
 		if velocity.y > 0 and !is_falling:
 			fall_height = global_position.y
@@ -157,23 +213,23 @@ func movement(delta):
 		is_falling = false
 		can_coyote = true
 	
-	if Input.is_action_just_pressed('down') and is_on_floor():
+	if Input.is_action_just_pressed(mov_down) and is_on_floor():
 		set_collision_mask_value(2, false) #IDKKKKK
 		
 		#print('awawa')
 	else:
 		set_collision_mask_value(2, true)
 	
-	if Input.is_action_just_pressed("jump") and (is_on_floor() or coyoteTimer.is_stopped() != true):
+	if Input.is_action_just_pressed(jmp) and (is_on_floor() or coyoteTimer.is_stopped() != true):
 		jump()
 		can_coyote = false
 	
-	if Input.is_action_pressed('down') and Input.is_action_just_pressed('jump') and not lock_horizontal_movement and not is_on_floor():
+	if Input.is_action_pressed(mov_down) and Input.is_action_just_pressed(jmp) and not lock_horizontal_movement and not is_on_floor():
 		just_ground_slammed = false
 		
 		ground_slam()
 		
-	if Input.is_action_just_released("jump") and velocity.y < 0:
+	if Input.is_action_just_released(jmp) and velocity.y < 0:
 		velocity.y *= jump_deceleration * fall_speed_multiplier
 		
 	
@@ -181,13 +237,21 @@ func movement(delta):
 		velocity.x = move_toward(0, direction * speed, speed * acceleration)
 	else:
 		velocity.x = move_toward(velocity.x, 0, speed * deceleration)
-	
-	if get_global_mouse_position().x < position.x:
-		player_sprite.flip_h = true
-		facing_right = false
-	else:
-		player_sprite.flip_h = false
-		facing_right = true
+	match player_type:
+		0:
+			if get_global_mouse_position().x < position.x:
+				player_sprite.flip_h = true
+				facing_right = false
+			else:
+				player_sprite.flip_h = false
+				facing_right = true
+		1:
+			if Input.is_action_just_pressed('p2_look_left'):
+				player_sprite.flip_h = true
+				facing_right = false
+			elif Input.is_action_just_pressed('p2_look_right'):
+				player_sprite.flip_h = false
+				facing_right = true
 
 func attack_move_speed(power:float = 1.0, duration:float = 1.0):
 	attack_slow_cooldown = true
@@ -205,6 +269,11 @@ func create_dmg_num(num:int, color_override:String = "#ffffff", text_override:St
 	super.create_dmg_num(num, col, txt)
 
 func _physics_process(delta):
+	var look_dir = Input.get_vector(mov_left, mov_right, mov_up, mov_down)
+
+	if look_dir.length() > 0.1:
+		var angle = look_dir.angle()
+		$RotateQuest.rotation = angle
 	
 	movement(delta)
 	if Input.is_action_just_pressed("dash") and can_dash:
@@ -223,7 +292,7 @@ func heal(num):
 func attacking():
 	var used_skill:int
 	
-	if Input.is_action_pressed("ability_1"):
+	if Input.is_action_pressed(attack1):
 		#print(global_position)
 		used_skill = 1
 		if $skill1Timer.is_stopped():
@@ -232,6 +301,9 @@ func attacking():
 			is_attacking = true
 			var new_skill = skills[0]
 			var skill_inst: BaseProjectile = new_skill.instantiate()
+			
+			if skill_inst.top_level:
+				skill_inst.global_position = global_position
 			
 			var crit_proc: float = randi_range(0, 100)
 
@@ -248,7 +320,7 @@ func attacking():
 			
 			$skill1Timer.start()
 	
-	if Input.is_action_pressed("ability_2"):
+	if Input.is_action_pressed(attack2) and len(skills) > 1:
 		used_skill = 2
 		if $skill2Timer.is_stopped():
 			is_attacking = true
@@ -257,12 +329,17 @@ func attacking():
 			var new_skill = skills[1]
 			var skill_inst = new_skill.instantiate()
 			skill_inst.global_position = global_position
-			#if not facing_right:
-				#skill_inst.scale.x = -1
-			#else:
-				#skill_inst.scale.x = 1
+			
 			calculate_gun_offset_position()
 			$GunOffset.add_child(skill_inst)
+			
+			match player_type:
+				0:
+					pass
+				1:
+					skill_inst.playertype = 1
+					skill_inst.target = $RotateQuest
+			
 			GlobalSignal.player_ability_2.emit()
 			
 			$skill2Timer.start()
@@ -295,6 +372,7 @@ func _on_dash_cooldown_timeout():
 func _on_hurtbox_hurt(p_friendly: Variant, p_damage: Variant, p_angle: Variant, p_knockback: Variant, p_attacker: Variant) -> void:
 	if godmode: 
 		return
+	print('hurting')
 	hurt(p_friendly, p_damage, p_angle, p_knockback)
 	GlobalSignal.player_hurt.emit()
 	GlobalSignal.player_stat_change.emit(self)

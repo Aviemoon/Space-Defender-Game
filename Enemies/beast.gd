@@ -5,7 +5,9 @@ var facing_left = true
 @onready var attack_timer: Timer = $attackTimer
 
 func _ready():
-	player = get_tree().get_nodes_in_group('Player').pick_random()
+	var every_player = get_tree().get_nodes_in_group('Player')
+	if every_player:
+		player = every_player.pick_random()
 
 func _physics_process(delta: float) -> void:
 	movement(delta)
@@ -55,14 +57,14 @@ func _on_attack_timer_timeout() -> void:
 	attack()
 
 
-func _on_target_attack_zone_body_entered(body: Node2D) -> void:
+func _on_target_attack_zone_body_entered(_body: Node2D) -> void:
 	if attack_timer.is_stopped():
 		if randi_range(1, 5) == 5:
 			attack()
 		attack_timer.start()
 
 
-func _on_target_attack_zone_body_exited(body: Node2D) -> void:
+func _on_target_attack_zone_body_exited(_body: Node2D) -> void:
 	attack_timer.stop()
 
 

@@ -7,6 +7,8 @@ extends Interactable
 @export var cost: int = 0
 @export_enum( 'random', 'all') var loot_type = 'all'
 
+@export var infinite = false
+
 func _ready() -> void:
 	super._ready()
 	cost_label.text = str(cost) + 'G'
@@ -14,7 +16,7 @@ func _ready() -> void:
 func interact():
 	
 	
-	$Sprite2D.frame += 1
+	
 	match loot_type:
 		'random':
 			var rand = drops.pick_random()
@@ -36,8 +38,10 @@ func interact():
 					new_drop.value += rand.value_bonus
 				new_drop.linear_velocity = Vector2(velocity_modifier, -150)
 				get_parent().call_deferred('add_child', new_drop)
-			opened = true
-			$Sprite2D.modulate = Color(0.4, 0.4, 0.3)
+			if !infinite:
+				opened = true
+				$Sprite2D.modulate = Color(0.4, 0.4, 0.3)
+				$Sprite2D.frame += 1
 	
 	
 			
@@ -62,9 +66,13 @@ func interact():
 						new_drop.value += i.value_bonus
 					new_drop.linear_velocity = Vector2(velocity_modifier, -150)
 					get_parent().call_deferred('add_child', new_drop)
-			opened = true
-			$Sprite2D.modulate = Color(0.4, 0.4, 0.3)
+			if !infinite:
+				opened = true
+				$Sprite2D.modulate = Color(0.4, 0.4, 0.3)
 	
+				$Sprite2D.frame += 1
+			else:
+				cost += cost / 25
 	player.gold -= cost
 
 func _input(event: InputEvent) -> void:

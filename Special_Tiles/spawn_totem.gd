@@ -1,7 +1,9 @@
 extends Node2D
 
 @export var spawn_time: float = 1.5
+@export var ignore_stats:bool = false
 @export var things_to_spawn: Array[SpawnInfo]
+
 
 @onready var effect: Sprite2D = $Effect
 @onready var spawn_timer: Timer = $spawnTimer
@@ -19,8 +21,9 @@ func spawn_stuff():
 	
 	var thing = things_to_spawn.pick_random()
 	for i in range(thing.num):
-		var inst: BaseEnemy = thing.enemy.instantiate()
-		if thing.stats:
+		
+		var inst = thing.enemy.instantiate()
+		if thing.stats and !ignore_stats:
 			inst.max_hp += thing.stats.hp
 			inst.weapon_damage_bonus += thing.stats.dmg
 			inst.speed += thing.stats.speed
@@ -30,12 +33,15 @@ func spawn_stuff():
 			inst.defense += diff
 			inst.speed += diff
 			inst.knockback_recovery += diff/4
-		inst.speed += randi_range(-5, 12)
+			inst.speed += randi_range(-5, 12)
 		inst.global_position = Vector2(global_position.x, global_position.y - 10)
+		
 		get_tree().root.add_child(inst)
-		Global.enemies_alive += 1
+		if !ignore_stats:
+			Global.enemies_alive += 1
+		await get_tree().create_timer(0.1).timeout
 
 
 func _on_spawn_timer_timeout() -> void:
-	spawn_timer.wait_time = spawn_time + randi_range(-1, 1)
+	spawn_timer.wait_time = spawn_time + randi_range(-0.9, 1)
 	spawn_stuff()

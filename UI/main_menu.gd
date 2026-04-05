@@ -35,3 +35,7 @@ func _on_load_button_pressed() -> void:
 	#await get_tree().physics_frame
 	#await get_tree().physics_frame
 	SavingManager.load_game()
+
+
+func _on_mp_button_pressed() -> void:
+	get_tree().change_scene_to_file('res://rooms/_multiplayer_level.tscn')

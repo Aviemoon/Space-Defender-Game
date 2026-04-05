@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bn3p2gijv0tv2"]
+[gd_scene load_steps=20 format=3 uid="uid://bn3p2gijv0tv2"]
 
 [ext_resource type="Script" uid="uid://cqeyq2oh5u3v6" path="res://Player/player.gd" id="1_l8h54"]
 [ext_resource type="Texture2D" uid="uid://4rptcch4o5hb" path="res://Sprites/player temp.png" id="2_4ntmi"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://cajavfyvvgq80" path="res://icon.svg" id="6_fhl08"]
 [ext_resource type="AudioStream" uid="uid://3t2rrwdkpp2d" path="res://sfx/jump.wav" id="9_00tjw"]
 [ext_resource type="AudioStream" uid="uid://c1ou3iqeejn2g" path="res://sfx/power_up.wav" id="10_x3vf3"]
+[ext_resource type="Texture2D" uid="uid://bg0p2d2my6gl5" path="res://s-l400.jpg" id="11_apopc"]
 
 [sub_resource type="Curve" id="Curve_gwnis"]
 _limits = [0.0, 25.0, 0.0, 350.0]
@@ -67,7 +68,7 @@ fall_damage_curve = SubResource("Curve_gwnis")
 friendly = true
 skills = Array[PackedScene]([ExtResource("2_gwnis"), ExtResource("3_k53q1"), ExtResource("4_od3ui")])
 items = Array[PackedScene]([ExtResource("4_vtle1")])
-speed = 1350.0
+speed = 1300.0
 jump_velocity = 320.0
 fall_immunity = true
 knockback_immunity = true
@@ -159,6 +160,16 @@ pitch_scale = 0.73
 [node name="SfxPowerUp" type="AudioStreamPlayer2D" parent="Sfx"]
 stream = ExtResource("10_x3vf3")
 volume_db = -12.187
+
+[node name="RotateQuest" type="Node2D" parent="."]
+visible = false
+
+[node name="Looksee" type="Marker2D" parent="RotateQuest"]
+
+[node name="Sprite2D" type="Sprite2D" parent="RotateQuest"]
+position = Vector2(21, 0)
+scale = Vector2(0.04000014, 0.04000014)
+texture = ExtResource("11_apopc")
 
 [connection signal="body_exited" from="Hurtbox" to="Hurtbox" method="_on_body_exited"]
 [connection signal="hurt" from="Hurtbox" to="." method="_on_hurtbox_hurt"]

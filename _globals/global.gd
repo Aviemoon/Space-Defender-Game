@@ -32,6 +32,8 @@ var completed = false
 signal objective_title(name)
 signal objective_complete
 
+var sfx_num = 0
+
 func objective_init():
 	room_count += 1
 	purge_objective_values()
@@ -95,7 +97,8 @@ func _ready() -> void:
 	levels = load_directory(ROOM_DIR)
 	items = load_directory(ITEM_DIR)
 	skills = load_directory(SKILL_DIR)
-	
+	#await get_tree().create_timer(10).timeout
+	#difficulty_modifier = 10
 	#print(levels)
 
 func load_directory(source: String):
