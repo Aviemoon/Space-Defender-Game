@@ -35,11 +35,11 @@ func _input(event: InputEvent) -> void:
 
 func _process(delta: float) -> void:
 	if not get_tree().paused:
-			seconds += delta
-			if seconds > 60:
-				seconds -= 60
-				minutes += 1
-			timer_label.text = "%02d:%02d" % [minutes, seconds]
+		seconds += delta
+		if seconds > 60:
+			seconds -= 60
+			minutes += 1
+		timer_label.text = "%02d:%02d" % [minutes, seconds]
 
 func update_labels(playa):
 	#print("AWAAWAWAWAAAWAWAWA")

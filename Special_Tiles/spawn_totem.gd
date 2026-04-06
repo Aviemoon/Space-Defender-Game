@@ -1,5 +1,6 @@
 extends Node2D
 
+@export var locked: bool = false
 @export var spawn_time: float = 1.5
 @export var ignore_stats:bool = false
 @export var things_to_spawn: Array[SpawnInfo]
@@ -15,7 +16,7 @@ func _ready() -> void:
 	spawn_timer.wait_time = spawn_time
 
 func spawn_stuff():
-	if not things_to_spawn or Global.enemies_alive >= Global.enemy_limit:
+	if not things_to_spawn or Global.enemies_alive >= Global.enemy_limit or locked:
 		return
 	var diff = Global.difficulty_modifier
 	

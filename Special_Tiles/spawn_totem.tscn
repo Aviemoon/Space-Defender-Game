@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://b2legsg0n885f" path="res://Sprites/tiles/totem_effect.png" id="3_sji60"]
 
 [node name="SpawnTotem" type="Node2D"]
+z_index = -1
 script = ExtResource("1_faqgy")
 spawn_time = 4.5
 

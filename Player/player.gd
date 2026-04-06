@@ -2,7 +2,8 @@ class_name PlayerCharacter extends Character
 
 @export var is_multiplayer: bool = false
 @export_enum('player1', 'player2') var player_type = 0
-var mlp = false
+
+
 
 @export var player_sprite:AnimatedSprite2D
 

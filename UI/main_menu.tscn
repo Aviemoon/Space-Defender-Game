@@ -134,6 +134,12 @@ size_flags_vertical = 3
 theme = ExtResource("1_p8ccj")
 text = "Multiplayer"
 
+[node name="TutorialButton" type="Button" parent="Control/Select/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("1_p8ccj")
+text = "Tutorial"
+
 [node name="QuitButton" type="Button" parent="Control/Select/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
@@ -143,4 +149,5 @@ text = "Quit Game"
 [connection signal="pressed" from="Control/GoAway/LoadButton" to="." method="_on_load_button_pressed"]
 [connection signal="pressed" from="Control/Select/VBoxContainer/NewGameButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="Control/Select/VBoxContainer/MPButton" to="." method="_on_mp_button_pressed"]
+[connection signal="pressed" from="Control/Select/VBoxContainer/TutorialButton" to="." method="_on_tutorial_button_pressed"]
 [connection signal="pressed" from="Control/Select/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

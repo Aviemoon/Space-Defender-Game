@@ -53,10 +53,12 @@ func movement(delta):
 				direction = global_position.direction_to(player.global_position)
 				
 		"wander":
-			if not player and get_tree().get_nodes_in_group('Player'): 
-				player = get_tree().get_nodes_in_group('Player').pick_random()
-			else:
-				return
+			
+			if not player:
+				if get_tree().get_nodes_in_group('Player'): 
+					player = get_tree().get_nodes_in_group('Player').pick_random()
+					
+			#print(player)
 			knockback = knockback.move_toward(Vector2.ZERO, knockback_recovery)
 			direction = global_position.direction_to(player.global_position)
 			velocity.x = direction.x * speed

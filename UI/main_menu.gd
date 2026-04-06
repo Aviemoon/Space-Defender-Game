@@ -4,6 +4,8 @@ extends CanvasLayer
 @export var parallax_multiplier: float = 2
 @onready var parallax_layer: ParallaxLayer = $Control/ParallaxBackground/ParallaxLayer
 
+const _MULTIPLAYER_LEVEL = "uid://dftl3pyxtlimr"
+const _TUTORIAL = "uid://dut78hqbtktpb"
 
 
 
@@ -38,4 +40,8 @@ func _on_load_button_pressed() -> void:
 
 
 func _on_mp_button_pressed() -> void:
-	get_tree().change_scene_to_file('res://rooms/_multiplayer_level.tscn')
+	get_tree().change_scene_to_file(_MULTIPLAYER_LEVEL)
+
+
+func _on_tutorial_button_pressed() -> void:
+	SceneManager.transition_scene(_TUTORIAL)

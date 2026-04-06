@@ -80,8 +80,8 @@ position = Vector2(-256, -48)
 things_to_spawn = Array[ExtResource("6_eat6w")]([SubResource("Resource_gr2p2"), SubResource("Resource_i4wjq")])
 
 [node name="SpawnTotem3" parent="Tiles/stuff" instance=ExtResource("5_0xt27")]
-position = Vector2(352, -16)
-things_to_spawn = Array[ExtResource("6_eat6w")]([SubResource("Resource_gr2p2"), SubResource("Resource_i4wjq")])
+position = Vector2(344, -16)
+things_to_spawn = Array[ExtResource("6_eat6w")]([SubResource("Resource_gr2p2")])
 
 [node name="Portal" parent="." instance=ExtResource("8_uye1s")]
 position = Vector2(440, -24)

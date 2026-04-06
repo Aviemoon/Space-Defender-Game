@@ -13,7 +13,13 @@ func _ready() -> void:
 
 	await get_tree().process_frame
 	load_scene_finished.emit()
-	
+
+func transition_main_menu():
+	transition_scene('uid://c4y786io00jka', '', Vector2.ZERO, '', true)
+	if get_tree().get_nodes_in_group('Player'):
+		for i in get_tree().get_nodes_in_group('Player'):
+			i.call_deferred('queue_free')
+	get_tree().paused = false
 
 func transition_scene(new_scene:String, target_area:String = '', player_offset:Vector2 = Vector2.ZERO, dir:String = '', quitting = false) -> void:
 	#if !fade:

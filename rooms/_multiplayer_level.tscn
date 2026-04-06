@@ -180,7 +180,7 @@ spawn_time = 10.0
 things_to_spawn = Array[ExtResource("7_d15uq")]([SubResource("Resource_07f2g")])
 
 [node name="SpawnTotem6" parent="Tiles/Cools" instance=ExtResource("6_xi701")]
-position = Vector2(-176, -296)
+position = Vector2(-176, -320)
 spawn_time = 15.0
 ignore_stats = true
 things_to_spawn = Array[ExtResource("7_d15uq")]([SubResource("Resource_7kao3")])
@@ -230,13 +230,14 @@ player1 = NodePath("../../Players/PlayerTheCool")
 player2 = NodePath("../../Players/PlayerTheWiz")
 
 [node name="DifficultyTimer" type="Timer" parent="."]
-wait_time = 30.0
+wait_time = 45.0
 autostart = true
 
 [node name="BG" type="Sprite2D" parent="."]
 modulate = Color(0.5254902, 0.6627451, 1, 1)
 z_index = -50
-scale = Vector2(2.62635, 2.3081968)
+position = Vector2(-1.5258789e-05, -3.0517578e-05)
+scale = Vector2(3.820145, 3.3573773)
 texture = ExtResource("18_ruqwl")
 
 [connection signal="timeout" from="DifficultyTimer" to="." method="_on_difficulty_timer_timeout"]

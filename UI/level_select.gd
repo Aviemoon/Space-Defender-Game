@@ -12,20 +12,25 @@ func transition(p_scene):
 func set_levels(p_array):
 	chosen_levels = [] # add all this to saving somehow...
 	chosen_names = []# zozo go baboba
+	await get_tree().physics_frame
+	await get_tree().physics_frame
 	for i in range(2):
 		var rand_lvl: Array = Global.get_random_level_and_name()
 		
 		while rand_lvl[0] in chosen_levels or rand_lvl[0] == SceneManager.current_scene_uid:
 			rand_lvl = Global.get_random_level_and_name()
-		#print(rand_lvl)
+		#print('rand %s' % rand_lvl)
+		rand_lvl = Global.get_random_level_and_name()
+		rand_lvl = Global.get_random_level_and_name()
 		
 		chosen_levels.append(rand_lvl[0])
 		chosen_names.append(rand_lvl[1])
 		
-	print(chosen_levels)
-	print(chosen_names)
-	choice_1_label.text = chosen_names[0]
-	choice_2_label.text = chosen_names[1]
+	#print('yay1 %s' % chosen_levels)
+	#print('yay2 %s' % chosen_names)
+	if chosen_names and chosen_levels:
+		choice_1_label.text = chosen_names[0]
+		choice_2_label.text = chosen_names[1]
 
 
 func _on_choice_1_pressed() -> void:

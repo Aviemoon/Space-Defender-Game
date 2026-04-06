@@ -38,8 +38,9 @@ func objective_init():
 	room_count += 1
 	purge_objective_values()
 	
-	if room_count % 3 != 0:
+	if room_count % 3 != 0 and SceneManager.current_scene_uid != 'uid://dut78hqbtktpb':
 		choose_objective()
+	
 	
 func _process(delta: float) -> void:
 	if current_objective == _SURVIVE and ! get_tree().paused:
@@ -76,6 +77,7 @@ func check_objective(idk = ''):
 			if objective_exterminate_killed >= objective_exterminate_needed:
 				objective_complete.emit()
 				completed = true
+				objective_exterminate_needed += (difficulty_modifier * 5)
 		_SURVIVE:
 			if survive_time_passed >= survive_time_needed:
 				objective_complete.emit()
@@ -121,16 +123,19 @@ func load_directory(source: String):
 	return target
 
 func get_random_level_and_name():
+	
 	var list: Array
 	for file_name in DirAccess.get_files_at(ROOM_DIR):
 		if (file_name.get_extension() == "import"):
 			file_name = file_name.replace('.import', '')
 		if (file_name.get_extension() == "remap"):
 			file_name = file_name.replace('.remap', '')
+		
 		var scene_uid = ResourceUID.path_to_uid(ROOM_DIR + file_name)
 		if file_name[0] != '_':
+			file_name = file_name.replace('.tscn', '')
 			list.append([scene_uid, file_name])
-		#print(file_name)
+		#print(list)
 	
 	
 	var rand_lvl = list.pick_random()

@@ -171,7 +171,7 @@ func _on_unpause_pressed():
 
 
 func _on_quit_menu_pressed():
-	get_parent().get_parent().queue_free()
+	get_parent().get_parent().queue_free() ##kill PLAYERR
 	get_tree().paused = false
 	SceneManager.transition_scene('uid://c4y786io00jka', '', Vector2.ZERO, '', true) # add continue with/without saving here
 	#SceneManager.transition_scene()
