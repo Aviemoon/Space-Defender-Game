@@ -29,6 +29,12 @@ func transition_scene(new_scene:String, target_area:String = '', player_offset:V
 	#fade.visible = true
 	#await fade_screen(fade_pos, Vector2.ZERO)
 	#
+	for i in get_tree().get_nodes_in_group('enemy'):
+		i.call_deferred('die')
+	for i in get_tree().get_nodes_in_group('loot'):
+		i.call_deferred('queue_free')
+	
+	
 	load_scene_started.emit()
 	await get_tree().process_frame
 	await get_tree().process_frame
@@ -45,6 +51,8 @@ func transition_scene(new_scene:String, target_area:String = '', player_offset:V
 	new_scene_ready.emit(target_area, player_offset)
 	#await GlobalSignal.load_animation
 	#await fade_screen(Vector2.ZERO, -fade_pos)
+	
+	
 	
 	load_scene_finished.emit()
 	

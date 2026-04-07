@@ -1,6 +1,8 @@
 extends BaseEnemy
 
-@onready var wall_check: Area2D = $WallCheck
+
+
+@onready var wall_area: Area2D = $WallCheck
 var facing_left = true
 @onready var attack_timer: Timer = $attackTimer
 

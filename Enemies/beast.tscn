@@ -75,17 +75,18 @@ animations = [{
 radius = 11.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fig5s"]
-size = Vector2(23, 7)
+size = Vector2(45, 7)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6vn8v"]
 radius = 4.0
 height = 106.0
 
-[node name="Beast" type="CharacterBody2D" node_paths=PackedStringArray("sprite") groups=["enemy"]]
+[node name="Beast" type="CharacterBody2D" node_paths=PackedStringArray("wall_check", "sprite") groups=["enemy"]]
 collision_layer = 8
 collision_mask = 35
 script = ExtResource("1_jo2xd")
 AI_type = "wander"
+wall_check = NodePath("WallCheck")
 sprite = NodePath("Sprite2D")
 skills = Array[PackedScene]([ExtResource("2_6vn8v")])
 max_hp = 45.0
@@ -117,8 +118,9 @@ collision_mask = 33
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WallCheck"]
-position = Vector2(10.5, 1.5)
+position = Vector2(0.5, 1.5)
 shape = SubResource("RectangleShape2D_fig5s")
+debug_color = Color(0.65505886, 0.50583345, 0.31201708, 0.41960785)
 
 [node name="sfxHit" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_dboa0")

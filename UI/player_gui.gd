@@ -18,6 +18,9 @@ extends Control
 @onready var objective_name: Label = $Overlays/ObjectiveVbox/ObjectiveName
 
 @onready var damage_lbl: Label = $Overlays/Stats/Damage
+@onready var win: Control = $Win
+
+#@onready var level_one = 'uid://cugfsoo4pjghg'
 
 #@export var hurt_overlay_curve: Curve
 
@@ -110,7 +113,7 @@ func player_die(player):
 	#
 	#await tween.finished
 	#tween.kill()
-	pause_game()
+	#pause_game()
 	GlobalSignal.player_finished_dying.emit()
 
 func level_select_visibility():
@@ -131,30 +134,39 @@ func load_anim():
 
 func change_objective_title(p_name):
 	objective_name.text = p_name
-	
+
+
+
 func done():
 	objective_name.self_modulate.b = 0
 	objective_name.text = 'complete'
-	
+
+func fix_lbl_col():
+	objective_name.self_modulate = '#ffffff'
+
 func _on_tree_entered() -> void:
+	GlobalSignal.win.connect(show_win)
 	GlobalSignal.player_hurt.connect(hurt_overlay_flash)
 	GlobalSignal.player_stat_change.connect(update_labels)
 	GlobalSignal.player_die.connect(player_die)
 	GlobalSignal.portal_interacted_with.connect(level_select_visibility)
 	SceneManager.load_scene_finished.connect(hide_lvl_select)
-	#SceneManager.load_scene_finished.connect(load_anim)
+	
+	SceneManager.load_scene_finished.connect(fix_lbl_col)
+	
 	GlobalSignal.save_game.connect(autosave_animation)
 	Global.objective_title.connect(change_objective_title)
 	Global.objective_complete.connect(done)
 	#GlobalSignal.enemy_die.connect(change_objective_title)
 
 func _on_tree_exited() -> void:
+	GlobalSignal.win.disconnect(show_win)
 	GlobalSignal.player_hurt.disconnect(hurt_overlay_flash)
 	GlobalSignal.player_stat_change.disconnect(update_labels)
 	GlobalSignal.player_die.disconnect(player_die)
 	GlobalSignal.portal_interacted_with.disconnect(level_select_visibility)
 	SceneManager.load_scene_finished.disconnect(hide_lvl_select)
-	#SceneManager.load_scene_finished.disconnect(load_anim)
+	SceneManager.load_scene_finished.disconnect(fix_lbl_col)
 	GlobalSignal.save_game.disconnect(autosave_animation)
 	Global.objective_title.disconnect(change_objective_title)
 	Global.objective_complete.disconnect(done)
@@ -188,6 +200,9 @@ func _on_options_pressed():
 	$PauseUI/OptionsMenu.visible = true
 	$PauseUI/MenuUi.visible = false
 
+func show_win():
+	get_tree().paused = true
+	win.visible = true
 
 func _on_options_back_pressed():
 	is_in_options = false
@@ -195,15 +210,15 @@ func _on_options_back_pressed():
 	$PauseUI/MenuUi.visible = true
 
 
-func _on_viewport_resolution_item_selected(index):
-	match index:
-		0:
-			DisplayServer.window_set_size(Vector2i(1920, 1080))
-		1:
-			DisplayServer.window_set_size(Vector2i(1600, 900))
-		2:
-			DisplayServer.window_set_size(Vector2i(1280, 720))
-
+#func _on_viewport_resolution_item_selected(index):
+	#match index:
+		#0:
+			#DisplayServer.window_set_size(Vector2i(1920, 1080))
+		#1:
+			#DisplayServer.window_set_size(Vector2i(1600, 900))
+		#2:
+			#DisplayServer.window_set_size(Vector2i(1280, 720))
+#
 
 
 func _on_save_pressed() -> void:
@@ -216,11 +231,21 @@ func _on_load_pressed() -> void:
 	pause_game()
 
 
-func _on_death_restart_button_pressed() -> void:
-	#get_tree().reload_current_scene()
+func menu_transition():
+	
 	if Player:
 		Player.call_deferred('queue_free')
-	SceneManager.transition_scene('uid://cugfsoo4pjghg')
+	for i in get_tree().get_nodes_in_group('enemy'):
+		i.die()
+	SceneManager.transition_main_menu()
+	
+func _on_death_restart_button_pressed() -> void:
+	for i in get_tree().get_nodes_in_group('enemy'):
+		i.die()
+	if Player:
+		Player.call_deferred('queue_free')
+	SavingManager.delete_save_file()
+	SceneManager.transition_main_menu()
 	death.visible = false
 	player_dead = false
 	
@@ -230,3 +255,28 @@ func _on_options_menu_left_options() -> void:
 	is_in_options = false
 	$PauseUI/OptionsMenu.visible = false
 	$PauseUI/MenuUi.visible = true
+
+
+func _on_win_button_pressed() -> void:
+	Global.room_count = 0
+	get_tree().paused = false
+	menu_transition()
+	win.visible = false
+
+
+func _on_restart_button_pressed() -> void:
+	Global.room_count = 0
+	get_tree().paused = false
+	SceneManager.transition_scene(Global.LEVEL_ON)
+	win.visible = false
+
+
+func _on_buttonawa_pressed() -> void:
+	for i in get_tree().get_nodes_in_group('enemy'):
+		i.die()
+	if Player:
+		Player.call_deferred('queue_free')
+	SceneManager.transition_scene(Global.LEVEL_ON)
+	death.visible = false
+	player_dead = false
+	

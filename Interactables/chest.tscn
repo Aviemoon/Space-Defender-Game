@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bt2e5rxx6m4uq"]
+[gd_scene load_steps=12 format=3 uid="uid://bt2e5rxx6m4uq"]
 
 [ext_resource type="Texture2D" uid="uid://dm2u1g8cds4or" path="res://Sprites/Interactable/chest_small.png" id="1_o08mj"]
 [ext_resource type="Script" uid="uid://m3xmp7fhmu3q" path="res://Interactables/chest.gd" id="1_odjdj"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://cxax878ppwtx7" path="res://Utility/resources/drops.gd" id="3_2ccwf"]
 [ext_resource type="PackedScene" uid="uid://0volkhlhw1ai" path="res://Pickups/health_vial.tscn" id="3_25v8b"]
 [ext_resource type="PackedScene" uid="uid://b4v155p54qhu4" path="res://Utility/interact_handler.tscn" id="4_waagb"]
+[ext_resource type="Texture2D" uid="uid://bxtjrx36ec8i5" path="res://Sprites/Interactable/silver chest small.png" id="6_1anhx"]
 
 [sub_resource type="Resource" id="Resource_1anhx"]
 script = ExtResource("3_2ccwf")
@@ -38,8 +39,13 @@ drops = Array[ExtResource("3_2ccwf")]([SubResource("Resource_1anhx"), SubResourc
 position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_enxnb")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Wood" type="Sprite2D" parent="."]
 texture = ExtResource("1_o08mj")
+hframes = 2
+
+[node name="Silver" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("6_1anhx")
 hframes = 2
 
 [node name="DropSpawnPoint" type="Marker2D" parent="."]

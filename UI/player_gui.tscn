@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://co5rx2yv2vhod"]
+[gd_scene load_steps=12 format=3 uid="uid://co5rx2yv2vhod"]
 
 [ext_resource type="Theme" uid="uid://7qs58mtig7i" path="res://UI/Themes/BlackNWhite.tres" id="1_d8ui2"]
 [ext_resource type="Script" uid="uid://mrg5myws8516" path="res://UI/player_gui.gd" id="1_g87e5"]
@@ -25,10 +25,17 @@ font_size = 20
 shadow_size = 4
 shadow_color = Color(0, 0, 0, 1)
 
+[sub_resource type="LabelSettings" id="LabelSettings_y5p36"]
+
 [sub_resource type="LabelSettings" id="LabelSettings_12w4r"]
 font_size = 52
 outline_size = 16
 outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_jocrg"]
+font_size = 50
+shadow_size = 4
+shadow_color = Color(0, 0, 0, 1)
 
 [node name="PlayerGUI" type="Control"]
 process_mode = 3
@@ -171,7 +178,7 @@ text = "Saving..."
 label_settings = SubResource("LabelSettings_ocnrf")
 
 [node name="Death" type="Control" parent="MainUI"]
-process_mode = 1
+process_mode = 3
 visible = false
 layout_mode = 1
 anchors_preset = 8
@@ -184,38 +191,35 @@ offset_right = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="MainUI/Death"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MainUI/Death"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -65.0
-offset_top = -11.5
-offset_right = 65.0
-offset_bottom = 11.5
+offset_left = -135.5
+offset_top = -20.5
+offset_right = 135.5
+offset_bottom = 20.5
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="Label" type="Label" parent="MainUI/Death/VBoxContainer"]
+layout_mode = 2
 text = "YOU HAVE DIED!!"
+label_settings = SubResource("LabelSettings_y5p36")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="deathRestartButton" type="Button" parent="MainUI/Death"]
+[node name="Buttonawa" type="Button" parent="MainUI/Death/VBoxContainer"]
+layout_mode = 2
+text = "Restart"
+
+[node name="deathRestartButton" type="Button" parent="MainUI/Death/VBoxContainer"]
 z_index = 50
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -4.0
-offset_top = 25.0
-offset_right = 4.0
-offset_bottom = 33.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "restart"
+layout_mode = 2
+text = "Go to main menu"
 
 [node name="PauseUI" type="Control" parent="."]
 visible = false
@@ -233,7 +237,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 0.20392157)
+color = Color(0, 0, 0, 0.5372549)
 
 [node name="MenuUi" type="Control" parent="PauseUI"]
 layout_mode = 1
@@ -264,6 +268,7 @@ size_flags_vertical = 3
 text = "Unpause"
 
 [node name="Save" type="Button" parent="PauseUI/MenuUi/VBoxContainer"]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 text = "Save Game"
@@ -317,9 +322,47 @@ layout_mode = 1
 visible = false
 layout_mode = 1
 
+[node name="Win" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Win"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Win/VBoxContainer"]
+layout_mode = 2
+text = "YOu won!!"
+label_settings = SubResource("LabelSettings_jocrg")
+horizontal_alignment = 1
+
+[node name="restartButton" type="Button" parent="Win/VBoxContainer"]
+layout_mode = 2
+text = "Restart"
+
+[node name="winButton" type="Button" parent="Win/VBoxContainer"]
+layout_mode = 2
+text = "Go to main menu"
+
 [connection signal="tree_entered" from="." to="." method="_on_tree_entered"]
 [connection signal="tree_exited" from="." to="." method="_on_tree_exited"]
-[connection signal="pressed" from="MainUI/Death/deathRestartButton" to="." method="_on_death_restart_button_pressed"]
+[connection signal="pressed" from="MainUI/Death/VBoxContainer/Buttonawa" to="." method="_on_buttonawa_pressed"]
+[connection signal="pressed" from="MainUI/Death/VBoxContainer/deathRestartButton" to="." method="_on_death_restart_button_pressed"]
 [connection signal="pressed" from="PauseUI/MenuUi/VBoxContainer/Unpause" to="." method="_on_unpause_pressed"]
 [connection signal="pressed" from="PauseUI/MenuUi/VBoxContainer/Save" to="." method="_on_save_pressed"]
 [connection signal="pressed" from="PauseUI/MenuUi/VBoxContainer/Load" to="." method="_on_load_pressed"]
@@ -328,6 +371,8 @@ layout_mode = 1
 [connection signal="pressed" from="PauseUI/MenuUi/VBoxContainer/QuitMenu" to="." method="_on_quit_menu_pressed"]
 [connection signal="pressed" from="PauseUI/MenuUi/VBoxContainer/QuitDesktop" to="." method="_on_quit_desktop_pressed"]
 [connection signal="left_options" from="PauseUI/OptionsMenu" to="." method="_on_options_menu_left_options"]
+[connection signal="pressed" from="Win/VBoxContainer/restartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="Win/VBoxContainer/winButton" to="." method="_on_win_button_pressed"]
 
 [editable path="PauseUI/OptionsMenu"]
 [editable path="LevelSelect"]

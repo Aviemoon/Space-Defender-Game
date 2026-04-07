@@ -14,7 +14,7 @@ signal player_enter_interact_area(interactable)
 
 signal character_hit(hit_object, attacker) #add le thing. uhhh ya
 
-signal enemy_die(enemy: BaseEnemy)
+signal enemy_die(enemy: BaseEnemy, score)
 
 signal portal_levels_chosen(levels: Array, level_names)
 signal portal_interacted_with
@@ -22,3 +22,5 @@ signal portal_interacted_with
 signal save_game
 signal load_animation
 signal load_game
+
+signal win

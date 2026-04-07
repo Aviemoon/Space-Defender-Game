@@ -25,7 +25,14 @@ func _input(event):
 
 func _on_start_button_pressed() -> void:
 	#get_tree().change_scene_to_file('uid://cugfsoo4pjghg')
-	SceneManager.transition_scene('uid://cugfsoo4pjghg', '', Vector2.ZERO, '')
+	#SceneManager.transition_scene('uid://cugfsoo4pjghg', '', Vector2.ZERO, '')
+	get_tree().change_scene_to_file("res://Utility/loading.tscn")
+	#await SceneManager.load_scene_finished
+	#await get_tree().physics_frame
+	
+	print("za")
+	
+	SceneManager.transition_scene(Global.LEVEL_ON)
 
 
 func _on_quit_button_pressed() -> void:

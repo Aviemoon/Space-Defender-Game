@@ -1,5 +1,7 @@
 class_name BaseEnemy extends Character 
 
+@export var score: int = 1
+
 @export_enum("sentry", "wander", "custom") var AI_type = "sentry"
 @export var can_fly:bool = false
 @export var knockback_recovery:float = 10
@@ -8,11 +10,13 @@ const GOLD = preload("res://Pickups/coin.tscn")
 const ALERT = preload("res://UI/alert_notifier.tscn")
 #var knockback
 
+@export var wall_check: Area2D
 
 var direction:Vector2
 #@onready var player = get_tree().get_first_node_in_group("player")
 var player: PlayerCharacter
 @export var sprite:AnimatedSprite2D
+var dead = false
 
 func _ready():
 	pass
@@ -22,19 +26,22 @@ func _ready():
 func _physics_process(delta):
 	#player = get_tree().get_first_node_in_group("player")
 	
-	movement(delta)
+	if !dead:
+		movement(delta)
 	move_and_slide()
 	
 func die():
+	dead = true
 	Global.enemies_alive -= 1
-	GlobalSignal.enemy_die.emit(self)
-	for i in range(randi_range(1, 3)):
-		var new_coin = GOLD.instantiate()
-		
-		new_coin.global_position = global_position + Vector2(randi_range(2, 5), randi_range(2, 5)) 
-		#if new_coin: print('awa')
-		
-		get_parent().call_deferred('add_child', new_coin)
+	GlobalSignal.enemy_die.emit(self, score)
+	#for i in range(randi_range(1, 3)):
+	var new_coin: Pickup = GOLD.instantiate()
+	
+	new_coin.value += randi_range(0, 5)
+	new_coin.global_position = global_position + Vector2(randi_range(2, 5), randi_range(2, 5)) 
+	#if new_coin: print('awa')
+	
+	get_parent().call_deferred('add_child', new_coin)
 	super.die()
 	
 func jump(power = 1):
@@ -59,13 +66,17 @@ func movement(delta):
 					player = get_tree().get_nodes_in_group('Player').pick_random()
 					
 			#print(player)
-			knockback = knockback.move_toward(Vector2.ZERO, knockback_recovery)
-			direction = global_position.direction_to(player.global_position)
-			velocity.x = direction.x * speed
-			velocity += knockback 
+			if not self or not player:
+				return
 			
-			if player.global_position.y < global_position.y  and is_on_floor() and abs(player.global_position.x - global_position.x) < 180:
-				jump()
+			if global_position and player.global_position:
+				knockback = knockback.move_toward(Vector2.ZERO, knockback_recovery)
+				direction = global_position.direction_to(player.global_position)
+				velocity.x = direction.x * speed
+				velocity += knockback 
+				
+				if player.global_position.y < global_position.y  and is_on_floor() and abs(player.global_position.x - global_position.x) < 180:
+					jump()
 				#print('i should jump')
 			
 	
@@ -74,7 +85,10 @@ func movement(delta):
 func jump_check():
 	if !player:
 		return
-
+	
+	if wall_check.get_overlapping_bodies() and is_on_floor():
+		jump()
+	
 	if player.global_position.y +1 > global_position.y :
 		#print('player: %d' % player.global_position.y, '\n', 'me %d' % global_position.y)
 

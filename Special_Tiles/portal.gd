@@ -12,11 +12,16 @@ const ROTATION_SPEED = 5
 var spawn_point 
 
 var levels = []
-
+@onready var count = Global.room_count
 signal unlock # this will be emitted when the mission objective is finished
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	
+	if count >= Global.final_level_count:
+		GlobalSignal.win.emit()
+	print(Global.room_count)
+	
 	if !locked:
 		turn_on()
 	SceneManager.load_scene_finished.connect(_on_load_scene_finished)

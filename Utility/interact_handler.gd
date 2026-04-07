@@ -29,3 +29,4 @@ func _on_interact_area_body_exited(_body: Node2D) -> void:
 func _on_interact() -> void:
 	_already_interacted = true
 	interact_label.hide()
+	

@@ -15,10 +15,11 @@ extends Control
 var seconds = 0
 var minutes = 0
 
+var overall_score = 0
 
 func _ready() -> void:
 	GlobalSignal.player_stat_change.connect(update_labels)
-	
+	GlobalSignal.enemy_die.connect(increment_score)
 	
 	
 	
@@ -27,7 +28,9 @@ func _ready() -> void:
 	
 	
 	
-
+func increment_score(_enemy, _score):
+	overall_score += _score
+	$scoreLabel.text = 'score: %s' % overall_score
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed('pause'):
@@ -87,3 +90,4 @@ func _on_quit_desktop_pressed() -> void:
 #
 func _on_tree_exited() -> void:
 	GlobalSignal.player_stat_change.disconnect(update_labels)
+	GlobalSignal.enemy_die.disconnect(increment_score)

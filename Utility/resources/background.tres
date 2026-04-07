@@ -1,8 +1,9 @@
-[gd_resource type="TileSet" load_steps=7 format=3 uid="uid://7tulda8njb2s"]
+[gd_resource type="TileSet" load_steps=9 format=3 uid="uid://7tulda8njb2s"]
 
 [ext_resource type="Texture2D" uid="uid://c1l0wkjc4hhd0" path="res://Sprites/tiles/tilesheet01.png" id="1_ng4qr"]
 [ext_resource type="Texture2D" uid="uid://dxe6f2vrn7gju" path="res://Sprites/tiles/brick_tileset.png" id="2_k24ge"]
 [ext_resource type="Texture2D" uid="uid://cbtwjiburs5f0" path="res://Sprites/tiles/grass.png" id="3_vwflh"]
+[ext_resource type="Texture2D" uid="uid://03ltrccw6m38" path="res://Sprites/tiles/background/foliage.png" id="4_k24ge"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_akkao"]
 texture = ExtResource("1_ng4qr")
@@ -472,6 +473,24 @@ texture = ExtResource("3_vwflh")
 4:6/0/terrain = 1
 4:6/0/terrains_peering_bit/top_side = 1
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vwflh"]
+texture = ExtResource("4_k24ge")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+0:2/0 = 0
+2:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+3:3/0 = 0
+4:3/0 = 0
+5:3/0 = 0
+
 [resource]
 terrain_set_0/mode = 0
 terrain_set_0/terrain_0/name = "Terrain 0"
@@ -481,3 +500,4 @@ terrain_set_0/terrain_1/color = Color(0.7461055, 0.10459659, 0.59157896, 1)
 sources/0 = SubResource("TileSetAtlasSource_akkao")
 sources/1 = SubResource("TileSetAtlasSource_4skqq")
 sources/2 = SubResource("TileSetAtlasSource_470om")
+sources/3 = SubResource("TileSetAtlasSource_vwflh")

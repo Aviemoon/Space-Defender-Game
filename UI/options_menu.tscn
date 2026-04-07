@@ -24,24 +24,9 @@ grow_horizontal = 2
 grow_vertical = 2
 current_tab = 0
 
-[node name="Gameplay" type="Control" parent="TabContainer"]
+[node name="Audio" type="Control" parent="TabContainer"]
 layout_mode = 2
 metadata/_tab_index = 0
-
-[node name="VboxGameplay" type="VBoxContainer" parent="TabContainer/Gameplay"]
-visible = false
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 31.0
-
-[node name="Button" type="Button" parent="TabContainer/Gameplay/VboxGameplay"]
-layout_mode = 2
-text = "awa"
-
-[node name="Audio" type="Control" parent="TabContainer"]
-visible = false
-layout_mode = 2
-metadata/_tab_index = 1
 
 [node name="VSeparator" type="VSeparator" parent="TabContainer/Audio"]
 layout_mode = 1
@@ -70,17 +55,9 @@ theme_override_constants/separation = 10
 
 [node name="Mute" type="CheckBox" parent="TabContainer/Audio/MarginContainer/AudioBtns"]
 layout_mode = 2
-button_pressed = true
+toggle_mode = false
 
 [node name="MasterSlider" type="HSlider" parent="TabContainer/Audio/MarginContainer/AudioBtns"]
-layout_mode = 2
-value = 45.0
-
-[node name="MasterSlider2" type="HSlider" parent="TabContainer/Audio/MarginContainer/AudioBtns"]
-layout_mode = 2
-value = 45.0
-
-[node name="MasterSlider3" type="HSlider" parent="TabContainer/Audio/MarginContainer/AudioBtns"]
 layout_mode = 2
 value = 45.0
 
@@ -99,18 +76,10 @@ text = "Mute all audio"
 layout_mode = 2
 text = "Master volume"
 
-[node name="lblMusic" type="Label" parent="TabContainer/Audio/VBoxContainer"]
-layout_mode = 2
-text = "Music volume"
-
-[node name="lblSFX" type="Label" parent="TabContainer/Audio/VBoxContainer"]
-layout_mode = 2
-text = "SFX volume"
-
 [node name="Graphics" type="Control" parent="TabContainer"]
 visible = false
 layout_mode = 2
-metadata/_tab_index = 2
+metadata/_tab_index = 1
 
 [node name="VboxGraphics" type="VBoxContainer" parent="TabContainer/Graphics"]
 visible = false
@@ -144,4 +113,6 @@ offset_right = 110.0
 offset_bottom = 75.0
 text = "Back"
 
+[connection signal="pressed" from="TabContainer/Audio/MarginContainer/AudioBtns/Mute" to="." method="_on_mute_pressed"]
+[connection signal="value_changed" from="TabContainer/Audio/MarginContainer/AudioBtns/MasterSlider" to="." method="_on_master_slider_value_changed"]
 [connection signal="pressed" from="OptionsBack" to="." method="_on_options_back_pressed"]

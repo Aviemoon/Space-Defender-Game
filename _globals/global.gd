@@ -10,10 +10,14 @@ const ROOM_DIR = "res://rooms/"
 const ITEM_DIR = "res://items/"
 const SKILL_DIR = "res://Skills/"
 
+const LEVEL_ON = "uid://cugfsoo4pjghg"
+const LOADING = 'uid://dcbag0pgwe60o'
+
 var enemy_limit = 50
 var enemies_alive = 0
 
 var room_count = 0
+var final_level_count = 15
 
 const _EXTERMINATE = 'exterminate'
 const _SURVIVE = 'survive'
@@ -35,10 +39,11 @@ signal objective_complete
 var sfx_num = 0
 
 func objective_init():
-	room_count += 1
+	if SceneManager.current_scene_uid != 'uid://bxsppjtqntsp0':
+		room_count += 1
 	purge_objective_values()
 	
-	if room_count % 3 != 0 and SceneManager.current_scene_uid != 'uid://dut78hqbtktpb':
+	if room_count % 3 != 0 and (SceneManager.current_scene_uid != 'uid://dut78hqbtktpb' or SceneManager.current_scene_uid != 'uid://bxsppjtqntsp0'):
 		choose_objective()
 	
 	
@@ -67,7 +72,7 @@ func choose_title():
 			title = 'survive for %d / %d seconds' % [survive_time_passed, survive_time_needed]
 	objective_title.emit(title)
 
-func check_objective(idk = ''):
+func check_objective(_idk = '', _sc = 0):
 	_kill_increment()
 	choose_title()
 	if completed:

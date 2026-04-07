@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=4 uid="uid://bxsppjtqntsp0"]
+[gd_scene load_steps=42 format=4 uid="uid://bxsppjtqntsp0"]
 
 [ext_resource type="TileSet" uid="uid://dk6k62ld4npaf" path="res://Utility/resources/world.tres" id="1_lr8gl"]
 [ext_resource type="TileSet" uid="uid://b2843p2axbng4" path="res://Utility/resources/details.tres" id="2_acn0x"]
@@ -30,6 +30,11 @@ drop = ExtResource("12_f8san")
 value_bonus = 10
 metadata/_custom_type_script = "uid://cxax878ppwtx7"
 
+[sub_resource type="Resource" id="Resource_ln22y"]
+script = ExtResource("8_wq0iu")
+drop = ExtResource("7_b2mfm")
+metadata/_custom_type_script = "uid://cxax878ppwtx7"
+
 [sub_resource type="Resource" id="Resource_1anhx"]
 script = ExtResource("8_wq0iu")
 drop = ExtResource("9_pksvi")
@@ -56,11 +61,13 @@ metadata/_custom_type_script = "uid://cxax878ppwtx7"
 [sub_resource type="Resource" id="Resource_ivrbv"]
 script = ExtResource("8_wq0iu")
 drop = ExtResource("7_b2mfm")
+value_bonus = 1
 metadata/_custom_type_script = "uid://cxax878ppwtx7"
 
 [sub_resource type="Resource" id="Resource_by0cv"]
 script = ExtResource("8_wq0iu")
 drop = ExtResource("13_ras8g")
+value_bonus = 5
 metadata/_custom_type_script = "uid://cxax878ppwtx7"
 
 [sub_resource type="Resource" id="Resource_qki7b"]
@@ -88,9 +95,21 @@ script = ExtResource("8_wq0iu")
 drop = ExtResource("11_qki7b")
 metadata/_custom_type_script = "uid://cxax878ppwtx7"
 
+[sub_resource type="Resource" id="Resource_j13hh"]
+script = ExtResource("8_wq0iu")
+drop = ExtResource("8_lr8gl")
+value_bonus = 2
+metadata/_custom_type_script = "uid://cxax878ppwtx7"
+
 [sub_resource type="Resource" id="Resource_elwfr"]
 script = ExtResource("8_wq0iu")
 drop = ExtResource("7_b2mfm")
+metadata/_custom_type_script = "uid://cxax878ppwtx7"
+
+[sub_resource type="Resource" id="Resource_hagsb"]
+script = ExtResource("8_wq0iu")
+drop = ExtResource("12_f8san")
+value_bonus = -5
 metadata/_custom_type_script = "uid://cxax878ppwtx7"
 
 [sub_resource type="Resource" id="Resource_5038i"]
@@ -139,31 +158,36 @@ metadata/_custom_type_script = "uid://cxax878ppwtx7"
 
 [node name="Chest" parent="Tiles/Stuff" instance=ExtResource("7_cmayy")]
 position = Vector2(392, 168)
-cost = 115
-drops = Array[ExtResource("8_wq0iu")]([SubResource("Resource_acn0x"), SubResource("Resource_2idtq")])
+difficulty_affected = true
+cost = 100
+drops = Array[ExtResource("8_wq0iu")]([SubResource("Resource_acn0x"), SubResource("Resource_2idtq"), SubResource("Resource_ln22y")])
 
 [node name="Chest2" parent="Tiles/Stuff" instance=ExtResource("7_cmayy")]
 position = Vector2(216, 184)
+difficulty_affected = true
 cost = 75
 loot_type = "random"
 drops = Array[ExtResource("8_wq0iu")]([SubResource("Resource_1anhx"), SubResource("Resource_cmayy"), SubResource("Resource_wq0iu"), SubResource("Resource_pksvi")])
 
 [node name="Chest3" parent="Tiles/Stuff" instance=ExtResource("7_cmayy")]
 position = Vector2(360, 8)
-cost = 150
+difficulty_affected = true
+cost = 125
 loot_type = "random"
 drops = Array[ExtResource("8_wq0iu")]([SubResource("Resource_ivrbv"), SubResource("Resource_by0cv"), SubResource("Resource_qki7b")])
 
 [node name="Chest4" parent="Tiles/Stuff" instance=ExtResource("7_cmayy")]
 position = Vector2(-528, 24)
-cost = 250
+difficulty_affected = true
+cost = 200
 loot_type = "random"
-drops = Array[ExtResource("8_wq0iu")]([SubResource("Resource_1anhx"), SubResource("Resource_f8san"), SubResource("Resource_ras8g"), SubResource("Resource_btfij"), SubResource("Resource_oamdo")])
+drops = Array[ExtResource("8_wq0iu")]([SubResource("Resource_1anhx"), SubResource("Resource_f8san"), SubResource("Resource_ras8g"), SubResource("Resource_btfij"), SubResource("Resource_oamdo"), SubResource("Resource_j13hh")])
 
 [node name="Chest5" parent="Tiles/Stuff" instance=ExtResource("7_cmayy")]
 position = Vector2(328, -184)
-cost = 155
-drops = Array[ExtResource("8_wq0iu")]([SubResource("Resource_1anhx"), SubResource("Resource_elwfr")])
+difficulty_affected = true
+cost = 140
+drops = Array[ExtResource("8_wq0iu")]([SubResource("Resource_1anhx"), SubResource("Resource_elwfr"), SubResource("Resource_hagsb")])
 
 [node name="Chest6" parent="Tiles/Stuff" instance=ExtResource("7_cmayy")]
 position = Vector2(312, -312)

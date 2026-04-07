@@ -47,6 +47,20 @@ grow_horizontal = 2
 text = "time go here :3"
 label_settings = SubResource("LabelSettings_2x4g0")
 
+[node name="scoreLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -251.5
+offset_top = 55.0
+offset_right = 251.5
+offset_bottom = 113.0
+grow_horizontal = 2
+text = "score"
+label_settings = SubResource("LabelSettings_2x4g0")
+horizontal_alignment = 1
+
 [node name="player1vbox" type="VBoxContainer" parent="."]
 layout_mode = 0
 offset_left = 10.0

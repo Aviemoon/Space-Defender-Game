@@ -142,7 +142,7 @@ func die():
 	GlobalSignal.player_die.emit(self)
 	if is_multiplayer:
 		queue_free()
-	print('dead')
+	#print('dead')
 	
 	#await GlobalSignal.player_finished_dying
 	#super.die()
@@ -188,6 +188,11 @@ func movement(delta):
 	#print(player_type)
 	
 	direction = Input.get_axis(mov_left, mov_right)
+	if (velocity.x) :
+		player_sprite.play('run')
+
+	else:
+		player_sprite.play('idle')
 
 	if not is_on_floor():
 		if velocity.y > 0 and !is_falling:

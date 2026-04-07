@@ -8,7 +8,8 @@ var persistent_data : Dictionary = {}
 const FILE_PATH = 'user://save.sav'
 #const PLAYER = preload("uid://bn3p2gijv0tv2")
 
-
+func delete_save_file():
+	create_new_save()
 
 func create_new_save():
 	var new_game_scene : String = ''
@@ -69,7 +70,9 @@ func load_game():
 	if !FileAccess.file_exists(FILE_PATH):
 		print('???')
 		return
-	
+	#SceneManager.transition_scene(Global.LOADING)
+	get_tree().change_scene_to_file("res://Utility/loading.tscn")
+	#await SceneManager.load_scene_finished
 	var save_file = FileAccess.open(FILE_PATH, FileAccess.READ)
 	save_data = JSON.parse_string(save_file.get_line())
 	persistent_data = save_data.get("persistent_data", {})

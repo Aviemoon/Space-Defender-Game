@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://bn3p2gijv0tv2"]
+[gd_scene load_steps=26 format=3 uid="uid://bn3p2gijv0tv2"]
 
 [ext_resource type="Script" uid="uid://cqeyq2oh5u3v6" path="res://Player/player.gd" id="1_l8h54"]
 [ext_resource type="Texture2D" uid="uid://4rptcch4o5hb" path="res://Sprites/player temp.png" id="2_4ntmi"]
@@ -21,6 +21,14 @@ metadata/_snap_count = 30
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k53q1"]
 size = Vector2(6, 14)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_dkpta"]
+atlas = ExtResource("2_4ntmi")
+region = Rect2(112, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lfmf2"]
+atlas = ExtResource("2_4ntmi")
+region = Rect2(96, 0, 16, 16)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_4ntmi"]
 atlas = ExtResource("2_4ntmi")
 region = Rect2(0, 0, 16, 16)
@@ -29,8 +37,35 @@ region = Rect2(0, 0, 16, 16)
 atlas = ExtResource("2_4ntmi")
 region = Rect2(16, 0, 16, 16)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_apopc"]
+atlas = ExtResource("2_4ntmi")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5htga"]
+atlas = ExtResource("2_4ntmi")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p5o4e"]
+atlas = ExtResource("2_4ntmi")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gu6f8"]
+atlas = ExtResource("2_4ntmi")
+region = Rect2(80, 0, 16, 16)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_gwnis"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dkpta")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lfmf2")
+}],
+"loop": true,
+"name": &"backwards",
+"speed": 7.5
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_4ntmi")
@@ -41,6 +76,23 @@ animations = [{
 "loop": true,
 "name": &"idle",
 "speed": 1.4
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_apopc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5htga")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p5o4e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gu6f8")
+}],
+"loop": true,
+"name": &"run",
+"speed": 7.5
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gwnis"]
@@ -68,7 +120,7 @@ fall_damage_curve = SubResource("Curve_gwnis")
 friendly = true
 skills = Array[PackedScene]([ExtResource("2_gwnis"), ExtResource("3_k53q1"), ExtResource("4_od3ui")])
 items = Array[PackedScene]([ExtResource("4_vtle1")])
-speed = 1300.0
+speed = 232.0
 jump_velocity = 320.0
 fall_immunity = true
 knockback_immunity = true
@@ -83,7 +135,6 @@ texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_gwnis")
 animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.744461
 
 [node name="coyoteTimer" type="Timer" parent="."]
 unique_name_in_owner = true
