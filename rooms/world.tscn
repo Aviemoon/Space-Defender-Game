@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=4 uid="uid://cugfsoo4pjghg"]
+[gd_scene load_steps=45 format=4 uid="uid://cugfsoo4pjghg"]
 
 [ext_resource type="Environment" uid="uid://cf0o50jm3wy3v" path="res://Utility/resources/base_worldenvironment.tres" id="1_6txnh"]
 [ext_resource type="Texture2D" uid="uid://c1l0wkjc4hhd0" path="res://Sprites/tiles/tilesheet01.png" id="2_wllj5"]
@@ -16,9 +16,11 @@
 [ext_resource type="PackedScene" uid="uid://jcandckf7dtw" path="res://Special_Tiles/spawn_totem.tscn" id="15_rvmc5"]
 [ext_resource type="Script" uid="uid://c2xaalpg2wvfj" path="res://Utility/resources/spawn_info.gd" id="16_30ace"]
 [ext_resource type="PackedScene" uid="uid://c5yf3t6dical1" path="res://Enemies/beast.tscn" id="17_4owcq"]
+[ext_resource type="PackedScene" uid="uid://cue2oosxgxu2" path="res://Pickups/max_hp_upgrade.tscn" id="17_y1ja7"]
 [ext_resource type="PackedScene" uid="uid://b3xiu7auw08nf" path="res://Enemies/elite_death_beast.tscn" id="18_8hgy7"]
+[ext_resource type="PackedScene" uid="uid://bps6ll5h3bb2t" path="res://Pickups/movement_speed_upgrade.tscn" id="18_eb7vr"]
 [ext_resource type="Script" uid="uid://cxax878ppwtx7" path="res://Utility/resources/drops.gd" id="19_aibtd"]
-[ext_resource type="PackedScene" uid="uid://ddfq4nf6ibvhg" path="res://Pickups/damage_syringe.tscn" id="19_en1l5"]
+[ext_resource type="PackedScene" uid="uid://di31ob7i7rkcj" path="res://Pickups/defense_upgrade.tscn" id="19_x25gb"]
 [ext_resource type="PackedScene" uid="uid://0volkhlhw1ai" path="res://Pickups/health_vial.tscn" id="20_y1ja7"]
 [ext_resource type="PackedScene" uid="uid://cbchrxtryto0a" path="res://Pickups/crit_chance_upgrade.tscn" id="22_y1ja7"]
 
@@ -663,22 +665,29 @@ enemy = ExtResource("17_4owcq")
 num = 3
 metadata/_custom_type_script = "uid://c2xaalpg2wvfj"
 
-[sub_resource type="Resource" id="Resource_1anhx"]
+[sub_resource type="Resource" id="Resource_xmond"]
+script = ExtResource("19_aibtd")
+drop = ExtResource("17_y1ja7")
+metadata/_custom_type_script = "uid://cxax878ppwtx7"
+
+[sub_resource type="Resource" id="Resource_h4gao"]
+script = ExtResource("19_aibtd")
+drop = ExtResource("18_eb7vr")
+metadata/_custom_type_script = "uid://cxax878ppwtx7"
+
+[sub_resource type="Resource" id="Resource_sjri6"]
+script = ExtResource("19_aibtd")
+drop = ExtResource("19_x25gb")
+metadata/_custom_type_script = "uid://cxax878ppwtx7"
+
+[sub_resource type="Resource" id="Resource_hxfuj"]
 script = ExtResource("19_aibtd")
 drop = ExtResource("20_y1ja7")
 metadata/_custom_type_script = "uid://cxax878ppwtx7"
 
-[sub_resource type="Resource" id="Resource_ovu33"]
+[sub_resource type="Resource" id="Resource_g6l24"]
 script = ExtResource("19_aibtd")
-drop = ExtResource("3_0l6l6")
-num = 6
-metadata/_custom_type_script = "uid://cxax878ppwtx7"
-
-[sub_resource type="Resource" id="Resource_eb7vr"]
-script = ExtResource("19_aibtd")
-drop = ExtResource("19_en1l5")
-value_bonus = 9
-num = 3
+drop = ExtResource("22_y1ja7")
 metadata/_custom_type_script = "uid://cxax878ppwtx7"
 
 [node name="World" type="Node2D"]
@@ -745,7 +754,7 @@ tile_map_data = PackedByteArray("AAABAPv/AAAAAAAAAAABAPz/AAAAAAAAAAACAPz/AAAAAAA
 tile_set = SubResource("TileSet_0l6l6")
 
 [node name="Platforms" parent="Tiles" instance=ExtResource("4_wllj5")]
-tile_map_data = PackedByteArray("AAD+//3/AAACAAAAAAD9//3/AAACAAAAAAD8//3/AAACAAAAAAD///3/AAADAAAAAAD6//j/AAACAAAAAAD5//j/AAABAAAAAAAEAAAAAAAAAAAAAAARAAAAAAABAAAAAAASAAAAAAADAAAAAAAOAPv/AAABAAAAAAAPAPv/AAACAAAAAAAQAPv/AAADAAAAAAALAPv/AAADAAAAAAAKAPv/AAABAAAAAAAIAP3/AAABAAAAAAAJAP3/AAADAAAAAAAzAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAAnAAAAAAABAAAAAAAoAAAAAAADAAAAAAAqAPj/AAAAAAAAAAArAPj/AAAAAAAAAAAhAPj/AAADAAAAAAAgAPj/AAACAAAAAAAfAPj/AAACAAAAAAAeAPj/AAACAAAAAAAdAPj/AAACAAAAAAAcAPj/AAABAAAAAAAWAPj/AAACAAAAAAAUAPj/AAACAAAAAAAVAPj/AAACAAAAAAATAPj/AAACAAAAAAASAPj/AAACAAAAAAARAPj/AAABAAAAAAATAPv/AAABAAAAAAAUAPv/AAACAAAAAAAVAPv/AAACAAAAAAAWAPv/AAADAAAAAAAXAPj/AAADAAAAAAAZAPX/AAAAAAAAAAAaAPX/AAAAAAAAAAAZAPv/AAAAAAAAAAAaAPv/AAAAAAAAAAAdAAMAAAACAAAAAAAeAAMAAAACAAAAAAAfAAMAAAADAAAAAAAcAAMAAAABAAAAAAAzAAQAAAABAAAAAAAwAAUAAAADAAAAAAAvAAUAAAABAAAAAAA4AAMAAAADAAAAAAA3AAMAAAABAAAAAAA5AAEAAAABAAAAAAA6AAEAAAADAAAAAAA0AAQAAAADAAAAAAD7//3/AAABAAAAAAD7//j/AAADAAAAAAA=")
+tile_map_data = PackedByteArray("AAD+//3/AAACAAAAAAD9//3/AAACAAAAAAD8//3/AAACAAAAAAD///3/AAADAAAAAAD6//j/AAACAAAAAAD5//j/AAABAAAAAAAEAAAAAAAAAAAAAAARAAAAAAABAAAAAAASAAAAAAADAAAAAAAOAPv/AAABAAAAAAAPAPv/AAACAAAAAAAQAPv/AAADAAAAAAALAPv/AAADAAAAAAAKAPv/AAABAAAAAAAIAP3/AAABAAAAAAAJAP3/AAADAAAAAAAzAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAAnAAAAAAABAAAAAAAoAAAAAAADAAAAAAAqAPj/AAAAAAAAAAArAPj/AAAAAAAAAAAhAPj/AAADAAAAAAAgAPj/AAACAAAAAAAfAPj/AAACAAAAAAAeAPj/AAACAAAAAAAdAPj/AAACAAAAAAAcAPj/AAABAAAAAAAWAPj/AAACAAAAAAAUAPj/AAACAAAAAAAVAPj/AAACAAAAAAATAPj/AAACAAAAAAASAPj/AAACAAAAAAARAPj/AAABAAAAAAATAPv/AAABAAAAAAAUAPv/AAACAAAAAAAVAPv/AAACAAAAAAAWAPv/AAADAAAAAAAXAPj/AAADAAAAAAAdAAMAAAACAAAAAAAeAAMAAAACAAAAAAAfAAMAAAADAAAAAAAcAAMAAAABAAAAAAAzAAQAAAABAAAAAAAwAAUAAAADAAAAAAAvAAUAAAABAAAAAAA4AAMAAAADAAAAAAA3AAMAAAABAAAAAAA5AAEAAAABAAAAAAA6AAEAAAADAAAAAAA0AAQAAAADAAAAAAD7//3/AAABAAAAAAD7//j/AAADAAAAAAA=")
 
 [node name="Interactables" type="TileMapLayer" parent="Tiles"]
 z_index = 2
@@ -753,7 +762,11 @@ tile_map_data = PackedByteArray("AAAFAPz/AAAAAAAAAQAEAPz/AAAAAAAAAQANAPr/AAAAAAA
 tile_set = SubResource("TileSet_mu24a")
 
 [node name="SpawnTotem" parent="Tiles" instance=ExtResource("15_rvmc5")]
-position = Vector2(120, -160)
+position = Vector2(112, -160)
+things_to_spawn = Array[ExtResource("16_30ace")]([SubResource("Resource_8hgy7")])
+
+[node name="SpawnTotem" parent="Tiles/SpawnTotem" instance=ExtResource("15_rvmc5")]
+position = Vector2(192, 64)
 things_to_spawn = Array[ExtResource("16_30ace")]([SubResource("Resource_8hgy7")])
 
 [node name="SpawnTotem4" parent="Tiles" instance=ExtResource("15_rvmc5")]
@@ -765,17 +778,46 @@ position = Vector2(752, -16)
 spawn_time = 8.0
 things_to_spawn = Array[ExtResource("16_30ace")]([SubResource("Resource_en1l5"), SubResource("Resource_n3si0")])
 
+[node name="SpawnTotem5" parent="Tiles/SpawnTotem5" instance=ExtResource("15_rvmc5")]
+position = Vector2(-208, -128)
+spawn_time = 8.0
+things_to_spawn = Array[ExtResource("16_30ace")]([SubResource("Resource_en1l5"), SubResource("Resource_n3si0")])
+
 [node name="Chest" parent="Tiles" instance=ExtResource("9_mu24a")]
 position = Vector2(568, 88)
-drops = Array[ExtResource("19_aibtd")]([SubResource("Resource_1anhx"), SubResource("Resource_ovu33"), SubResource("Resource_eb7vr")])
+difficulty_affected = true
+loot_type = "random"
+drops = Array[ExtResource("19_aibtd")]([SubResource("Resource_xmond"), SubResource("Resource_h4gao"), SubResource("Resource_sjri6"), SubResource("Resource_hxfuj"), SubResource("Resource_g6l24")])
 
 [node name="CritChanceUpgrade" parent="Tiles" instance=ExtResource("22_y1ja7")]
 position = Vector2(88, -8)
 
 [node name="Portal" parent="Tiles" instance=ExtResource("12_6txnh")]
 position = Vector2(984, -8)
-locked = false
 
 [node name="dungeon_generator" parent="." instance=ExtResource("6_q45av")]
 
 [node name="PlayerSpawn" type="Marker2D" parent="."]
+
+[connection signal="player_spotted" from="Tiles/WorldTileMapLayer/Enemy_turret" to="Tiles/WorldTileMapLayer/Enemy_turret" method="_on_player_spotted"]
+[connection signal="player_spotted" from="Tiles/WorldTileMapLayer/@CharacterBody2D@32177" to="Tiles/WorldTileMapLayer/@CharacterBody2D@32177" method="_on_player_spotted"]
+[connection signal="player_spotted" from="Tiles/WorldTileMapLayer/@CharacterBody2D@32178" to="Tiles/WorldTileMapLayer/@CharacterBody2D@32178" method="_on_player_spotted"]
+[connection signal="player_spotted" from="Tiles/WorldTileMapLayer/@CharacterBody2D@32179" to="Tiles/WorldTileMapLayer/@CharacterBody2D@32179" method="_on_player_spotted"]
+[connection signal="player_spotted" from="Tiles/WorldTileMapLayer/@CharacterBody2D@32180" to="Tiles/WorldTileMapLayer/@CharacterBody2D@32180" method="_on_player_spotted"]
+[connection signal="body_entered" from="Tiles/Interactables/Vase" to="Tiles/Interactables/Vase" method="_on_body_entered"]
+[connection signal="body_entered" from="Tiles/Interactables/@RigidBody2D@32181" to="Tiles/Interactables/@RigidBody2D@32181" method="_on_body_entered"]
+[connection signal="body_entered" from="Tiles/Interactables/@RigidBody2D@32182" to="Tiles/Interactables/@RigidBody2D@32182" method="_on_body_entered"]
+[connection signal="body_entered" from="Tiles/Interactables/@RigidBody2D@32183" to="Tiles/Interactables/@RigidBody2D@32183" method="_on_body_entered"]
+[connection signal="body_entered" from="Tiles/Interactables/@RigidBody2D@32184" to="Tiles/Interactables/@RigidBody2D@32184" method="_on_body_entered"]
+[connection signal="body_entered" from="Tiles/Interactables/@RigidBody2D@32185" to="Tiles/Interactables/@RigidBody2D@32185" method="_on_body_entered"]
+[connection signal="body_entered" from="Tiles/Interactables/@RigidBody2D@32186" to="Tiles/Interactables/@RigidBody2D@32186" method="_on_body_entered"]
+[connection signal="body_entered" from="Tiles/Interactables/@RigidBody2D@32187" to="Tiles/Interactables/@RigidBody2D@32187" method="_on_body_entered"]
+[connection signal="body_entered" from="Tiles/Interactables/@RigidBody2D@32188" to="Tiles/Interactables/@RigidBody2D@32188" method="_on_body_entered"]
+[connection signal="body_entered" from="Tiles/Interactables/@RigidBody2D@32189" to="Tiles/Interactables/@RigidBody2D@32189" method="_on_body_entered"]
+[connection signal="body_entered" from="Tiles/Interactables/@RigidBody2D@32190" to="Tiles/Interactables/@RigidBody2D@32190" method="_on_body_entered"]
+[connection signal="body_entered" from="Tiles/Interactables/@RigidBody2D@32191" to="Tiles/Interactables/@RigidBody2D@32191" method="_on_body_entered"]
+[connection signal="body_entered" from="Tiles/Interactables/@RigidBody2D@32192" to="Tiles/Interactables/@RigidBody2D@32192" method="_on_body_entered"]
+[connection signal="body_entered" from="Tiles/Interactables/@RigidBody2D@32193" to="Tiles/Interactables/@RigidBody2D@32193" method="_on_body_entered"]
+[connection signal="body_entered" from="Tiles/Interactables/@RigidBody2D@32194" to="Tiles/Interactables/@RigidBody2D@32194" method="_on_body_entered"]
+[connection signal="body_entered" from="Tiles/Interactables/@RigidBody2D@32195" to="Tiles/Interactables/@RigidBody2D@32195" method="_on_body_entered"]
+[connection signal="body_entered" from="Tiles/Interactables/@RigidBody2D@32196" to="Tiles/Interactables/@RigidBody2D@32196" method="_on_body_entered"]

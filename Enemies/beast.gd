@@ -13,12 +13,13 @@ func _ready():
 
 func _physics_process(delta: float) -> void:
 	movement(delta)
-	if velocity.x > 0.1:
+	if velocity.x > 0.1 and wall_check:
 		wall_check.rotation = 0
 		facing_left = false
 	else:
-		wall_check.rotation = PI
-		facing_left = true
+		if wall_check:
+			wall_check.rotation = PI
+			facing_left = true
 	
 	#if player.global_position.x > global_position:
 		

@@ -12,7 +12,8 @@ var enemies_needed = 5
 func _ready() -> void:
 	GlobalSignal.enemy_die.connect(check_door_enemy)
 
-func check_door_enemy(_en):
+func check_door_enemy(_en, _a):
+	print('check cehck check')
 	enemies_dead += 1
 	label_4.text = 'Kill %d / %d enemies' % [enemies_dead, enemies_needed]
 	if enemies_dead >= enemies_needed:
